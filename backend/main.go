@@ -38,20 +38,35 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "OPTIONS, GET")
-	w.Header().Set("Access-Control-Allow-Headers", "hx-current-url, hx-request")
+	w.Header().Set("Access-Control-Allow-Headers", "*")
 
 	if r.Method == "GET" {
 
 		id := r.URL.Query().Get("id")
 
+		//Se não foi passado um ID
 		if id == "" {
 			fmt.Fprint(w, formulas.Formulas)
-		} else {
-			idInt, err := strconv.Atoi(id)
-			if err == nil {
-				fmt.Fprint(w, formulas.Formulas[idInt])
-			}
+			return
 		}
+
+		//Se foi passado um ID -> converte de string para int
+		idInt, err := strconv.Atoi(id)
+		//Se não houver erros de converção
+		if err != nil {
+			return
+		}
+
+		//Se o ID esta no range da lista de formulas
+		if idInt > len(formulas.Formulas)-1 {
+			return
+		}
+
+		//Adiciona ao body da resposta o elemento HTML com a formula
+		fmt.Fprintf(w,
+			`<div class='card'>
+				<span>%s</span>
+			</div>`, formulas.Formulas[idInt].Formula)
 
 	}
 

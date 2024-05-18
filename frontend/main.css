@@ -10,7 +10,6 @@ body{
 }
 
 .formula_card{
-
     --card--height: 100px;
     --card--width: 75dvw;
     --card--margin: 1em;
@@ -20,6 +19,7 @@ body{
     height: var(--card--height);
     background-color: white;
     padding: var(--card--margin) ;
+    margin: 1.5em 0;
 }
 
 .formula_card__img{
@@ -30,7 +30,6 @@ body{
 
 .formula_card__holder{
     width: calc(var(--card--width) - var(--card--height) - var(--card--margin));
-    /* overflow-x: hidden; */
     margin-left: auto;
     display: flex;
     flex-direction: column;
@@ -102,44 +101,13 @@ body{
 
 }
 
-.card{
-
-    width: 100%;
-    height: 200px;
-
-    background-color: white;
-
-    box-sizing: border-box;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin: 0 auto 50px auto;
-
-    flex-shrink: 0;
-
-}
-
-.card > span {
-
-    font-weight: bold;
-    font-size: 1.5em;
-
-}
-
 #holder{
-
     display: flex;
     flex-direction: column;
-
-    border: 1px solid black;
 }
 
 #load_trigger{
-
     width: 100%;
     height: 30px;
     background-color: red;
-
 }

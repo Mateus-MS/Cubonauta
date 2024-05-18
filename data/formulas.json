@@ -1,39 +1,48 @@
 {
     "formulas": [
         {
-            "formula": "y L' U' L",
-            "tags"   : ["F2L"]
-        },
-        {
-            "formula": "y U' L' U L",
-            "tags"   : ["F2L"]
-        },
-        {
-            "formula": "U R U' R'",
-            "tags"   : ["F2L"]
-        },
-        {
-            "formula": "U R U' R' U' F' U F",
-            "tags"   : ["F2L"]
-        },
-        {
             "formula": "R' U R' U' R' U' R' U R U R2",
+            "name"   : "Caso U horário",
             "tags"   : ["PLL"]
         },
         {
-            "formula": "x R' U R' D2 R U' R' D2 R2 x'",
+            "formula": "R2 U' R' U' R U R U R U' R",
+            "name"   : "Caso U anti-horário",
             "tags"   : ["PLL"]
         },
         {
-            "formula": "x R2' D2 R U R' D2 R U' R x'",
+            "formula": "x R' U R' D2 R U' R' D2 R2 x''",
+            "name"   : "Caso A horário",
+            "tags"   : ["PLL"]
+        },
+        {
+            "formula": "x R2' D2 R U R' D2 R U' R x",
+            "name"   : "Caso A anti-horário",
             "tags"   : ["PLL"]
         },
         {
             "formula": "M2 U M2 U2 M2 U M2",
+            "name"   : "Caso H",
             "tags"   : ["PLL"]
         },
         {
             "formula": "M2 U M2 U M' U2 M2 U2 M'",
+            "name"   : "Caso Z",
+            "tags"   : ["PLL"]
+        },
+        {
+            "formula": "R U R' U' R' F R2 U' R' U' R U R' F'",
+            "name"   : "Caso T",
+            "tags"   : ["PLL"]
+        },
+        {
+            "formula": "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R",
+            "name"   : "Caso F",
+            "tags"   : ["PLL"]
+        },
+        {
+            "formula": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+            "name"   : "Caso Y",
             "tags"   : ["PLL"]
         }
     ]

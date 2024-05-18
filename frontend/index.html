@@ -21,7 +21,7 @@
 </head>
 <body>
 
-    <!-- <script>
+    <script>
         var formula_index = 4
         document.addEventListener("htmx:afterRequest", (evt)=>{
             console.log(evt)
@@ -36,7 +36,7 @@
         <div 
             id         = "holder"
             hx-trigger = "load"
-            hx-get     = "http://localhost:8080/api/formulas?id=0&size=4"
+            hx-get     = "http://localhost:8080/api/formulas?size=4"
         >
 
         </div>
@@ -48,42 +48,12 @@
             hx-trigger = "intersect threshold:.5"
 
             hx-target = "#holder"
-            hx-vars   = "{'id': formula_index}"
+            hx-vars   = "{'id': formula_index, 'size': 3}"
             hx-swap   = "beforeend"
 
         >
         </div>
 
-    </div> -->
-
-    <div class="formula_card">
-        <div class="formula_card__img"></div>
-        <div class="formula_card__holder">
-            <div class="formula_card__holder__formula">
-                R' U R' U' R' U' R' U R U R2
-            </div>
-            <div class="formula_card__holder__tag_container">
-                <div class="formula_card__holder__tag_container__tag">
-                    PLL
-                </div>
-                <div class="formula_card__holder__tag_container__tag">
-                    J Perm
-                </div>
-            </div>
-            <div class="formula_card__holder__bottom">
-                <div class="formula_card__holder__bottom__name">
-                    Minerva
-                </div>
-                <div class="formula_card__holder__bottom__options_holder">
-                    <div class="formula_card__holder__bottom__options_holder__option">
-
-                    </div>
-                    <div class="formula_card__holder__bottom__options_holder__option">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 </body>

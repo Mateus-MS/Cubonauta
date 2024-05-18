@@ -32,11 +32,7 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 		if id == -1 && size != -1 {
 			stringHtml := ""
 			for i := 0; i < size; i++ {
-				stringHtml += fmt.Sprintf(
-					`<div class='card'>
-						<span>%s</span>
-					</div>`,
-					formulas.Formulas[i].Formula)
+				stringHtml += FormulaString(formulas.Formulas[i])
 			}
 
 			fmt.Fprint(w, stringHtml)
@@ -46,11 +42,8 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 
 		//Se Foi passado um ID mas NÃO FOI passado um SIZE
 		if id != -1 && size == -1 {
-			element :=
-				`<div class='card'>
-				<span>%s</span>
-			</div>`
-			fmt.Fprintf(w, element, formulas.Formulas[id].Formula)
+			element := FormulaString(formulas.Formulas[id])
+			fmt.Fprint(w, element)
 
 			return
 		}
@@ -60,11 +53,7 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 			stringHtml := ""
 			for i := id; i < id+size; i++ {
 				if i <= len(formulas.Formulas)-1 {
-					stringHtml += fmt.Sprintf(
-						`<div class='card'>
-							<span>%s</span>
-						</div>`,
-						formulas.Formulas[i].Formula)
+					stringHtml += FormulaString(formulas.Formulas[id])
 				}
 			}
 
@@ -127,4 +116,44 @@ func StringToInt(value string) int {
 	}
 
 	return number
+}
+
+func FormulaString(formula data.Formula) string {
+
+	tags := ""
+
+	for i := 0; i < len(formula.Tags); i++ {
+		tags += fmt.Sprintf(`<div class='formula_card__holder__tag_container__tag'>
+					%s
+				</div>`, formula.Tags[i])
+	}
+
+	templ := fmt.Sprintf(`<div class='formula_card'>
+		<div class='formula_card__img'></div>
+		<div class='formula_card__holder'>
+			<div class='formula_card__holder__formula'>
+				%s
+			</div>
+			<div class='formula_card__holder__tag_container'>
+				%s
+			</div>
+			<div class='formula_card__holder__bottom'>
+				<div class='formula_card__holder__bottom__name'>
+					%s
+				</div>
+				<div class='formula_card__holder__bottom__options_holder'>
+					<div class='formula_card__holder__bottom__options_holder__option'>
+
+					</div>
+					<div class='formula_card__holder__bottom__options_holder__option'>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	`, formula.Formula, tags, formula.Name)
+
+	return templ
+
 }

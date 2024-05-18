@@ -1,20 +1,40 @@
 {
     "formulas": [
         {
-            "formula": "R U' R' U R U' R' U2 R U' R'",
+            "formula": "y L' U' L",
             "tags"   : ["F2L"]
         },
         {
-            "formula": "R U R' U R U2 R' F' U2 F",
+            "formula": "y U' L' U L",
             "tags"   : ["F2L"]
         },
         {
-            "formula": "F' U2 F U F' U' F",
+            "formula": "U R U' R'",
             "tags"   : ["F2L"]
         },
         {
-            "formula": "R U2 R' U' R U R'",
+            "formula": "U R U' R' U' F' U F",
             "tags"   : ["F2L"]
+        },
+        {
+            "formula": "R' U R' U' R' U' R' U R U R2",
+            "tags"   : ["PLL"]
+        },
+        {
+            "formula": "x R' U R' D2 R U' R' D2 R2 x'",
+            "tags"   : ["PLL"]
+        },
+        {
+            "formula": "x R2' D2 R U R' D2 R U' R x'",
+            "tags"   : ["PLL"]
+        },
+        {
+            "formula": "M2 U M2 U2 M2 U M2",
+            "tags"   : ["PLL"]
+        },
+        {
+            "formula": "M2 U M2 U M' U2 M2 U2 M'",
+            "tags"   : ["PLL"]
         }
     ]
 }

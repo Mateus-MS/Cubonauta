@@ -17,34 +17,114 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "GET" {
 
-		id := r.URL.Query().Get("id")
+		//Pega o ID da url e converte para int
+		//Checka se está no range de formulas
+		//Se houver algum erro retorna -1
+		id := IdResolve(r, len(formulas.Formulas))
+		size := SizeResolve(r)
 
-		//Se não foi passado um ID
-		if id == "" {
-			fmt.Fprint(w, formulas)
+		//Se O ID passado for maior que a lista de formulas
+		if id == -2 {
 			return
 		}
 
-		//Se foi passado um ID -> converte de string para int
-		idInt, err := strconv.Atoi(id)
-		//Se não houver erros de converção
-		if err != nil {
+		//Se NÃO foi passado um ID mas FOI passado um SIZE
+		if id == -1 && size != -1 {
+			stringHtml := ""
+			for i := 0; i < size; i++ {
+				stringHtml += fmt.Sprintf(
+					`<div class='card'>
+						<span>%s</span>
+					</div>`,
+					formulas.Formulas[i].Formula)
+			}
+
+			fmt.Fprint(w, stringHtml)
+
 			return
 		}
 
-		//Se o ID esta no range da lista de formulas
-		if idInt > len(formulas.Formulas)-1 {
-			return
-		}
-
-		//Adiciona ao body da resposta o elemento HTML com a formula
-		element :=
-			`<div class='card'>
+		//Se Foi passado um ID mas NÃO FOI passado um SIZE
+		if id != -1 && size == -1 {
+			element :=
+				`<div class='card'>
 				<span>%s</span>
 			</div>`
+			fmt.Fprintf(w, element, formulas.Formulas[id].Formula)
 
-		fmt.Fprintf(w, element, formulas.Formulas[idInt].Formula)
+			return
+		}
+
+		//Se Foi passado um ID E um SIZE
+		if id != -1 && size != -1 {
+			stringHtml := ""
+			for i := id; i < id+size; i++ {
+				if i <= len(formulas.Formulas)-1 {
+					stringHtml += fmt.Sprintf(
+						`<div class='card'>
+							<span>%s</span>
+						</div>`,
+						formulas.Formulas[i].Formula)
+				}
+			}
+
+			fmt.Fprint(w, stringHtml)
+
+			return
+		}
+
+		//Se NÃO foi passado um ID NEM um SIZE
+		fmt.Fprint(w, formulas)
 
 	}
 
+}
+
+func IdResolve(path *http.Request, formulas_size int) int {
+	//Extrai o ID da URL
+	id_URL := path.URL.Query().Get("id")
+
+	//Se não foi passado um ID
+	if id_URL == "" {
+		return -1
+	}
+
+	//Converte string -> int
+	id := StringToInt(id_URL)
+
+	//Se houver erro de converção
+	if id == -1 {
+		return -1
+	}
+
+	//Se o ID esta no range da lista de formulas
+	if id > formulas_size {
+		return -2
+	}
+
+	return id
+}
+
+func SizeResolve(path *http.Request) int {
+	size_URL := path.URL.Query().Get("size")
+
+	//Converte string -> int
+	size := StringToInt(size_URL)
+
+	//Se houver erro de converção
+	if size == -1 {
+		return -1
+	}
+
+	return size
+}
+
+func StringToInt(value string) int {
+	number, err := strconv.Atoi(value)
+
+	if err != nil {
+		return -1
+	}
+
+	return number
 }

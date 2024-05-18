@@ -21,20 +21,11 @@
 </head>
 <body>
 
-    <button 
-        class     = "test"
-        hx-get    = "http://localhost:8080/api/formulas"
-        hx-trigger= "click"
-        hx-target = "#container"
-        hx-vars   = "{'id': formula_index}"
-        hx-swap   = "beforeend"
-    >
-        Chamar nova formula
-    </button>
     <script>
-        var formula_index = 0
+        var formula_index = 4
         document.addEventListener("htmx:afterRequest", (evt)=>{
-            if(evt.detail.target.id === "container"){
+            console.log(evt)
+            if(evt.detail.target.id === "holder"){
                 formula_index += 1
             }
         })
@@ -42,7 +33,26 @@
     
     <div id="container">
 
-        
+        <div 
+            id         = "holder"
+            hx-trigger = "load"
+            hx-get     = "http://localhost:8080/api/formulas?id=0&size=4"
+        >
+
+        </div>
+
+        <div 
+            id         = "load_trigger"
+            hx-get     = "http://localhost:8080/api/formulas"
+            
+            hx-trigger = "intersect threshold:.5"
+
+            hx-target = "#holder"
+            hx-vars   = "{'id': formula_index}"
+            hx-swap   = "beforeend"
+
+        >
+        </div>
 
     </div>
 

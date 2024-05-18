@@ -11,6 +11,7 @@ func main() {
 	router := http.NewServeMux()
 
 	router.HandleFunc("/api/formulas", rotas.FormulaCard)
+	router.HandleFunc("/api/test", rotas.Test)
 
 	if err := http.ListenAndServe(":8080", router); err != nil {
 		fmt.Println(err.Error())

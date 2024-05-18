@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
@@ -17,8 +18,6 @@
 
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 
-    
-
 </head>
 <body>
 
@@ -32,10 +31,8 @@
     >
         Chamar nova formula
     </button>
-
     <script>
         var formula_index = 0
-
         document.addEventListener("htmx:afterRequest", (evt)=>{
             if(evt.detail.target.id === "container"){
                 formula_index += 1

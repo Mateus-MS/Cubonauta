@@ -22,34 +22,25 @@
 <body>
 
     <script>
-        var filter_test = "PLL"
         var formula_index = 0
         document.body.addEventListener("att-ID", function(evt){
-            console.log(evt.detail.value)
             formula_index = evt.detail.value
         })
     </script>
     
     <div id="container">
 
-        <div 
-            id         = "holder"
-            hx-trigger = "load"
-            hx-get     = "http://localhost:8080/api/formulas"
-            hx-vars    = "{'size': 3, 'filter': filter_test}"
-        >
-        </div>
+        <div id="holder"></div>
 
         <div 
-            id         = "load_trigger"
+            id         = "intersect_trigger"
             hx-get     = "http://localhost:8080/api/formulas"
             
             hx-trigger = "intersect threshold:.5"
 
             hx-target = "#holder"
-            hx-vars   = "{'id': formula_index, 'size': 3, 'filter': filter_test}"
+            hx-vars   = "{'id': formula_index, 'size': 6, 'filters': 'F2L'}"
             hx-swap   = "beforeend"
-
         >
         </div>
 

@@ -22,12 +22,11 @@
 <body>
 
     <script>
-        var formula_index = 4
-        document.addEventListener("htmx:afterRequest", (evt)=>{
-            console.log(evt)
-            if(evt.detail.target.id === "holder"){
-                formula_index += 1
-            }
+        var filter_test = "PLL"
+        var formula_index = 0
+        document.body.addEventListener("att-ID", function(evt){
+            console.log(evt.detail.value)
+            formula_index = evt.detail.value
         })
     </script>
     
@@ -36,9 +35,9 @@
         <div 
             id         = "holder"
             hx-trigger = "load"
-            hx-get     = "http://localhost:8080/api/formulas?size=4"
+            hx-get     = "http://localhost:8080/api/formulas"
+            hx-vars    = "{'size': 3, 'filter': filter_test}"
         >
-
         </div>
 
         <div 
@@ -48,7 +47,7 @@
             hx-trigger = "intersect threshold:.5"
 
             hx-target = "#holder"
-            hx-vars   = "{'id': formula_index, 'size': 3}"
+            hx-vars   = "{'id': formula_index, 'size': 3, 'filter': filter_test}"
             hx-swap   = "beforeend"
 
         >

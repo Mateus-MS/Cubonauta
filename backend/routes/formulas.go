@@ -5,13 +5,17 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 )
+
+//TODO REORGANIZAR TODA A LOGICA DESSE END POINT MDS
 
 func FormulaCard(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "OPTIONS, GET")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Expose-Headers", "*")
 
 	formulas := data.GetFormulas()
 
@@ -22,6 +26,7 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 		//Se houver algum erro retorna -1
 		id := IdResolve(r, len(formulas.Formulas))
 		size := SizeResolve(r)
+		//filters := FiltersResolve(r)
 
 		//Se O ID passado for maior que a lista de formulas
 		if id == -2 {
@@ -35,6 +40,7 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 				stringHtml += FormulaString(formulas.Formulas[i])
 			}
 
+			w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, size))
 			fmt.Fprint(w, stringHtml)
 
 			return
@@ -52,11 +58,13 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 		if id != -1 && size != -1 {
 			stringHtml := ""
 			for i := id; i < id+size; i++ {
-				if i <= len(formulas.Formulas)-1 {
-					stringHtml += FormulaString(formulas.Formulas[id])
+				fmt.Println(i)
+				if i < len(formulas.Formulas) {
+					stringHtml += FormulaString(formulas.Formulas[i])
 				}
 			}
 
+			w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, id+size))
 			fmt.Fprint(w, stringHtml)
 
 			return
@@ -108,6 +116,22 @@ func SizeResolve(path *http.Request) int {
 	return size
 }
 
+func FiltersResolve(path *http.Request) []string {
+
+	filters := path.URL.Query().Get("filters")
+
+	//Se não foi passado nenhum filtro
+	if filters == "" {
+		return nil
+	}
+
+	//Se foi, coloca cada um dentro de um array
+	filtersArr := strings.Split(filters, ":")
+
+	return filtersArr
+
+}
+
 func StringToInt(value string) int {
 	number, err := strconv.Atoi(value)
 
@@ -146,7 +170,7 @@ func FormulaString(formula data.Formula) string {
 
 					</div>
 					<div class='formula_card__holder__bottom__options_holder__option'>
-						
+
 					</div>
 				</div>
 			</div>
@@ -155,5 +179,4 @@ func FormulaString(formula data.Formula) string {
 	`, formula.Formula, tags, formula.Name)
 
 	return templ
-
 }

@@ -4,13 +4,22 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <link rel="stylesheet" href="main.css">
 
+    <link rel="stylesheet" href="./css/formula-card/card.css">
+    <link rel="stylesheet" href="./css/formula-card/card-skeleton.css">
+    
+    <link rel="stylesheet" href="./css/header/header.css">
+    <link rel="stylesheet" href="./css/selector/selector.css">
+    <link rel="stylesheet" href="./css/nav-bar/nav-bar.css">
+    
     <style>
         *{
             margin: 0;
             padding: 0;
             border: 0;
+            user-select: none;
         }
     </style>
 
@@ -22,15 +31,188 @@
 <body>
 
     <script>
-        var formula_index = 0
+        var formula_index = 5
         document.body.addEventListener("att-ID", function(evt){
             formula_index = evt.detail.value
         })
     </script>
+
+    <header>
+        <div id="logo"></div>
+        <div id="method">Fridirich</div>
+        <div id="filters"></div>
+    </header>
+
+    <div id="selector">
+        <button 
+            class="button"
+            onclick="setFilter('F2L')"
+            hx-get     = "http://localhost:8080/api/formulas"
+            hx-trigger = "click"
+            hx-target = "#holder"
+            hx-vars   = "{'id': 0, 'size': 10, 'filters': 'F2L'}"
+            hx-swap   = "innerHTML"
+        >F2L</button>
+        <button 
+            class="button"
+            onclick="setFilter('PLL')"
+            hx-get     = "http://localhost:8080/api/formulas"
+            hx-trigger = "click"
+            hx-target = "#holder"
+            hx-vars   = "{'id': 0, 'size': 10, 'filters': 'PLL'}"
+            hx-swap   = "innerHTML"
+        >PLL</button>
+        <button 
+            class="button"
+            onclick="setFilter('OLL')"
+            hx-get     = "http://localhost:8080/api/formulas"
+            hx-trigger = "click"
+            hx-target = "#holder"
+            hx-vars   = "{'id': 0, 'size': 10, 'filters': 'OLL'}"
+            hx-swap   = "innerHTML"
+            >OLL</button>
+    </div>
+
+    <script>
+        var filter = "F2L"
+        function setFilter(_filter){
+            filter = _filter
+            window.scrollTo(0,0)
+            formula_index = 0
+        }
+    </script>
     
     <div id="container">
 
-        <div id="holder"></div>
+        <div id="holder">
+
+            <!--De acordo com meu atual pobre conhecimento de SEO, isso é uma tentativa de otimização-->
+            <div 
+                class      = 'formula_card'
+                hx-get     = "http://localhost:8080/api/formulas"
+                hx-vars    = "{'id': 0, 'size': 1, 'filters': filter}"
+                hx-trigger = "load"
+                hx-swap    = "outerHTML"
+            >
+                <div class='img loading'></div>
+                <div class='holder'>
+                    <div class='formula--skeleton loading'></div>
+                    <div class='tag_container'>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                    </div>
+                    <div class='bottom'>
+                        <div class='name--skeleton loading'></div>
+                        <div class='options_holder'>
+                            <div class='option loading'></div>
+                            <div class='option loading'></div>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+
+            <div 
+                class      = 'formula_card'
+                hx-get     = "http://localhost:8080/api/formulas"
+                hx-vars    = "{'id': 1, 'size': 1, 'filters': filter}"
+                hx-trigger = "load"
+                hx-swap    = "outerHTML"
+            >
+                <div class='img loading'></div>
+                <div class='holder'>
+                    <div class='formula--skeleton loading'></div>
+                    <div class='tag_container'>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                    </div>
+                    <div class='bottom'>
+                        <div class='name--skeleton loading'></div>
+                        <div class='options_holder'>
+                            <div class='option loading'></div>
+                            <div class='option loading'></div>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+
+            <div 
+                class      = 'formula_card'
+                hx-get     = "http://localhost:8080/api/formulas"
+                hx-vars    = "{'id': 2, 'size': 1, 'filters': filter}"
+                hx-trigger = "load"
+                hx-swap    = "outerHTML"
+            >
+                <div class='img loading'></div>
+                <div class='holder'>
+                    <div class='formula--skeleton loading'></div>
+                    <div class='tag_container'>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                    </div>
+                    <div class='bottom'>
+                        <div class='name--skeleton loading'></div>
+                        <div class='options_holder'>
+                            <div class='option loading'></div>
+                            <div class='option loading'></div>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+
+            <div 
+                class      = 'formula_card'
+                hx-get     = "http://localhost:8080/api/formulas"
+                hx-vars    = "{'id': 3, 'size': 1, 'filters': filter}"
+                hx-trigger = "load"
+                hx-swap    = "outerHTML"
+            >
+                <div class='img loading'></div>
+                <div class='holder'>
+                    <div class='formula--skeleton loading'></div>
+                    <div class='tag_container'>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                    </div>
+                    <div class='bottom'>
+                        <div class='name--skeleton loading'></div>
+                        <div class='options_holder'>
+                            <div class='option loading'></div>
+                            <div class='option loading'></div>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+
+            <div 
+                class      = 'formula_card'
+                hx-get     = "http://localhost:8080/api/formulas"
+                hx-vars    = "{'id': 4, 'size': 1, 'filters': filter}"
+                hx-trigger = "load"
+                hx-swap    = "outerHTML"
+            >
+                <div class='img loading'></div>
+                <div class='holder'>
+                    <div class='formula--skeleton loading'></div>
+                    <div class='tag_container'>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                        <div class='tag--skeleton loading'></div>
+                    </div>
+                    <div class='bottom'>
+                        <div class='name--skeleton loading'></div>
+                        <div class='options_holder'>
+                            <div class='option loading'></div>
+                            <div class='option loading'></div>
+                        </div>
+                    </div> 
+                </div> 
+            </div>
+        
+        </div> 
 
         <div 
             id         = "intersect_trigger"
@@ -39,11 +221,19 @@
             hx-trigger = "intersect threshold:.5"
 
             hx-target = "#holder"
-            hx-vars   = "{'id': formula_index, 'size': 6, 'filters': 'F2L'}"
+            hx-vars   = "{'id': formula_index, 'size': 10, 'filters': filter}"
             hx-swap   = "beforeend"
         >
         </div>
 
+    </div>
+
+    <div id="nav-bar">
+        <div class="page"></div>
+        <div class="page selected"></div>
+        <div class="page"></div>
+        <div class="page"></div>
+        <div class="page"></div>
     </div>
 
 </body>

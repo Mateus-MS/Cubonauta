@@ -1,0 +1,25 @@
+#selector{
+    box-sizing: border-box;
+    width: 100dvw;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em calc(20dvw / 2);
+    background-color: gray;
+
+    position: sticky;
+    top: 0;
+
+}
+
+#selector > .button{
+
+    width: 80px;
+    height: 45px;
+
+    font-size: 1.4em;
+    font-weight: bolder;
+    background-color: rgb(232, 76, 76);
+    color: white;
+    border-radius: 7px;
+
+}

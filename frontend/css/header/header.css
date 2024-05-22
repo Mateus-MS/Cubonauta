@@ -1,0 +1,36 @@
+header{
+
+    box-sizing: border-box;
+
+    width: 100dvw;
+    height: 60px;
+    padding: 1.5dvh calc(20dvw / 2);
+
+    background-color: rgb(67, 67, 67);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#logo{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: black;
+}
+
+#method{
+
+    font-size: 1.7em;
+    font-weight: bolder;
+    color: white;
+
+    width: fit-content;
+}
+
+#filters{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: black;
+}

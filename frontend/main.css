@@ -1,90 +1,12 @@
 body{
     width: 100dvw;
-    height: 100dvh;
+    height: auto;
 
     display: flex;
-    justify-content: center;
     align-content: center;
+    flex-direction: column;
 
     background-color: gray;
-}
-
-.formula_card{
-    --card--height: 100px;
-    --card--width: 75dvw;
-    --card--margin: 1em;
-
-    display: flex;
-    width: var(--card--width);
-    height: var(--card--height);
-    background-color: white;
-    padding: var(--card--margin) ;
-    margin: 1.5em 0;
-}
-
-.formula_card__img{
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    background-color: rgb(56, 124, 183);
-}
-
-.formula_card__holder{
-    width: calc(var(--card--width) - var(--card--height) - var(--card--margin));
-    margin-left: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.formula_card__holder__formula{
-    font-weight: bolder;
-    font-size: 1.4em;
-
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis ellipsis;
-}
-
-.formula_card__holder__tag_container{
-    width: 100%;
-    margin-top: 5px;
-    display: flex;
-}
-
-.formula_card__holder__tag_container__tag{
-    width: fit-content;
-    color: white;
-    font-weight: bolder;
-    padding: .35em .7em;
-    border-radius: 8px;
-    background-color: black;
-    margin-right: .7em;
-    font-size: .8em;
-}
-
-.formula_card__holder__bottom{
-    display: flex;
-    margin-top: auto;
-    justify-content: space-between;
-}
-
-.formula_card__holder__bottom__name{
-    font-weight: bolder;
-    font-size: 1.4em;
-
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis ellipsis;
-}
-
-.formula_card__holder__bottom__options_holder{
-    display: flex;
-}
-
-.formula_card__holder__bottom__options_holder__option{
-    height: 1.4em;
-    width: 1.4em;
-    background-color: red;
-    margin-left: 10px;
 }
 
 #container{

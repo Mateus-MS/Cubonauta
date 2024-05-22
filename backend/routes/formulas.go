@@ -156,35 +156,35 @@ func FormulaString(formula data.Formula) string {
 	tags := ""
 
 	for i := 0; i < len(formula.Tags); i++ {
-		tags += fmt.Sprintf(`<div class='formula_card__holder__tag_container__tag'>
+		tags += fmt.Sprintf(`<div class='tag'>
 					%s
 				</div>`, formula.Tags[i])
 	}
 
 	templ := fmt.Sprintf(`<div class='formula_card'>
-		<div class='formula_card__img'></div>
-		<div class='formula_card__holder'>
-			<div class='formula_card__holder__formula'>
+	<div class='img'></div>
+	<div class='holder'>
+		<div class='formula'>
+			%s
+		</div>
+		<div class='tag_container'>
+			%s
+		</div>
+		<div class='bottom'>
+			<div class='name'>
 				%s
 			</div>
-			<div class='formula_card__holder__tag_container'>
-				%s
-			</div>
-			<div class='formula_card__holder__bottom'>
-				<div class='formula_card__holder__bottom__name'>
-					%s
+			<div class='options_holder'>
+				<div class='option'>
+
 				</div>
-				<div class='formula_card__holder__bottom__options_holder'>
-					<div class='formula_card__holder__bottom__options_holder__option'>
+				<div class='option'>
 
-					</div>
-					<div class='formula_card__holder__bottom__options_holder__option'>
-
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 	`, formula.Formula, tags, formula.Name)
 
 	return templ

@@ -16,10 +16,22 @@
     
     <link rel="stylesheet" href="./css/filter/filter.css">
 
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+    <script type="importmap">
+        {
+            "imports": {
+            "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+            "orbitControls": "https://unpkg.com/three@0.150.1/examples/jsm/controls/OrbitControls.js"
+            }
+        }
+    </script>
 
+    
     <script src="./js/category_filters.js"></script>
     <script src="./js/att-Id-Request.js" defer></script>
     <script src="./js/filter_control.js" defer></script>
+    
+    <script src="./js/cube/cube.js" type="module"></script>
     
     <style>
         *{
@@ -31,8 +43,6 @@
     </style>
 
     <title>Cubonauta</title>
-
-    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -226,7 +236,7 @@
     <!--BUGADO-->
     <div id="nav-bar">
         <div class="nav-bar__page"></div>
-        <div class="nav-bar__page--selected"></div>
+        <div class="nav-bar__page nav-bar__page--selected"></div>
         <div class="nav-bar__page"></div>
         <div class="nav-bar__page"></div>
         <div class="nav-bar__page"></div>
@@ -275,6 +285,10 @@
             hx-on:click="hideFilters()"
         ></div>
 
+    </div>
+
+    <div id="cube_holder">
+        <canvas id="cube"></canvas>
     </div>
 
 </body>

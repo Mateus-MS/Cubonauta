@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="./css/selector/selector.css">
     <link rel="stylesheet" href="./css/nav-bar/nav-bar.css">
     
+    <link rel="stylesheet" href="./css/filter/filter.css">
+
+
+    <script src="./js/filter_control.js" defer></script>
+    
     <style>
         *{
             margin: 0;
@@ -40,7 +45,9 @@
     <header>
         <div id="logo"></div>
         <div id="method">Fridirich</div>
-        <div id="filters"></div>
+        <div id="filters"
+            hx-on:click="showFilters()"
+        ></div>
     </header>
 
     <div id="selector">
@@ -49,7 +56,7 @@
             onclick="setFilter('F2L')"
             hx-get     = "http://localhost:8080/api/formulas"
             hx-trigger = "click"
-            hx-target = "#holder"
+            hx-target = "#bag"
             hx-vars   = "{'id': 0, 'size': 10, 'filters': 'F2L'}"
             hx-swap   = "innerHTML"
         >F2L</button>
@@ -58,7 +65,7 @@
             onclick="setFilter('PLL')"
             hx-get     = "http://localhost:8080/api/formulas"
             hx-trigger = "click"
-            hx-target = "#holder"
+            hx-target = "#bag"
             hx-vars   = "{'id': 0, 'size': 10, 'filters': 'PLL'}"
             hx-swap   = "innerHTML"
         >PLL</button>
@@ -67,7 +74,7 @@
             onclick="setFilter('OLL')"
             hx-get     = "http://localhost:8080/api/formulas"
             hx-trigger = "click"
-            hx-target = "#holder"
+            hx-target = "#bag"
             hx-vars   = "{'id': 0, 'size': 10, 'filters': 'OLL'}"
             hx-swap   = "innerHTML"
             >OLL</button>
@@ -86,8 +93,9 @@
 
         <div id="holder">
 
-            <!--De acordo com meu atual pobre conhecimento de SEO, isso é uma tentativa de otimização-->
-            <div 
+            <div id="bag">
+                <!--De acordo com meu atual pobre conhecimento de SEO, isso é uma tentativa de otimização-->
+                <div 
                 class      = 'formula_card'
                 hx-get     = "http://localhost:8080/api/formulas"
                 hx-vars    = "{'id': 0, 'size': 1, 'filters': filter}"
@@ -110,6 +118,7 @@
                         </div>
                     </div> 
                 </div> 
+        
             </div>
 
             <div 
@@ -135,6 +144,7 @@
                         </div>
                     </div> 
                 </div> 
+        
             </div>
 
             <div 
@@ -160,6 +170,7 @@
                         </div>
                     </div> 
                 </div> 
+        
             </div>
 
             <div 
@@ -185,6 +196,7 @@
                         </div>
                     </div> 
                 </div> 
+        
             </div>
 
             <div 
@@ -210,30 +222,80 @@
                         </div>
                     </div> 
                 </div> 
-            </div>
         
-        </div> 
+            </div>
+            </div> <!--bag-->
 
-        <div 
+            
+            <div 
             id         = "intersect_trigger"
             hx-get     = "http://localhost:8080/api/formulas"
             
-            hx-trigger = "intersect threshold:.5"
+            hx-trigger = "intersect threshold:.1"
 
-            hx-target = "#holder"
+            hx-target = "#bag"
             hx-vars   = "{'id': formula_index, 'size': 10, 'filters': filter}"
             hx-swap   = "beforeend"
         >
         </div>
+            
+
+        </div> <!--holder-->
 
     </div>
 
+    <!--BUGADO-->
     <div id="nav-bar">
-        <div class="page"></div>
-        <div class="page selected"></div>
-        <div class="page"></div>
-        <div class="page"></div>
-        <div class="page"></div>
+        <div class="nav-bar__page"></div>
+        <div class="nav-bar__page--selected"></div>
+        <div class="nav-bar__page"></div>
+        <div class="nav-bar__page"></div>
+        <div class="nav-bar__page"></div>
+    </div>
+
+    <div 
+        id="filter_holder"
+    >
+        <div class="filter">
+            <div id="filter__left">
+                <span>Filtros das formulas:</span>
+                <div id="filter__left__holder">
+                    <div class="filter__left__holder__tag">Velocidade</div>
+                    <div class="filter__left__holder__tag">Antigas</div>
+                    <div class="filter__left__holder__tag">Movimentos</div>
+                    <div class="filter__left__holder__tag">Novas</div>
+                    <div class="filter__left__holder__tag">Dificuldade</div>
+                </div>
+                <div id="filter__left__holder__options">
+                    <button id="filter__left__holder__options__left">Remover todos...</button>
+                    <button id="filter__left__holder__options__right">Aplicar</button>
+                </div>
+            </div>
+            <div id="filter__right">
+                <div id="filter__right__top">
+                    <button class="filter__right__top__selector">Metodos</button>
+                    <button class="filter__right__top__selector">Cubos</button>
+                </div>
+                <div id="filter__right__mid">
+                    <div class="filter__right__mid__selector"></div>
+                    <div id="filter__right__mid__img"></div>
+                    <div class="filter__right__mid__selector"></div>
+                </div>
+                <div id="filter__right__bot">
+                    <div id="filter__right__bot__holder">
+                        <div class="filter__right__bot__holder__tag">ZZ</div>
+                        <div class="filter__right__bot__holder__tag">Roux</div>
+                    </div>
+                    <input type="text" placeholder="Escolha um método!">
+                </div>
+            </div>
+        </div>
+
+        <div 
+            id="filter_blur"
+            hx-on:click="hideFilters()"
+        ></div>
+
     </div>
 
 </body>

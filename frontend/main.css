@@ -1,18 +1,17 @@
 body{
     width: 100dvw;
-    height: auto;
+    height: 100dvh;
 
     display: flex;
-    align-content: center;
+    align-items: center;
     flex-direction: column;
-
     background-color: gray;
 }
 
 #container{
 
-    width: 100dvw;
-    height: fit-content;
+    width: fit-content;
+    height: auto;
 
     display: flex;
     flex-direction: column;
@@ -20,16 +19,23 @@ body{
     justify-content: start;
 
     background-color: gray;
-
+    overflow-y: scroll;
+    
 }
 
-#holder{
+#bag{
+    width: 100dvw;
     display: flex;
+    align-items: center;
     flex-direction: column;
 }
 
-#load_trigger{
+#intersect_trigger{
     width: 100%;
-    height: 30px;
-    background-color: red;
+    height: 1px;
+}
+
+#ui{
+    position: absolute;
+    top: 0;
 }

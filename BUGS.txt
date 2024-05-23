@@ -1,0 +1,9 @@
+BACKEND
+
+- Keeps sending the last formula from PLL category over and over
+
+DATA
+
+FRONTEND
+
+- NavBar resing when #holder element getting bigger

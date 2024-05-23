@@ -1,6 +1,6 @@
 BACKEND
 
-- Keeps sending the last formula from PLL category over and over
+- SOLVED Keeps sending the last formula from PLL category over and over
 
 DATA
 

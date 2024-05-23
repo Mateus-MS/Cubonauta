@@ -7,7 +7,9 @@ import (
 	"os"
 )
 
-var FormulasOBJ Formulas = OpenFormulasFile()
+var CFOP_F2L Formulas = OpenFile("../data/methods/CFOP/F2L.json")
+var CFOP_OLL Formulas = OpenFile("../data/methods/CFOP/OLL.json")
+var CFOP_PLL Formulas = OpenFile("../data/methods/CFOP/PLL.json")
 
 type Formulas struct {
 	Formulas []Formula `json:"formulas"`
@@ -19,23 +21,32 @@ type Formula struct {
 	Tags    []string `json:"tags"`
 }
 
-func OpenFormulasFile() Formulas {
-	formulasFile, err := os.Open("../data/formulas.json")
+func OpenFile(path string) Formulas {
+	file, err := os.Open(path)
 
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	formulasByteJSON, _ := io.ReadAll(formulasFile)
+	byteJson, _ := io.ReadAll(file)
 
-	formulas := Formulas{}
+	fileArray := Formulas{}
 
-	json.Unmarshal(formulasByteJSON, &formulas)
-	defer formulasFile.Close()
+	json.Unmarshal(byteJson, &fileArray)
+	defer file.Close()
 
-	return formulas
+	return fileArray
 }
 
-func GetFormulas() Formulas {
-	return FormulasOBJ
+func GetFormulas(filter string) Formulas {
+	if filter == "F2L" {
+		return CFOP_F2L
+	}
+	if filter == "OLL" {
+		return CFOP_OLL
+	}
+	if filter == "PLL" {
+		return CFOP_PLL
+	}
+	return Formulas{}
 }

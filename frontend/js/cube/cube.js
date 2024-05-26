@@ -1,6 +1,5 @@
 import * as THREE from "three";
 //TEMPORARIO
-import { OrbitControls } from 'orbitControls';
 import { Piece } from "./piece.js";
 
 import { Matrix } from "./matrix.js";
@@ -13,14 +12,11 @@ camera.position.set(4, 4, 4);
 camera.lookAt(0, 0, 0)
 
 var cube_holder = document.getElementById("cube_holder")
-const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0], antialias: true, preserveDrawingBuffer: true});
+const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0], antialias: true});
 renderer.setSize(300, 300);
 renderer.setClearColor("rgb(255, 255, 255)")
 // renderer.setClearAlpha(0)
 cube_holder.appendChild(renderer.domElement);
-
-//TEMPORARIO
-const controls = new OrbitControls( camera, renderer.domElement );
 //#endregion
 
 //#region CREATE CUBE
@@ -61,7 +57,7 @@ let positions = [
 
 ]
 
-let colors = [
+let normalColors = [
     ["black", "#ffa719", "black", "#406bf7", "black", "#e6e6e6"],
     ["black", "#ffa719", "black", "black", "black", "#e6e6e6"],
     ["black", "#ffa719", "#46f740", "black", "black", "#e6e6e6"],
@@ -93,64 +89,52 @@ let colors = [
 ]
 
 for(let i = 0; i < 26; i++){
-    cube.geometry.add(new Piece(colors[i]).geometry)
+    cube.geometry.add(new Piece(normalColors[i]).geometry)
     cube.geometry.children[i].position.set(...positions[i])
 }
 //#endregion
 
-document.addEventListener("keydown", (e)=>{
-
-    if(e.key === "q"){
-        AnimateRotation("F")
-    } else if(e.key === "Q"){
-        AnimateRotation("F'")
-    }
-    
-
-    if(e.key === "w"){
-        animateRotation("B")
-    } else if (e.key === "W"){
-        animateRotation("B'")
+document.addEventListener("keypress", (e)=>{
+    if(e.key === " "){
+        toogleAutoPlay()
     }
 
-    if(e.key === "e"){
-        animateRotation("L")
-    } else if (e.key === "E"){
-        animateRotation("L'")
+    if(e.key === "r"){
+        reset()
     }
-
-    if(e.key === "a"){
-        animateRotation("R")
-    } else if (e.key === "A"){
-        animateRotation("R'")
-    }
-
-    if(e.key === "s"){
-        animateRotation("U")
-    } else if (e.key === "S"){
-        animateRotation("U'")
-    }
-
-    if(e.key === "d"){
-        animateRotation("D")
-    } else if (e.key === "D"){
-        animateRotation("D'")
-    }
-
 })
 
+function reset(){
+    for(let i = 0; i < positions.length; i++){
+        cube.geometry.children[i].position.set(...positions[i])
+        cube.geometry.children[i].setRotationFromQuaternion(new THREE.Quaternion())
+    }
+}
+
+function toogleAutoPlay(){
+    play = !play
+}
+
 var angle = 0
-var speed = 3
+var speed = 1
 var maxAngle;
 var animating = false
 var round = false
 var animationFunction;
 var speedRad = speed * Math.PI / 180;
-
+let caseSetter = "R U2' R' y' F U' R2' U' R2' U R2' F' y'" 
+setCase(caseSetter)
+var formulaString = " " //y F R2 U' R2 U R2 U F' y R U2 R'
+var formulaArray  = formulaString.split(" ")
 var formula_index = 0;
+var play = true;
 
 function animate() {
     requestAnimationFrame(animate);
+
+    if(!animating && play){
+        AnimateRotation(formulaArray[formula_index])
+    }
 
     update()
 
@@ -167,16 +151,15 @@ function update(){
             animating = false
             maxAngle = undefined
             round = false
+            formula_index += 1
         }
     }
 
 }
 
-setCase("R2' U' R' U' R U R U R U' R")
-
 function setCase(formula){
 
-    let form = formula.split(' ')
+    let form = formula.split(" ")
 
     for(let i = 0; i < formula.length; i++){
         setRotation(form[i])
@@ -504,12 +487,12 @@ function setRotation(move){
                         [cube.geometry.children[i].position.z]
                     ])
 
-                    let result = counterClockWise.multiply(mat2d)
+                    let result = clockWise.multiply(mat2d)
 
                     cube.geometry.children[i].position.y = result.matrix[0][0]
                     cube.geometry.children[i].position.z = result.matrix[1][0]
 
-                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2)
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2)
                 }
             }
             break
@@ -522,12 +505,12 @@ function setRotation(move){
                         [cube.geometry.children[i].position.z]
                     ])
 
-                    let result = clockWise.multiply(mat2d)
+                    let result = counterClockWise.multiply(mat2d)
 
                     cube.geometry.children[i].position.y = result.matrix[0][0]
                     cube.geometry.children[i].position.z = result.matrix[1][0]
 
-                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2)
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2)
                 }
             }
             break
@@ -1044,1432 +1027,157 @@ function setRotation(move){
             }
             break
 
-    }
-
-}
-
-function animateRotation(move){
-
-    if(animating) return
-
-    switch(move){
-
-        case "F":
-            animationFunction = ()=>{
-
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "F'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "F2":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 180
-            break
-
-        case "Fw":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z != -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "Fw'":
-        animationFunction = ()=>{
-            if(angle >= maxAngle){
-                angle = maxAngle
-            }
-        
-            let rotationMatrix = new Matrix([
-                [Math.cos(speedRad), -Math.sin(speedRad)],
-                [Math.sin(speedRad),  Math.cos(speedRad)]
-            ])
-
-            let founded = 0
+        case "M":
             for(let i = 0; i < 26; i++){
-                if(cube.geometry.children[i].position.z != -1){
+                if(cube.geometry.children[i].position.x == 0){
+                    
                     let mat2d = new Matrix([
-                        [cube.geometry.children[i].position.x],
-                        [cube.geometry.children[i].position.y]
-                    ])
-            
-                    // let result = clockWise.multiply(mat2d)
-                    let result = rotationMatrix.multiply(mat2d)
-            
-                    cube.geometry.children[i].position.x = result.matrix[0][0]
-                    cube.geometry.children[i].position.y = result.matrix[1][0]
-                    
-                    //NEED MORE RESEARCH
-                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), speedRad)
-
-                    if(round){
-                        cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                        cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                    }
-
-                    founded += 1
-                    if(founded == 17){
-                        break
-                    }
-                    
-                }
-            }
-        }
-        animating = true
-        maxAngle = 90
-        break
-
-
-        case "B":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "B'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "B2":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 180
-            break
-
-        case "Bw":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z != 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "Bw'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.z != 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-
-
-        case "L":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "L'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "L2":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 180
-            break
-
-        case "Lw":
-        animationFunction = ()=>{
-            if(angle >= maxAngle){
-                angle = maxAngle
-            }
-        
-            let rotationMatrix = new Matrix([
-                [Math.cos(speedRad), -Math.sin(speedRad)],
-                [Math.sin(speedRad),  Math.cos(speedRad)]
-            ])
-
-            let founded = 0
-            for(let i = 0; i < 26; i++){
-                if(cube.geometry.children[i].position.x != -1){
-                    let mat2d = new Matrix([
-                        [cube.geometry.children[i].position.z],
-                        [cube.geometry.children[i].position.y]
-                    ])
-            
-                    // let result = clockWise.multiply(mat2d)
-                    let result = rotationMatrix.multiply(mat2d)
-            
-                    cube.geometry.children[i].position.z = result.matrix[0][0]
-                    cube.geometry.children[i].position.y = result.matrix[1][0]
-                    
-                    //NEED MORE RESEARCH
-                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -speedRad)
-
-                    if(round){
-                        cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                    }
-
-                    founded += 1
-                    if(founded == 17){
-                        break
-                    }
-                    
-                }
-            }
-        }
-        animating = true
-        maxAngle = 90
-        break
-        case "Lw'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x != -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-
-
-        case "R":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "R'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "R2":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 180
-            break
-
-        case "Rw":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x != 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "Rw'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.x != 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.z],
-                            [cube.geometry.children[i].position.y]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.z = result.matrix[0][0]
-                        cube.geometry.children[i].position.y = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                            cube.geometry.children[i].position.y = Math.round(cube.geometry.children[i].position.y)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-
-
-        case "U":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "U'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "U2":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y == 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 180
-            break
-            
-        case "Uw":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y != -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "Uw'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y != -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-
-
-        case "D":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "D'":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), -speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 90
-            break
-        case "D2":
-            animationFunction = ()=>{
-                angle += speed
-
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                    [Math.sin(-speedRad),  Math.cos(-speedRad)]
-                ])
-
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y == -1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), speedRad)
-
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 9){
-                            break
-                        }
-                        
-                    }
-                }
-            }
-            animating = true
-            maxAngle = 180
-            break
-
-        case "Dw":
-        animationFunction = ()=>{
-            if(angle >= maxAngle){
-                angle = maxAngle
-            }
-        
-            let rotationMatrix = new Matrix([
-                [Math.cos(-speedRad), -Math.sin(-speedRad)],
-                [Math.sin(-speedRad),  Math.cos(-speedRad)]
-            ])
-
-            let founded = 0
-            for(let i = 0; i < 26; i++){
-                if(cube.geometry.children[i].position.y != 1){
-                    let mat2d = new Matrix([
-                        [cube.geometry.children[i].position.x],
+                        [cube.geometry.children[i].position.y],
                         [cube.geometry.children[i].position.z]
                     ])
-            
-                    // let result = clockWise.multiply(mat2d)
-                    let result = rotationMatrix.multiply(mat2d)
-            
-                    cube.geometry.children[i].position.x = result.matrix[0][0]
+
+                    let result = counterClockWise.multiply(mat2d)
+
+                    cube.geometry.children[i].position.y = result.matrix[0][0]
                     cube.geometry.children[i].position.z = result.matrix[1][0]
-                    
-                    //NEED MORE RESEARCH
-                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), speedRad)
 
-                    if(round){
-                        cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                        cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                    }
-
-                    founded += 1
-                    if(founded == 17){
-                        break
-                    }
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), Math.PI / 2)
                     
                 }
             }
-        }
-        animating = true
-        maxAngle = 90
-        break
-        case "Dw'":
-            animationFunction = ()=>{
-                angle += speed
+            break
+        case "M'":
+            for(let i = 0; i < 26; i++){
+                if(cube.geometry.children[i].position.x == 0){
+                    
+                    let mat2d = new Matrix([
+                        [cube.geometry.children[i].position.y],
+                        [cube.geometry.children[i].position.z]
+                    ])
 
-                if(angle >= maxAngle){
-                    angle = maxAngle
-                    round = true
-                }
-            
-                let rotationMatrix = new Matrix([
-                    [Math.cos(speedRad), -Math.sin(speedRad)],
-                    [Math.sin(speedRad),  Math.cos(speedRad)]
-                ])
+                    let result = clockWise.multiply(mat2d)
 
-                let founded = 0
-                for(let i = 0; i < 26; i++){
-                    if(cube.geometry.children[i].position.y != 1){
-                        let mat2d = new Matrix([
-                            [cube.geometry.children[i].position.x],
-                            [cube.geometry.children[i].position.z]
-                        ])
-                
-                        // let result = clockWise.multiply(mat2d)
-                        let result = rotationMatrix.multiply(mat2d)
-                
-                        cube.geometry.children[i].position.x = result.matrix[0][0]
-                        cube.geometry.children[i].position.z = result.matrix[1][0]
-                        
-                        //NEED MORE RESEARCH
-                        cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), -speedRad)
+                    cube.geometry.children[i].position.y = result.matrix[0][0]
+                    cube.geometry.children[i].position.z = result.matrix[1][0]
 
-                        if(round){
-                            cube.geometry.children[i].position.x = Math.round(cube.geometry.children[i].position.x)
-                            cube.geometry.children[i].position.z = Math.round(cube.geometry.children[i].position.z)
-                        }
-
-                        founded += 1
-                        if(founded == 17){
-                            break
-                        }
-                        
-                    }
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -Math.PI / 2)
                 }
             }
-            animating = true
-            maxAngle = 90
+            break
+        case "M2":
+            for(let i = 0; i < 26; i++){
+                if(cube.geometry.children[i].position.x == 0){
+                    
+                    let mat2d = new Matrix([
+                        [cube.geometry.children[i].position.y],
+                        [cube.geometry.children[i].position.z]
+                    ])
+
+                    let result = counterClockWise.multiply(mat2d)
+
+                    cube.geometry.children[i].position.y = result.matrix[0][0]
+                    cube.geometry.children[i].position.z = result.matrix[1][0]
+
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), Math.PI)
+                    
+                }
+            }
+            break
+        case "M2'":
+            for(let i = 0; i < 26; i++){
+                if(cube.geometry.children[i].position.x == 0){
+                    
+                    let mat2d = new Matrix([
+                        [cube.geometry.children[i].position.y],
+                        [cube.geometry.children[i].position.z]
+                    ])
+
+                    let result = clockWise.multiply(mat2d)
+
+                    cube.geometry.children[i].position.y = result.matrix[0][0]
+                    cube.geometry.children[i].position.z = result.matrix[1][0]
+
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(1, 0, 0), -Math.PI)
+                }
+            }
             break
 
+        case "S":
+            for(let i = 0; i < 26; i++){
+                if(cube.geometry.children[i].position.z == 0){
+                    
+                    let mat2d = new Matrix([
+                        [cube.geometry.children[i].position.x],
+                        [cube.geometry.children[i].position.y]
+                    ])
+            
+                    let result = clockWise.multiply(mat2d)
+            
+                    cube.geometry.children[i].position.x = result.matrix[0][0]
+                    cube.geometry.children[i].position.y = result.matrix[1][0]
+                    
+                    //NEED MORE RESEARCH
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), -Math.PI / 2)
+
+                }
+            }
+            break
+        case "S'":
+            for(let i = 0; i < 26; i++){
+                if(cube.geometry.children[i].position.z == 0){
+                    
+                    let mat2d = new Matrix([
+                        [cube.geometry.children[i].position.x],
+                        [cube.geometry.children[i].position.y]
+                    ])
+            
+                    let result = counterClockWise.multiply(mat2d)
+            
+                    cube.geometry.children[i].position.x = result.matrix[0][0]
+                    cube.geometry.children[i].position.y = result.matrix[1][0]
+            
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), Math.PI / 2)
+                }
+            }
+            break
+        case "S2":
+            for(let i = 0; i < 26; i++){
+                if(cube.geometry.children[i].position.z == 0){
+                    
+                    let mat2d = new Matrix([
+                        [cube.geometry.children[i].position.x],
+                        [cube.geometry.children[i].position.y]
+                    ])
+            
+                    let result = clockWise.multiply(mat2d)
+            
+                    cube.geometry.children[i].position.x = result.matrix[0][0]
+                    cube.geometry.children[i].position.y = result.matrix[1][0]
+                    
+                    //NEED MORE RESEARCH
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), -Math.PI)
+
+                }
+            }
+            break
+        case "S2'":
+            for(let i = 0; i < 26; i++){
+                if(cube.geometry.children[i].position.z == 0){
+                    
+                    let mat2d = new Matrix([
+                        [cube.geometry.children[i].position.x],
+                        [cube.geometry.children[i].position.y]
+                    ])
+            
+                    let result = counterClockWise.multiply(mat2d)
+            
+                    cube.geometry.children[i].position.x = result.matrix[0][0]
+                    cube.geometry.children[i].position.y = result.matrix[1][0]
+            
+                    cube.geometry.children[i].rotateOnWorldAxis(new THREE.Vector3(0, 0, 1), Math.PI)
+                }
+            }
+            break
     }
 
 }
@@ -2536,6 +1244,8 @@ function Rotate(axys, translationDir, rotationDir, axysRange){
 }
 
 function AnimateRotation(move){
+
+    if(animating) return
 
     switch(move){
 
@@ -2819,6 +1529,64 @@ function AnimateRotation(move){
         case "Uw2'":
             animationFunction = ()=>{
                 Rotate(new THREE.Vector3(0, 1, 0), -1, 1, [1, 0])
+            }
+            maxAngle = 180
+            animating = true
+            break
+
+        case "D":
+            animationFunction = ()=>{
+                Rotate(new THREE.Vector3(0, 1, 0), -1, 1, [-1])
+            }
+            maxAngle = 90
+            animating = true
+            break
+        case "D'":
+            animationFunction = ()=>{
+                Rotate(new THREE.Vector3(0, 1, 0), 1, -1, [-1])
+            }
+            maxAngle = 90
+            animating = true
+            break
+
+        case "D2":
+            animationFunction = ()=>{
+                Rotate(new THREE.Vector3(0, 1, 0), -1, 1, [-1])
+            }
+            maxAngle = 180
+            animating = true
+            break
+        case "D2'":
+            animationFunction = ()=>{
+                Rotate(new THREE.Vector3(0, 1, 0), 1, -1, [-1])
+            }
+            maxAngle = 180
+            animating = true
+            break
+        case "Dw":
+            animationFunction = ()=>{
+                Rotate(new THREE.Vector3(0, 1, 0), -1, 1, [-1, 0])
+            }
+            maxAngle = 90
+            animating = true
+            break
+        case "Dw'":
+            animationFunction = ()=>{
+                Rotate(new THREE.Vector3(0, 1, 0), 1, -1, [-1, 0])
+            }
+            maxAngle = 90
+            animating = true
+            break
+        case "Dw2":
+            animationFunction = ()=>{
+                Rotate(new THREE.Vector3(0, 1, 0), -1, 1, [-1, 0])
+            }
+            maxAngle = 180
+            animating = true
+            break
+        case "Dw2'":
+            animationFunction = ()=>{
+                Rotate(new THREE.Vector3(0, 1, 0), 1, -1, [-1, 0])
             }
             maxAngle = 180
             animating = true

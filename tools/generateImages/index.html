@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+            user-select: none;
+        }
+        #cube_holder{
+            position: absolute;
+            width: 100dvw;
+            height: 100dvh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <script type="importmap">
+        {
+            "imports": {
+            "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+            "orbitControls": "https://unpkg.com/three@0.150.1/examples/jsm/controls/OrbitControls.js"
+            }
+        }
+    </script>
+
+    <script src="../../frontend/js/cube/cube.js" type="module"></script>
+
+</head>
+<body>
+    
+    <script src="./saveCanvasAsImage.js"></script>
+
+    <div id="cube_holder">
+        <canvas id="cube"></canvas>
+    </div>
+
+</body>
+</html>

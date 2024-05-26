@@ -1,289 +1,460 @@
 {
     "formulas": [
         {
-            "formula": "R U R' U R U2 R'",
-            "name"   : "Caso 01",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U R U2 R'",
+          "setCase": "R U2' R' U' R U' R' ",
+          "name": "Caso 01",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R' U' R U' R' U2 R",
-            "name"   : "Caso 02",
-            "tags"   : ["OLL"]
+          "formula": "R' U' R U' R' U2 R",
+          "setCase": "R' U2' R U R' U R ",
+          "name": "Caso 02",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U R U' R' U R U2 R'",
-            "name"   : "Caso 03",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U R U' R' U R U2 R'",
+          "setCase": "R U2' R' U' R U R' U' R U' R' ",
+          "name": "Caso 03",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U2 R2 U' R2 U' R2 U2 R",
-            "name"   : "Caso 04",
-            "tags"   : ["OLL"]
+          "formula": "R U2 R2 U' R2 U' R2 U2 R",
+          "setCase": "R' U2' R2' U R2' U R2' U2' R' ",
+          "name": "Caso 04",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U R’ U’ Rw’ F R F’",
-            "name"   : "Caso 05",
-            "tags"   : ["OLL"]
+          "formula": "Rw U R’ U’ Rw’ F R F’",
+          "setCase": "F’' R' F' Rw’' U’' R’' U' Rw' ",
+          "name": "Caso 05",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "F' Rw U R' U' Rw' F R",
-            "name"   : "Caso 06",
-            "tags"   : ["OLL"]
+          "formula": "F' Rw U R' U' Rw' F R",
+          "setCase": "R' F' Rw U R U' Rw' F ",
+          "name": "Caso 06",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R2 D' R U2 R' D R U2 R",
-            "name"   : "Caso 07",
-            "tags"   : ["OLL"]
+          "formula": "R2 D' R U2 R' D R U2 R",
+          "setCase": "R' U2' R' D' R U2' R' D R2' ",
+          "name": "Caso 07",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U' R' F R F'",
-            "name"   : "Caso 08",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U' R' F R F'",
+          "setCase": "F R' F' R U R U' R' ",
+          "name": "Caso 08",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "F R U R' U' F'",
-            "name"   : "Caso 09",
-            "tags"   : ["OLL"]
+          "formula": "F R U R' U' F'",
+          "setCase": "F U R U' R' F' ",
+          "name": "Caso 09",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U2 R' U' R U' Rw'",
-            "name"   : "Caso 10",
-            "tags"   : ["OLL"]
+          "formula": "Rw U2 R' U' R U' Rw'",
+          "setCase": "Rw U R' U R U2' Rw' ",
+          "name": "Caso 10",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw' U2 R U R' U Rw",
-            "name"   : "Caso 11",
-            "tags"   : ["OLL"]
+          "formula": "Rw' U2 R U R' U Rw",
+          "setCase": "Rw' U' R U' R' U2' Rw ",
+          "name": "Caso 11",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Fw R U R' U' Fw'",
-            "name"   : "Caso 12",
-            "tags"   : ["OLL"]
+          "formula": "Fw R U R' U' Fw'",
+          "setCase": "Fw U R U' R' Fw' ",
+          "name": "Caso 12",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Fw' L' U' L U Fw",
-            "name"   : "Caso 13",
-            "tags"   : ["OLL"]
+          "formula": "Fw' L' U' L U Fw",
+          "setCase": "Fw' U' L' U L Fw ",
+          "name": "Caso 13",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "S R U R' U' R' F R Fw'",
-            "name"   : "Caso 14",
-            "tags"   : ["OLL"]
+          "formula": "S R U R' U' R' F R Fw'",
+          "setCase": "Fw R' F' R U R U' R' S' ",
+          "name": "Caso 14",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R' U' F U R U' R' F' R",
-            "name"   : "Caso 15",
-            "tags"   : ["OLL"]
+          "formula": "R' U' F U R U' R' F' R",
+          "setCase": "R' F R U R' U' F' U R ",
+          "name": "Caso 15",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U R' U' M U R U' R'",
-            "name"   : "Caso 16",
-            "tags"   : ["OLL"]
+          "formula": "Rw U R' U' M U R U' R'",
+          "setCase": "R U R' U' M' U R U' Rw' ",
+          "name": "Caso 16",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U' M' U R U' Rw'",
-            "name"   : "Caso 17",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U' M' U R U' Rw'",
+          "setCase": "Rw U R' U' M U R U' R' ",
+          "name": "Caso 17",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R' U' R' F R F' U R",
-            "name"   : "Caso 18",
-            "tags"   : ["OLL"]
+          "formula": "R' U' R' F R F' U R",
+          "setCase": "R' U' F R' F' R U R ",
+          "name": "Caso 18",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R2 U' R' F R U R U' F'",
-            "name"   : "Caso 19",
-            "tags"   : ["OLL"]
+          "formula": "R U R2 U' R' F R U R U' F'",
+          "setCase": "F U R' U' R' F' R U R2' U' R' ",
+          "name": "Caso 19",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "F R U' R' U' R U R' F'",
-            "name"   : "Caso 20",
-            "tags"   : ["OLL"]
+          "formula": "F R U' R' U' R U R' F'",
+          "setCase": "F R U' R' U R U R' F' ",
+          "name": "Caso 20",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U2 R2 F R F' R U2 R'",
-            "name"   : "Caso 21",
-            "tags"   : ["OLL"]
+          "formula": "R U2 R2 F R F' R U2 R'",
+          "setCase": "R U2' R' F R' F' R2' U2' R' ",
+          "name": "Caso 21",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U R' F R F' R U2 R'",
-            "name"   : "Caso 22",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U R' F R F' R U2 R'",
+          "setCase": "R U2' R' F R' F' R U' R U' R' ",
+          "name": "Caso 22",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U' R' F R2 U R' U' F'",
-            "name"   : "Caso 23",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U' R' F R2 U R' U' F'",
+          "setCase": "F U R U' R2' F' R U R U' R' ",
+          "name": "Caso 23",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U R' U R U2 Rw'",
-            "name"   : "Caso 24",
-            "tags"   : ["OLL"]
+          "formula": "Rw U R' U R U2 Rw'",
+          "setCase": "Rw U2' R' U' R U' Rw' ",
+          "name": "Caso 24",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw' U' R U' R' U2 Rw",
-            "name"   : "Caso 25",
-            "tags"   : ["OLL"]
+          "formula": "Rw' U' R U' R' U2 Rw",
+          "setCase": "Rw' U2' R U R' U Rw ",
+          "name": "Caso 25",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw' R2 U R' U R U2 R' U M'",
-            "name"   : "Caso 26",
-            "tags"   : ["OLL"]
+          "formula": "Rw' R2 U R' U R U2 R' U M'",
+          "setCase": "M U' R U2' R' U' R U' R2' Rw ",
+          "name": "Caso 26",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "F R U R' U' F' U F R U R' U' F'",
-            "name"   : "Caso 27",
-            "tags"   : ["OLL"]
+          "formula": "F R U R' U' F' U F R U R' U' F'",
+          "setCase": "F U R U' R' F' U' F U R U' R' F' ",
+          "name": "Caso 27",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw' U' R U' R' U R U' R' U2 Rw",
-            "name"   : "Caso 28",
-            "tags"   : ["OLL"]
+          "formula": "Rw' U' R U' R' U R U' R' U2 Rw",
+          "setCase": "Rw' U2' R U R' U' R U R' U Rw ",
+          "name": "Caso 28",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U R' U R U' R' U R U2 Rw'",
-            "name"   : "Caso 29",
-            "tags"   : ["OLL"]
+          "formula": "Rw U R' U R U' R' U R U2 Rw'",
+          "setCase": "Rw U2' R' U' R U R' U' R U' Rw' ",
+          "name": "Caso 29",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U' Rw2 U Rw2 U Rw2 U' Rw",
-            "name"   : "Caso 30",
-            "tags"   : ["OLL"]
+          "formula": "Rw U' Rw2 U Rw2 U Rw2 U' Rw",
+          "setCase": "Rw' U Rw2' U' Rw2' U' Rw2' U Rw' ",
+          "name": "Caso 30",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw' U Rw2 U' Rw2 U' Rw2 U Rw'",
-            "name"   : "Caso 31",
-            "tags"   : ["OLL"]
+          "formula": "Rw' U Rw2 U' Rw2 U' Rw2 U Rw'",
+          "setCase": "Rw U' Rw2' U Rw2' U Rw2' U' Rw ",
+          "name": "Caso 31",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "F' L' U' L U L' U' L U F",
-            "name"   : "Caso 32",
-            "tags"   : ["OLL"]
+          "formula": "F' L' U' L U L' U' L U F",
+          "setCase": "F' U' L' U L U' L' U L F ",
+          "name": "Caso 32",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "F R U R' U' R U R' U' F'",
-            "name"   : "Caso 33",
-            "tags"   : ["OLL"]
+          "formula": "F R U R' U' R U R' U' F'",
+          "setCase": "F U R U' R' U R U' R' F' ",
+          "name": "Caso 33",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U R U' R' U' R' F R F'",
-            "name"   : "Caso 34",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U R U' R' U' R' F R F'",
+          "setCase": "F R' F' R U R U R' U' R U' R' ",
+          "name": "Caso 34",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "L' U' L U' L' U L U L F' L' F",
-            "name"   : "Caso 35",
-            "tags"   : ["OLL"]
+          "formula": "L' U' L U' L' U L U L F' L' F",
+          "setCase": "F' L F L' U' L' U' L U L' U L ",
+          "name": "Caso 35",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R' F R U R' F' R F U' F'",
-            "name"   : "Caso 36",
-            "tags"   : ["OLL"]
+          "formula": "R' F R U R' F' R F U' F'",
+          "setCase": "F U F' R' F R U' R' F' R ",
+          "name": "Caso 36",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U' Rw' U' Rw U Rw' F' U F",
-            "name"   : "Caso 37",
-            "tags"   : ["OLL"]
+          "formula": "Rw U' Rw' U' Rw U Rw' F' U F",
+          "setCase": "F' U' F Rw U' Rw' U Rw U Rw' ",
+          "name": "Caso 37",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw' U' Rw R' U' R U Rw' U Rw",
-            "name"   : "Caso 38",
-            "tags"   : ["OLL"]
+          "formula": "Rw' U' Rw R' U' R U Rw' U Rw",
+          "setCase": "Rw' U' Rw U' R' U R Rw' U Rw ",
+          "name": "Caso 38",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U Rw' R U R' U' Rw U' Rw'",
-            "name"   : "Caso 39",
-            "tags"   : ["OLL"]
+          "formula": "Rw U Rw' R U R' U' Rw U' Rw'",
+          "setCase": "Rw U Rw' U R U' R' Rw U' Rw' ",
+          "name": "Caso 39",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Fw R U R' U' R U R' U' Fw'",
-            "name"   : "Caso 40",
-            "tags"   : ["OLL"]
+          "formula": "Fw R U R' U' R U R' U' Fw'",
+          "setCase": "Fw U R U' R' U R U' R' Fw' ",
+          "name": "Caso 40",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U Rw' U R U' R' U R U' R' Rw U' Rw'",
-            "name"   : "Caso 41",
-            "tags"   : ["OLL"]
+          "formula": "Rw U Rw' U R U' R' U R U' R' Rw U' Rw'",
+          "setCase": "Rw U Rw' R U R' U' R U R' U' Rw U' Rw' ",
+          "name": "Caso 41",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U R Dw' R U' R' F'",
-            "name"   : "Caso 42",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U R Dw' R U' R' F'",
+          "setCase": "F R U R' Dw R' U' R U' R' ",
+          "name": "Caso 42",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U2 R2 U' R U' R' U2 F R F'",
-            "name"   : "Caso 43",
-            "tags"   : ["OLL"]
+          "formula": "R U2 R2 U' R U' R' U2 F R F'",
+          "setCase": "F R' F' U2' R U R' U R2' U2' R' ",
+          "name": "Caso 43",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R' U' R U' R' U2 R F R U R' U' F'",
-            "name"   : "Caso 44",
-            "tags"   : ["OLL"]
+          "formula": "R' U' R U' R' U2 R F R U R' U' F'",
+          "setCase": "F U R U' R' F' R' U2' R U R' U R ",
+          "name": "Caso 44",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U R U2 R' F R U R' U' F'",
-            "name"   : "Caso 45",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U R U2 R' F R U R' U' F'",
+          "setCase": "F U R U' R' F' R U2' R' U' R U' R' ",
+          "name": "Caso 45",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "M U R U R' U' R' F R F' M'",
-            "name"   : "Caso 46",
-            "tags"   : ["OLL"]
+          "formula": "M U R U R' U' R' F R F' M'",
+          "setCase": "M F R' F' R U R U' R' U' M' ",
+          "name": "Caso 46",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "F U R U2 R' U' R U2 R' U' F'",
-            "name"   : "Caso 47",
-            "tags"   : ["OLL"]
+          "formula": "F U R U2 R' U' R U2 R' U' F'",
+          "setCase": "F U R U2' R' U R U2' R' U' F' ",
+          "name": "Caso 47",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "L F' L' U' L U F U' L'",
-            "name"   : "Caso 48",
-            "tags"   : ["OLL"]
+          "formula": "L F' L' U' L U F U' L'",
+          "setCase": "L U F' U' L' U L F L' ",
+          "name": "Caso 48",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R' F R U R' U' F' U R",
-            "name"   : "Caso 49",
-            "tags"   : ["OLL"]
+          "formula": "R' F R U R' U' F' U R",
+          "setCase": "R' U' F U R U' R' F' R ",
+          "name": "Caso 49",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Rw U R' U R U2 Rw2 U' R U' R' U2 Rw",
-            "name"   : "Caso 50",
-            "tags"   : ["OLL"]
+          "formula": "Rw U R' U R U2 Rw2 U' R U' R' U2 Rw",
+          "setCase": "Rw' U2' R U R' U Rw2' U2' R' U' R U' Rw' ",
+          "name": "Caso 50",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "M U R U R' U' M' R' F R F'",
-            "name"   : "Caso 51",
-            "tags"   : ["OLL"]
+          "formula": "M U R U R' U' M' R' F R F'",
+          "setCase": "F R' F' R M U R U' R' U' M' ",
+          "name": "Caso 51",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Fw R U R' U' Fw' U' F R U R' U' F'",
-            "name"   : "Caso 52",
-            "tags"   : ["OLL"]
+          "formula": "Fw R U R' U' Fw' U' F R U R' U' F'",
+          "setCase": "F U R U' R' F' U Fw U R U' R' Fw' ",
+          "name": "Caso 52",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "Fw R U R' U' Fw' U F R U R' U' F'",
-            "name"   : "Caso 53",
-            "tags"   : ["OLL"]
+          "formula": "Fw R U R' U' Fw' U F R U R' U' F'",
+          "setCase": "F U R U' R' F' U' Fw U R U' R' Fw' ",
+          "name": "Caso 53",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U2 R2' F R F' U2' R' F R F'",
-            "name"   : "Caso 54",
-            "tags"   : ["OLL"]
+          "formula": "R U2 R2' F R F' U2' R' F R F'",
+          "setCase": "F R' F' R U2 F R' F' R2 U2' R' ",
+          "name": "Caso 54",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "F R U R' U' S R U R' U' Fw'",
-            "name"   : "Caso 55",
-            "tags"   : ["OLL"]
+          "formula": "F R U R' U' S R U R' U' Fw'",
+          "setCase": "Fw U R U' R' S' U R U' R' F' ",
+          "name": "Caso 55",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "R U R' U R' F R F' U2 R' F R F'",
-            "name"   : "Caso 56",
-            "tags"   : ["OLL"]
+          "formula": "R U R' U R' F R F' U2 R' F R F'",
+          "setCase": "F R' F' R U2' F R' F' R U' R U' R' ",
+          "name": "Caso 56",
+          "tags": [
+            "OLL"
+          ]
         },
         {
-            "formula": "M U R U R' U' M2 U R U' Rw'",
-            "name"   : "Caso 57",
-            "tags"   : ["OLL"]
+          "formula": "M U R U R' U' M2 U R U' Rw'",
+          "setCase": "Rw U R' U' M2' U R U' R' U' M' ",
+          "name": "Caso 57",
+          "tags": [
+            "OLL"
+          ]
         }
-    ]
+      ]
 }

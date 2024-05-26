@@ -1,109 +1,172 @@
 {
     "formulas": [
         {
-            "formula": "R' U R' U' R' U' R' U R U R2",
-            "name"   : "Caso U horário",
-            "tags"   : ["PLL"]
+          "formula": "R' U R' U' R' U' R' U R U R2",
+          "setCase": "R2' U' R' U' R U R U R U' R ",
+          "name": "Caso U horário",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R2 U' R' U' R U R U R U' R",
-            "name"   : "Caso U anti-horário",
-            "tags"   : ["PLL"]
+          "formula": "R2 U' R' U' R U R U R U' R",
+          "setCase": "R' U R' U' R' U' R' U R U R2'",
+          "name": "Caso U anti-horário",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "x R' U R' D2 R U' R' D2 R2 x''",
-            "name"   : "Caso A horário",
-            "tags"   : ["PLL"]
+          "formula": "x R' U R' D2 R U' R' D2 R2 x'",
+          "setCase": "x R2' D2' R U R' D2' R U' R x'",
+          "name": "Caso A horário",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "x R2' D2 R U R' D2 R U' R x",
-            "name"   : "Caso A anti-horário",
-            "tags"   : ["PLL"]
+          "formula": "x R2' D2 R U R' D2 R U' R x",
+          "setCase": "x' R' U R' D2' R U' R' D2' R2 x' ",
+          "name": "Caso A anti-horário",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "M2 U M2 U2 M2 U M2",
-            "name"   : "Caso H",
-            "tags"   : ["PLL"]
+          "formula": "M2 U M2 U2 M2 U M2",
+          "setCase": "M2' U' M2' U2' M2' U' M2' ",
+          "name": "Caso H",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "M2 U M2 U M' U2 M2 U2 M'",
-            "name"   : "Caso Z",
-            "tags"   : ["PLL"]
+          "formula": "M2 U M2 U M' U2 M2 U2 M'",
+          "setCase": "M U2' M2' U2' M U' M2' U' M2' ",
+          "name": "Caso Z",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R U R' U' R' F R2 U' R' U' R U R' F'",
-            "name"   : "Caso T",
-            "tags"   : ["PLL"]
+          "formula": "R U R' U' R' F R2 U' R' U' R U R' F'",
+          "setCase": "F R U' R' U R U R2' F' R U R U' R' ",
+          "name": "Caso T",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R",
-            "name"   : "Caso F",
-            "tags"   : ["PLL"]
+          "formula": "R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R",
+          "setCase": "R' U' R U' R' U R U R2' F' R U R U' R' F U R ",
+          "name": "Caso F",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
-            "name"   : "Caso Y",
-            "tags"   : ["PLL"]
+          "formula": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+          "setCase": "F R' F' R U R U' R' F R U' R' U R U R' F' ",
+          "name": "Caso Y",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "x' R U' R' D R U R' D' R U R' D R U' R' D' x",
-            "name"   : "Caso E",
-            "tags"   : ["PLL"]
+          "formula": "x' R U' R' D R U R' D' R U R' D R U' R' D' x",
+          "setCase": "x' D R U R' D' R U' R' D R U' R' D' R U R' x ",
+          "name": "Caso E",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R' U R' Dw' R' F' R2 U' R' U R' F R F",
-            "name"   : "Caso V",
-            "tags"   : ["PLL"]
+          "formula": "R' U R' Dw' R' F' R2 U' R' U R' F R F",
+          "setCase": "F' R' F' R U' R U R2' F R Dw R U' R ",
+          "name": "Caso V",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R U' R' U' R U R D R' U' R D' R' U2 R' U'",
-            "name"   : "Caso R1",
-            "tags"   : ["PLL"]
+          "formula": "R U' R' U' R U R D R' U' R D' R' U2 R' U'",
+          "setCase": "U R U2' R D R' U R D' R' U' R' U R U R' ",
+          "name": "Caso R1",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R' U2 R U2' R' F R U R' U' R' F' R2 U'",
-            "name"   : "Caso R2",
-            "tags"   : ["PLL"]
+          "formula": "R' U2 R U2' R' F R U R' U' R' F' R2 U'",
+          "setCase": "U R2' F R U R U' R' F' R U2 R' U2' R ",
+          "name": "Caso R2",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "x R2 F R F' R U2 Rw' U Rw U2 x'",
-            "name"   : "Caso J1",
-            "tags"   : ["PLL"]
+          "formula": "x R2 F R F' R U2 Rw' U Rw U2 x'",
+          "setCase": "x U2' Rw' U' Rw U2' R' F R' F' R2' x' ",
+          "name": "Caso J1",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R U R' F' R U R' U' R' F R2 U' R' U'",
-            "name"   : "Caso J2",
-            "tags"   : ["PLL"]
+          "formula": "R U R' F' R U R' U' R' F R2 U' R' U'",
+          "setCase": "U R U R2' F' R U R U' R' F R U' R' ",
+          "name": "Caso J2",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'",
-            "name"   : "Caso N1",
-            "tags"   : ["PLL"]
+          "formula": "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'",
+          "setCase": "R U R' U2' R U R2' F' R U R U' R' F R U' R' U' R U' R' ",
+          "name": "Caso N1",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R' U R U' R' F' U' F R U R' F R' F' R U' R",
-            "name"   : "Caso N2",
-            "tags"   : ["PLL"]
+          "formula": "R' U R U' R' F' U' F R U R' F R' F' R U' R",
+          "setCase": "R' U R' F R F' R U' R' F' U F R U R' U' R ",
+          "name": "Caso N2",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R2' Uw R' U R' U' R Uw' R2 y' R' U R",
-            "name"   : "Caso G1",
-            "tags"   : ["PLL"]
+          "formula": "R2' Uw R' U R' U' R Uw' R2 y' R' U R",
+          "setCase": "R' U' R y R2' Uw R' U R U' R Uw' R2 ",
+          "name": "Caso G1",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R' U' R U D' R2 U R' U R U' R U' R2 D U'",
-            "name"   : "Caso G2",
-            "tags"   : ["PLL"]
+          "formula": "R' U' R U D' R2 U R' U R U' R U' R2 D U'",
+          "setCase": "U D' R2' U R' U R' U' R U' R2' D U' R' U R ",
+          "name": "Caso G2",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R2 U' R U' R U R' U R2 D' U R U' R' D U'",
-            "name"   : "Caso G3",
-            "tags"   : ["PLL"]
+          "formula": "R2 U' R U' R U R' U R2 D' U R U' R' D U'",
+          "setCase": "U D' R U R' U' D R2' U' R U' R' U R' U R2' ",
+          "name": "Caso G3",
+          "tags": [
+            "PLL"
+          ]
         },
         {
-            "formula": "R U R' y' R2 Uw' R U' R' U R' Uw R2",
-            "name"   : "Caso G4",
-            "tags"   : ["PLL"]
+          "formula": "R U R' y' R2 Uw' R U' R' U R' Uw R2",
+          "setCase": "R2' Uw' R U' R U R' Uw R2' y R U' R' ",
+          "name": "Caso G4",
+          "tags": [
+            "PLL"
+          ]
         }
-    ]
-}
+      ]
+    }

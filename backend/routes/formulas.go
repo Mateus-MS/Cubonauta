@@ -27,7 +27,7 @@ func FormulasCFOP(w http.ResponseWriter, r *http.Request) {
 	var size int = SizeResolve(r)
 	var filters []string = FiltersResolve(r)
 
-	var searchResult Search = SearchFormulas(id, size, filters, formulas)
+	var searchResult Search = SearchFormulas(id, size, filters, formulas, category)
 
 	w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, searchResult.cursor))
 	fmt.Fprint(w, searchResult.html)

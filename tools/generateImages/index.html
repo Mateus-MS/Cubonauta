@@ -12,13 +12,60 @@
             border: 0;
             user-select: none;
         }
-        #cube_holder{
+        body{
             position: absolute;
             width: 100dvw;
             height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+        }
+        #cube_holder{
+            margin-bottom: 1em;
+        }
+        #btn{
+            padding: 1em 1.5em;
+            font-weight: bolder;
+            background-color: rgb(255, 56, 56);
+            color: white;
+            border-radius: 10px;
+            font-size: 1.2em;
+            transition: all ease-in-out .5s;
+            border: 2px solid white;
+        }
+        #btn:hover{
+            background-color: white;
+            color: rgb(255, 56, 56);
+            border: 2px solid red;
+        }
+        span{
+            font-weight: bolder;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        #holder{
+            display: flex;
+            align-items: center;
+        }
+        #cube_holder{
+            margin: 0 3em;
+        }
+        .btn{
+            height: fit-content;
+            padding: 1em 1.5em;
+            background-color: rgb(95, 232, 95);
+            color: white;
+            font-size: 1.3em;
+            font-weight: bolder;
+            border-radius: 10px;
+            transition: all ease-in-out .5s;
+            border: 2px solid white;
+        }
+        .btn:hover{
+            border: 2px solid rgb(95, 232, 95);
+            background-color: white;
+            color: rgb(95, 232, 95);
         }
     </style>
 
@@ -30,17 +77,21 @@
             }
         }
     </script>
-
-    <script src="../../frontend/js/cube/cube.js" type="module"></script>
+    <script src="./initiateCubeSimplified.js" type="module"></script>
+    <script src="./saveFormImages.js" type="module"></script>
 
 </head>
 <body>
-    
-    <script src="./saveCanvasAsImage.js"></script>
 
-    <div id="cube_holder">
-        <canvas id="cube"></canvas>
+    <span id="text"></span>
+    <div id="holder">
+        <button class="btn" id="left">previous</button>
+        <div id="cube_holder">
+            <canvas id="cube"></canvas>
+        </div>
+        <button class="btn" id="right">next</button>
     </div>
+    <button id="btn">Generate Image</button>
 
 </body>
 </html>

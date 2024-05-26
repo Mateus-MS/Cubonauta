@@ -12,7 +12,7 @@ camera.position.set(4, 4, 4);
 camera.lookAt(0, 0, 0)
 
 var cube_holder = document.getElementById("cube_holder")
-const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0], antialias: true});
+const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0], antialias: true, preserveDrawingBuffer: true  });
 renderer.setSize(300, 300);
 renderer.setClearColor("rgb(255, 255, 255)")
 // renderer.setClearAlpha(0)
@@ -102,6 +102,14 @@ document.addEventListener("keypress", (e)=>{
     if(e.key === "r"){
         reset()
     }
+
+    if(e.key === "p"){
+        var link = document.createElement("a")
+        link.setAttribute("href", renderer.domElement.toDataURL())
+        link.setAttribute("download", "R' U R' U' R' U' R' U R U R2")
+        link.click()
+    }
+
 })
 
 function reset(){
@@ -122,7 +130,7 @@ var animating = false
 var round = false
 var animationFunction;
 var speedRad = speed * Math.PI / 180;
-let caseSetter = "R U2' R' y' F U' R2' U' R2' U R2' F' y'" 
+let caseSetter = "R2' U' R' U' R U R U R U' R" 
 setCase(caseSetter)
 var formulaString = " " //y F R2 U' R2 U R2 U F' y R U2 R'
 var formulaArray  = formulaString.split(" ")

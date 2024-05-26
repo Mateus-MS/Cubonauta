@@ -70,7 +70,7 @@ func StringToInt(value string) int {
 	return number
 }
 
-func FormulaString(formula data.Formula) string {
+func FormulaString(formula data.Formula, category string) string {
 
 	tags := ""
 
@@ -81,7 +81,7 @@ func FormulaString(formula data.Formula) string {
 	}
 
 	templ := fmt.Sprintf(`<div class='formula_card'>
-	<div class='img'></div>
+	<img class='img' src="../data/methods/CFOP/%s_images/compactadas/%s.jpg">
 	<div class='holder'>
 		<div class='formula'>
 			%s
@@ -104,7 +104,7 @@ func FormulaString(formula data.Formula) string {
 		</div>
 	</div>
 </div>
-	`, formula.Formula, tags, formula.Name)
+	`, category, strings.ReplaceAll(formula.Name, " ", "_"), formula.Formula, tags, formula.Name)
 
 	return templ
 }
@@ -114,7 +114,7 @@ type Search struct {
 	cursor int
 }
 
-func SearchFormulas(id int, size int, filters []string, formulas data.Formulas) Search {
+func SearchFormulas(id int, size int, filters []string, formulas data.Formulas, category string) Search {
 
 	stringHtml := ""
 	formulasAdded := 0
@@ -131,7 +131,7 @@ func SearchFormulas(id int, size int, filters []string, formulas data.Formulas) 
 
 		//Se não houver nenhum filtro
 		if len(filters) <= 0 {
-			stringHtml += FormulaString(formulas.Formulas[i])
+			stringHtml += FormulaString(formulas.Formulas[i], category)
 			formulasAdded += 1
 			continue
 		}
@@ -150,7 +150,7 @@ func SearchFormulas(id int, size int, filters []string, formulas data.Formulas) 
 		}
 		//no fim, testa se o tamanho de filtros é igual ao numeros de encontrados
 		if filtersCount == len(filters) {
-			stringHtml += FormulaString(formulas.Formulas[i])
+			stringHtml += FormulaString(formulas.Formulas[i], category)
 			formulasAdded += 1
 		}
 

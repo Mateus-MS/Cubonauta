@@ -80,7 +80,8 @@ func FormulaString(formula data.Formula, category string) string {
 				</div>`, formula.Tags[i])
 	}
 
-	templ := fmt.Sprintf(`<div class='formula_card'>
+	templ := fmt.Sprintf(`<div class='formula_card'
+	onclick="openFormPopUp(event)" data-set-case = "%s" data-play-form="%s">
 	<img class='img' src="../data/methods/CFOP/%s_images/compactadas/%s.jpg">
 	<div class='holder'>
 		<div class='formula'>
@@ -104,7 +105,7 @@ func FormulaString(formula data.Formula, category string) string {
 		</div>
 	</div>
 </div>
-	`, category, strings.ReplaceAll(formula.Name, " ", "_"), formula.Formula, tags, formula.Name)
+	`, formula.SetCase, formula.Formula, category, strings.ReplaceAll(formula.Name, " ", "_"), formula.Formula, tags, formula.Name)
 
 	return templ
 }

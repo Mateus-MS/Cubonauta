@@ -16,6 +16,8 @@
     
     <link rel="stylesheet" href="./css/filter/filter.css">
 
+    <link rel="stylesheet" href="./css/cube/cube.css">
+
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <script type="importmap">
         {
@@ -31,7 +33,32 @@
     <script src="./js/att-Id-Request.js" defer></script>
     <script src="./js/filter_control.js" defer></script>
     
-    <!-- <script src="./js/cube/cube.js" type="module"></script> -->
+    <script src="./js/cube/cube.js" type="module"></script>
+
+    <script>
+        function closeFormPopUp(){
+            let popUp = document.getElementsByClassName("cube_holder")[0]
+            popUp.classList.remove("cube_holder--show")
+        }
+    </script>
+
+    <script type="module">
+        import {reset, setCase, setPlayFormula} from "./js/cube/cube.js"
+        
+        function openFormPopUp(e){
+
+            reset()
+            setCase(e.target.dataset.setCase)
+            setPlayFormula(e.target.dataset.playForm)
+            
+            let popUp = document.getElementsByClassName("cube_holder")[0]
+            popUp.classList.add("cube_holder--show")
+            
+        }
+
+        window.openFormPopUp = openFormPopUp
+    
+    </script>
     
     <style>
         *{
@@ -59,7 +86,7 @@
         <button 
             class="button"
             onclick="setCategory('F2L')"
-            hx-get     = "http://localhost:8080/api/formulas/CFOP"
+            hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
             hx-trigger = "click"
             hx-target = "#bag"
             hx-vars   = "{'id': 0, 'size': 10, 'category': 'F2L'}"
@@ -68,7 +95,7 @@
         <button 
             class="button"
             onclick="setCategory('OLL')"
-            hx-get     = "http://localhost:8080/api/formulas/CFOP"
+            hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
             hx-trigger = "click"
             hx-target = "#bag"
             hx-vars   = "{'id': 0, 'size': 10, 'category': 'OLL'}"
@@ -77,7 +104,7 @@
         <button 
             class="button"
             onclick="setCategory('PLL')"
-            hx-get     = "http://localhost:8080/api/formulas/CFOP"
+            hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
             hx-trigger = "click"
             hx-target = "#bag"
             hx-vars   = "{'id': 0, 'size': 10, 'category': 'PLL'}"
@@ -93,7 +120,7 @@
                 
                 <div 
                     class      = 'formula_card'
-                    hx-get     = "http://localhost:8080/api/formulas/CFOP"
+                    hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
                     hx-vars    = "{'id': 0, 'size': 1, 'category': category}"
                     hx-trigger = "load"
                     hx-swap    = "outerHTML"
@@ -118,7 +145,7 @@
 
                 <div 
                     class      = 'formula_card'
-                    hx-get     = "http://localhost:8080/api/formulas/CFOP"
+                    hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
                     hx-vars    = "{'id': 1, 'size': 1, 'category': category}"
                     hx-trigger = "load"
                     hx-swap    = "outerHTML"
@@ -143,7 +170,7 @@
 
                 <div 
                     class      = 'formula_card'
-                    hx-get     = "http://localhost:8080/api/formulas/CFOP"
+                    hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
                     hx-vars    = "{'id': 2, 'size': 1, 'category': category}"
                     hx-trigger = "load"
                     hx-swap    = "outerHTML"
@@ -168,7 +195,7 @@
 
                 <div 
                     class      = 'formula_card'
-                    hx-get     = "http://localhost:8080/api/formulas/CFOP"
+                    hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
                     hx-vars    = "{'id': 3, 'size': 1, 'category': category}"
                     hx-trigger = "load"
                     hx-swap    = "outerHTML"
@@ -193,7 +220,7 @@
 
                 <div 
                     class      = 'formula_card'
-                    hx-get     = "http://localhost:8080/api/formulas/CFOP"
+                    hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
                     hx-vars    = "{'id': 4, 'size': 1, 'category': category}"
                     hx-trigger = "load"
                     hx-swap    = "outerHTML"
@@ -220,7 +247,7 @@
             
             <div 
                 id         = "intersect_trigger"
-                hx-get     = "http://localhost:8080/api/formulas/CFOP"
+                hx-get     = "http://192.168.1.69:8080/api/formulas/CFOP"
                 
                 hx-trigger = "intersect threshold:.1"
 
@@ -287,9 +314,9 @@
 
     </div>
 
-    <!-- <div id="cube_holder">
+    <div class="cube_holder" onclick="closeFormPopUp()">
         <canvas id="cube"></canvas>
-    </div> -->
+    </div>
 
 </body>
 </html>

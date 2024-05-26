@@ -1,0 +1,13 @@
+.cube_holder{
+    position: absolute;
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.cube_holder--show{
+    display: flex;
+}

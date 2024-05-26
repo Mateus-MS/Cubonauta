@@ -34,17 +34,3 @@ body{
     width: 100%;
     height: 1px;
 }
-
-#ui{
-    position: absolute;
-    top: 0;
-}
-
-#cube_holder{
-    position: absolute;
-    width: 100dvw;
-    height: 100dvh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}

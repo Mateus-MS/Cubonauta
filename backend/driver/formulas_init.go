@@ -17,6 +17,7 @@ type Formulas struct {
 
 type Formula struct {
 	Formula string   `json:"formula"`
+	SetCase string   `json:"setCase"`
 	Name    string   `json:"name`
 	Tags    []string `json:"tags"`
 }

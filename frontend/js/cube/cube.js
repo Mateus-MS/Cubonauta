@@ -11,7 +11,7 @@ const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 20);
 camera.position.set(4, 4, 4);
 camera.lookAt(0, 0, 0)
 
-var cube_holder = document.getElementById("cube_holder")
+var cube_holder = document.getElementsByClassName("cube_holder")[0]
 const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0], antialias: true, preserveDrawingBuffer: true  });
 renderer.setSize(300, 300);
 renderer.setClearColor("rgb(255, 255, 255)")
@@ -112,11 +112,21 @@ document.addEventListener("keypress", (e)=>{
 
 })
 
-function reset(){
+export function reset(){
     for(let i = 0; i < positions.length; i++){
         cube.geometry.children[i].position.set(...positions[i])
         cube.geometry.children[i].setRotationFromQuaternion(new THREE.Quaternion())
     }
+    formula_index = 0;
+    play = false
+}
+
+export function setPlayFormula(form){
+    setTimeout(()=>{
+        play = true
+    }, 500)
+    formulaString = form
+    formulaArray = formulaString.split(" ")
 }
 
 function toogleAutoPlay(){
@@ -124,23 +134,21 @@ function toogleAutoPlay(){
 }
 
 var angle = 0
-var speed = 1
+var speed = 2
 var maxAngle;
 var animating = false
 var round = false
 var animationFunction;
 var speedRad = speed * Math.PI / 180;
-let caseSetter = "R2' U' R' U' R U R U R U' R" 
-setCase(caseSetter)
-var formulaString = " " //y F R2 U' R2 U R2 U F' y R U2 R'
-var formulaArray  = formulaString.split(" ")
+var formulaString = " "
+var formulaArray;
 var formula_index = 0;
-var play = true;
+var play = false;
 
 function animate() {
     requestAnimationFrame(animate);
 
-    if(!animating && play){
+    if(!animating && play && formulaArray !== undefined){
         AnimateRotation(formulaArray[formula_index])
     }
 
@@ -165,7 +173,7 @@ function update(){
 
 }
 
-function setCase(formula){
+export function setCase(formula){
 
     let form = formula.split(" ")
 

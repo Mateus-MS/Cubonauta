@@ -72,6 +72,8 @@
     flex-wrap: wrap;
     flex-basis: 0;
     justify-content: center;
+    overflow: hidden;
+
 }
 
 .filter__left__holder__tag{

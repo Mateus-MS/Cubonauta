@@ -11,7 +11,7 @@ const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 20);
 camera.position.set(4, 4, 4);
 camera.lookAt(0, 0, 0)
 
-var cube_holder = document.getElementsByClassName("cube_holder")[0]
+var cube_holder = document.getElementsByClassName("formPopUp__cube_holder")[0]
 const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0], antialias: true, preserveDrawingBuffer: true  });
 renderer.setSize(300, 300);
 renderer.setClearColor("rgb(255, 255, 255)")
@@ -119,6 +119,12 @@ export function reset(){
     }
     formula_index = 0;
     play = false
+    let movementsDisplayer = document.getElementById("formPopUp__movements__holder")
+    while (movementsDisplayer.firstChild) {
+        movementsDisplayer.removeChild(movementsDisplayer.firstChild);
+    }
+    console.log(movementsDisplayer.children)
+    movementsDisplayer.style.marginLeft = "0"
 }
 
 export function setPlayFormula(form){
@@ -129,12 +135,16 @@ export function setPlayFormula(form){
     formulaArray = formulaString.split(" ")
 }
 
+export function getFormulaIndex(){
+    return formula_index
+}
+
 function toogleAutoPlay(){
     play = !play
 }
 
 var angle = 0
-var speed = 2
+var speed = .5
 var maxAngle;
 var animating = false
 var round = false
@@ -163,6 +173,16 @@ function update(){
         if(angle < maxAngle){
             animationFunction()
         } else {
+
+            if(formula_index + 1 < formulaArray.length){
+                let movementsDisplayer = document.getElementById("formPopUp__movements__holder")
+
+                movementsDisplayer.children[formula_index].classList.remove("formPopUp__movements__movement--active")
+                movementsDisplayer.children[formula_index + 1].classList.add("formPopUp__movements__movement--active")
+
+                movementsDisplayer.style.marginLeft = formula_index * -40 + "px"
+            }
+
             angle = 0
             animating = false
             maxAngle = undefined

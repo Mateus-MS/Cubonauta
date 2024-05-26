@@ -1,4 +1,4 @@
-.cube_holder{
+.formPopUp{
     position: absolute;
     width: 100dvw;
     height: 100dvh;
@@ -6,8 +6,60 @@
     justify-content: center;
     align-items: center;
     display: none;
+    flex-direction: column;
 }
 
-.cube_holder--show{
+.formPopUp--show{
     display: flex;
+}
+
+#formPopUp__movements{
+
+    width: 300px;
+    height: 45px;
+    overflow-x: hidden;
+    font-weight: bolder;
+    background-color: white;
+    
+}
+
+#formPopUp__movements__holder{
+    display: flex;
+    align-items: end;
+    height: 45px;
+    transition: all ease-in-out .5s;
+}
+
+#formPopUp__movements__holder > span:first-child {
+    margin-left: 150px;
+}
+
+.formPopUp__movements__movement{
+    font-size: 30px;
+    margin-right: 10px;
+    color: rgb(189, 189, 189);
+    transition: all ease-in-out .5s;
+    text-align: center;
+}
+
+.formPopUp__movements__movement--active{
+    font-size: 45px;
+    color: rgb(93, 255, 93);
+}
+
+#formPopUp__options_holder{
+    width: 300px;
+    height: 30px;
+    /*WHY IS NOT 40PX?????*/
+    margin-top: -45px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.formPopUp__options_holder__option{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: rgb(169, 169, 169);
 }

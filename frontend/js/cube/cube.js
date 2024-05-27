@@ -4,6 +4,8 @@ import { Piece } from "./piece.js";
 
 import { Matrix } from "./matrix.js";
 
+import {deleteHolderChildren, setNewLeftMargin, setNewMoveOnFocus} from "../form_popUp.js"
+
 //#region SETUP
 const scene = new THREE.Scene();
 
@@ -94,24 +96,6 @@ for(let i = 0; i < 26; i++){
 }
 //#endregion
 
-document.addEventListener("keypress", (e)=>{
-    if(e.key === " "){
-        toogleAutoPlay()
-    }
-
-    if(e.key === "r"){
-        reset()
-    }
-
-    if(e.key === "p"){
-        var link = document.createElement("a")
-        link.setAttribute("href", renderer.domElement.toDataURL())
-        link.setAttribute("download", "R' U R' U' R' U' R' U R U R2")
-        link.click()
-    }
-
-})
-
 export function reset(){
     for(let i = 0; i < positions.length; i++){
         cube.geometry.children[i].position.set(...positions[i])
@@ -119,12 +103,7 @@ export function reset(){
     }
     formula_index = 0;
     play = false
-    let movementsDisplayer = document.getElementById("formPopUp__movements__holder")
-    while (movementsDisplayer.firstChild) {
-        movementsDisplayer.removeChild(movementsDisplayer.firstChild);
-    }
-    console.log(movementsDisplayer.children)
-    movementsDisplayer.style.marginLeft = "0"
+    deleteHolderChildren();
 }
 
 export function setPlayFormula(form){
@@ -144,7 +123,7 @@ function toogleAutoPlay(){
 }
 
 var angle = 0
-var speed = .5
+var speed = 3
 var maxAngle;
 var animating = false
 var round = false
@@ -174,13 +153,10 @@ function update(){
             animationFunction()
         } else {
 
+            
             if(formula_index + 1 < formulaArray.length){
-                let movementsDisplayer = document.getElementById("formPopUp__movements__holder")
-
-                movementsDisplayer.children[formula_index].classList.remove("formPopUp__movements__movement--active")
-                movementsDisplayer.children[formula_index + 1].classList.add("formPopUp__movements__movement--active")
-
-                movementsDisplayer.style.marginLeft = formula_index * -40 + "px"
+                setNewMoveOnFocus(formula_index)
+                setNewLeftMargin()
             }
 
             angle = 0

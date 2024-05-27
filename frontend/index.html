@@ -32,46 +32,9 @@
     <script src="./js/category_filters.js"></script>
     <script src="./js/att-Id-Request.js" defer></script>
     <script src="./js/filter_control.js" defer></script>
-    
     <script src="./js/cube/cube.js" type="module"></script>
-
-    <script type="module">
-        import {reset, setCase, setPlayFormula} from "./js/cube/cube.js"
-        
-        function openFormPopUp(e){
-
-            reset()
-            setCase(e.target.dataset.setCase)
-            setPlayFormula(e.target.dataset.playForm)
-
-            let formDisplayer = document.getElementById("formPopUp__movements__holder")
-            let formArray = e.target.dataset.playForm.split(" ")
-
-            for(let i = 0; i < formArray.length; i++){
-                let span = document.createElement("span")
-                span.innerText = formArray[i]
-                if(i === 0){
-                    span.classList.add("formPopUp__movements__movement", "formPopUp__movements__movement--active")
-                } else {
-                    span.classList.add("formPopUp__movements__movement")
-                }
-                formDisplayer.appendChild(span)
-            }
-
-            let popUp = document.getElementsByClassName("formPopUp")[0]
-            popUp.classList.add("formPopUp--show")
-            
-        }
-
-        function closeFormPopUp(){
-            let popUp = document.getElementsByClassName("formPopUp")[0]
-            popUp.classList.remove("formPopUp--show")
-        }
-
-        window.closeFormPopUp = closeFormPopUp
-        window.openFormPopUp = openFormPopUp
     
-    </script>
+    <script src="./js/form_popUp.js" type="module" defer></script>
     
     <style>
         *{

@@ -14,6 +14,40 @@
 }
 
 #formPopUp__movements{
+    z-index: 1;
+    margin-bottom: -30px;
+    width: 300px;
+    height: 40px;
+    overflow-x: hidden;
+    background-color: white;
+}
+
+#formPopUp__movements__holder{
+    height: inherit;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: margin-left ease .5s;
+}
+
+#formPopUp__movements__holder span{
+    margin-right: 10px;
+}
+
+.formPopUp__movements__holder__movement{
+    font-size: 1.5em;
+    color: rgb(187, 187, 187);
+    font-weight: bolder;
+    transition: all ease .5s;
+}
+
+.formPopUp__movements__holder__movement--active{
+    /* discover a way to implement this */
+    font-size: 2.2em;
+    color: rgb(99, 235, 99);
+}
+
+/* #formPopUp__movements{
 
     width: 300px;
     height: 45px;
@@ -45,7 +79,7 @@
 .formPopUp__movements__movement--active{
     font-size: 45px;
     color: rgb(93, 255, 93);
-}
+} */
 
 #formPopUp__options_holder{
     width: 300px;

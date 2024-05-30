@@ -4,7 +4,7 @@ import { Piece } from "./piece.js";
 
 import { Matrix } from "./matrix.js";
 
-import {deleteHolderChildren, setNewLeftMargin, setNewMoveOnFocus} from "../form_popUp.js"
+import { passStyleToNext, putOnTheCenter } from "./slider.js";
 
 //#region SETUP
 const scene = new THREE.Scene();
@@ -103,7 +103,6 @@ export function reset(){
     }
     formula_index = 0;
     play = false
-    deleteHolderChildren();
 }
 
 export function setPlayFormula(form){
@@ -153,10 +152,9 @@ function update(){
             animationFunction()
         } else {
 
-            
-            if(formula_index + 1 < formulaArray.length){
-                setNewMoveOnFocus(formula_index)
-                setNewLeftMargin()
+            if(formula_index + 1 > 0 && formula_index + 1 < formulaArray.length){
+                passStyleToNext(formula_index + 1)
+                putOnTheCenter(formula_index + 1)
             }
 
             angle = 0

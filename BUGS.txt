@@ -1,9 +1,16 @@
 BACKEND
 
-- SOLVED Keeps sending the last formula from PLL category over and over
+- SOLVED Keeps sending the last formula
+from PLL category over and over
 
 DATA
 
 FRONTEND
 
 - NavBar resing when #holder element getting bigger
+
+CUBE
+
+- Some times for some reason the little cubies seems
+to not complete his hole rotation, but complete his 
+position animation

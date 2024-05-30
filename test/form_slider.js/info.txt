@@ -1,0 +1,3 @@
+This approach does not let me animate the size of the letter using different classes and a transition, when the code calculate the offset by the sizes of the letters, cause of how the transition works, the size still is the minimun size.
+
+It is possible, and really not that different to made this code a little more optmized, but for now will remain like this :D

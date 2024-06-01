@@ -1,0 +1,24 @@
+#formPopUp__progress_bar{
+    --bar-height: 3px;
+    --ball-size: 12px;
+    width: 300px;
+    height: var(--bar-height);
+    background-color: white;
+    padding: 15px 10px;
+    box-sizing: border-box;
+}
+
+#formPopUp__progress_bar__bar{
+    width: 100%;
+    height: var(--bar-height);
+    background-color: gray;
+}
+
+#formPopUp__progress_bar__ball{
+    width: var(--ball-size);
+    aspect-ratio: 1 / 1;
+    background-color: rgb(100, 100, 100);
+    border-radius: 100%;
+    margin-top: calc((var(--bar-height) / 2 * -1) - (var(--ball-size) / 2));
+    transition: margin-left linear .3s;
+}   

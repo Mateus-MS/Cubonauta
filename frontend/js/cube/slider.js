@@ -12,9 +12,6 @@ export function initiateMoves(moves_){
         let child = document.createElement("div")
         child.innerText = moves[i]
         child.classList.add("formPopUp__movements__holder__movement")
-        // if(i === 0){
-        //     child.classList.add("formPopUp__movements__holder__movement--active")
-        // }
         holder.appendChild(child)
         
     }
@@ -28,6 +25,12 @@ export function removeMoves(){
         holder.removeChild(holder.firstChild)
     }
 
+}
+
+export function resetSlider(index){
+    putOnTheCenter(0)
+    passStyleToNext(0)
+    children[index - 1].classList.remove("formPopUp__movements__holder__movement--active")
 }
 
 export function passStyleToNext(index){

@@ -4,7 +4,8 @@ import { Piece } from "./piece.js";
 
 import { Matrix } from "./matrix.js";
 
-import { passStyleToNext, putOnTheCenter } from "./slider.js";
+import { passStyleToNext, putOnTheCenter, resetSlider } from "./slider.js";
+import { moveBall } from "./progress_bar.js";
 
 //#region SETUP
 const scene = new THREE.Scene();
@@ -97,13 +98,54 @@ for(let i = 0; i < 26; i++){
 //#endregion
 
 export function reset(){
-    for(let i = 0; i < positions.length; i++){
-        cube.geometry.children[i].position.set(...positions[i])
-        cube.geometry.children[i].setRotationFromQuaternion(new THREE.Quaternion())
-    }
+    cubeReset()
     formula_index = 0;
     play = false
+    angle = 0
+    formulaArray = []
+    formulaString = ""
+    set_caseArray = []
+    set_case = ""
 }
+
+function refresh(){
+    resetSlider(formula_index)
+    cubeReset()
+    setCase(set_case)
+    moveBall(0)
+
+    formula_index = 0
+    angle = 0
+    play = false
+    round = false
+    animating = false
+}
+window.refresh = refresh;
+
+function toogleAutoPlay(){
+
+    if(formula_index === formulaArray.length){
+        resetFormula()
+        setTimeout(()=>{
+            play = true
+        }, 500)
+    } else {
+        play = !play
+    }
+
+}
+window.toogleAutoPlay = toogleAutoPlay
+
+function playNextMove(){
+    AnimateRotation(formulaArray[formula_index])
+}
+window.playNextMove = playNextMove
+
+function playPreviousMove(){
+    console.log("a")
+}
+window.playPreviousMove = playPreviousMove
+
 
 export function setPlayFormula(form){
     setTimeout(()=>{
@@ -117,12 +159,8 @@ export function getFormulaIndex(){
     return formula_index
 }
 
-function toogleAutoPlay(){
-    play = !play
-}
-
 var angle = 0
-var speed = 3
+var speed = 1
 var maxAngle;
 var animating = false
 var round = false
@@ -132,44 +170,68 @@ var formulaString = " "
 var formulaArray;
 var formula_index = 0;
 var play = false;
+var set_case = ""
+var set_caseArray = []
 
 function animate() {
     requestAnimationFrame(animate);
-
+    
     if(!animating && play && formulaArray !== undefined){
         AnimateRotation(formulaArray[formula_index])
     }
-
+    
     update()
-
+    
     renderer.render(scene, camera);
 }
 
 function update(){
-
+    
     if(animating){
         if(angle < maxAngle){
             animationFunction()
         } else {
-
-            if(formula_index + 1 > 0 && formula_index + 1 < formulaArray.length){
-                passStyleToNext(formula_index + 1)
-                putOnTheCenter(formula_index + 1)
-            }
-
-            angle = 0
-            animating = false
-            maxAngle = undefined
-            round = false
-            formula_index += 1
+            afterMovement()
         }
     }
 
 }
 
+function beforeMovement(){
+
+}
+
+function afterMovement(){
+
+    //The formula_index should be increased before
+    formula_index += 1
+    angle = 0
+    animating = false
+    maxAngle = undefined
+    round = false
+
+    moveBall(formula_index)
+
+    if(formula_index > 0 && formula_index < formulaArray.length){
+        passStyleToNext(formula_index)
+        putOnTheCenter(formula_index)
+    }
+
+
+}
+
+function cubeReset(){
+    for(let i = 0; i < positions.length; i++){
+        cube.geometry.children[i].position.set(...positions[i])
+        cube.geometry.children[i].setRotationFromQuaternion(new THREE.Quaternion())
+    }
+}
+
 export function setCase(formula){
 
     let form = formula.split(" ")
+    set_case = formula
+    set_caseArray = form
 
     for(let i = 0; i < formula.length; i++){
         setRotation(form[i])
@@ -1083,7 +1145,7 @@ function setRotation(move){
                         [cube.geometry.children[i].position.z]
                     ])
 
-                    let result = counterClockWise.multiply(mat2d)
+                    let result = halfTurn.multiply(mat2d)
 
                     cube.geometry.children[i].position.y = result.matrix[0][0]
                     cube.geometry.children[i].position.z = result.matrix[1][0]
@@ -1102,7 +1164,7 @@ function setRotation(move){
                         [cube.geometry.children[i].position.z]
                     ])
 
-                    let result = clockWise.multiply(mat2d)
+                    let result = halfTurn.multiply(mat2d)
 
                     cube.geometry.children[i].position.y = result.matrix[0][0]
                     cube.geometry.children[i].position.z = result.matrix[1][0]
@@ -1159,7 +1221,7 @@ function setRotation(move){
                         [cube.geometry.children[i].position.y]
                     ])
             
-                    let result = clockWise.multiply(mat2d)
+                    let result = halfTurn.multiply(mat2d)
             
                     cube.geometry.children[i].position.x = result.matrix[0][0]
                     cube.geometry.children[i].position.y = result.matrix[1][0]
@@ -1179,7 +1241,7 @@ function setRotation(move){
                         [cube.geometry.children[i].position.y]
                     ])
             
-                    let result = counterClockWise.multiply(mat2d)
+                    let result = halfTurn.multiply(mat2d)
             
                     cube.geometry.children[i].position.x = result.matrix[0][0]
                     cube.geometry.children[i].position.y = result.matrix[1][0]
@@ -1256,6 +1318,8 @@ function Rotate(axys, translationDir, rotationDir, axysRange){
 function AnimateRotation(move){
 
     if(animating) return
+
+    beforeMovement();
 
     switch(move){
 

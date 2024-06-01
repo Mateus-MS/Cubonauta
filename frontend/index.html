@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="./css/filter/filter.css">
 
     <link rel="stylesheet" href="./css/cube/cube.css">
+    <link rel="stylesheet" href="./css/cube/movements.css">
+    <link rel="stylesheet" href="./css/cube/controls.css">
+    <link rel="stylesheet" href="./css/cube/options.css">
+    <link rel="stylesheet" href="./css/cube/progress_bar.css">
 
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <script type="importmap">
@@ -290,17 +294,36 @@
 
     </div>
 
-    <div class="formPopUp" onclick="closeFormPopUp()"">
-        <div id="formPopUp__movements">
-            <div id="formPopUp__movements__holder"></div>
-        </div>
-
-        <div class="formPopUp__cube_holder">
-            <canvas id="cube"></canvas>
-        </div>
-        <div id="formPopUp__options_holder">
-            <div class="formPopUp__options_holder__option"></div>
-            <div class="formPopUp__options_holder__option"></div>
+    <div class="formPopUp" onclick="closeFormPopUp(event)"">
+        <div id="formPopUp__holder">
+            <div id="formPopUp__movements">
+                <div id="formPopUp__movements__holder"></div>
+            </div>
+    
+            <div class="formPopUp__cube_holder">
+                <canvas id="cube"></canvas>
+            </div>
+            <div id="formPopUp__options_holder">
+                <div class="formPopUp__options_holder__option"></div>
+                <div class="formPopUp__options_holder__option"></div>
+            </div>
+            <div id="formPopUp__progress_bar" onclick="ballMover()">
+                <div id="formPopUp__progress_bar__bar"></div>
+                <div id="formPopUp__progress_bar__ball"></div>
+            </div>
+            <div id="formPopUp__controls">
+                <div class="formPopUp__controls__btn" onclick="refresh()">
+                    <img src="./icons/reload.png">
+                </div>
+                <div class="formPopUp__controls__btn" onclick="playPreviousMove()"></div>
+                <div class="formPopUp__controls__btn" onclick="toogleAutoPlay()">
+                    <img src="./icons/play.png">
+                </div>
+                <div class="formPopUp__controls__btn" onclick="playNextMove()">
+                    <img src="./icons/next.png">
+                </div>
+                <div class="formPopUp__controls__btn"></div>
+            </div>
         </div>
     </div>
 

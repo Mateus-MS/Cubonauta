@@ -7,56 +7,9 @@
     align-items: center;
     display: none;
     flex-direction: column;
+    backdrop-filter: blur(3px);
 }
 
 .formPopUp--show{
     display: flex;
-}
-
-#formPopUp__movements{
-    width: 300px;
-    height: 50px;
-    margin-bottom: -30px;
-    background-color: white;
-    overflow: hidden;
-}
-
-#formPopUp__movements__holder{
-    width: fit-content;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    transition: transform ease .3s;
-}
-
-.formPopUp__movements__holder__movement{
-    font-size: 1.5em;
-    font-weight: bolder;
-    margin-right: 10px;
-    color: rgb(172, 172, 172);
-    transition: color ease .5s;
-}
-
-.formPopUp__movements__holder__movement--active{
-    font-size: 2.5em;
-    color: rgb(69, 255, 69);
-}
-
-#formPopUp__options_holder{
-    width: 300px;
-    height: 30px;
-    /*WHY IS NOT 40PX?????*/
-    margin-top: -20px;
-    padding-bottom: 10px;
-    display: flex;
-    background-color: white;
-    justify-content: space-between;
-}
-
-.formPopUp__options_holder__option{
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    background-color: rgb(169, 169, 169);
-    margin: 0 10px;
 }

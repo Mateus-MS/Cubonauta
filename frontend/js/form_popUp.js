@@ -1,5 +1,6 @@
 import { reset, setCase, setPlayFormula } from "./cube/cube.js"
 import { initiateMoves, putOnTheCenter, passStyleToNext, removeMoves } from "./cube/slider.js";
+import { resetBall } from "./cube/progress_bar.js";
 
 var wrapper = document.getElementsByClassName("formPopUp")[0]
         
@@ -15,6 +16,8 @@ function openFormPopUp(e){
     setPlayFormula(e.target.dataset.playForm)
     //Inicia os Movimentos
     initiateMoves(e.target.dataset.playForm);
+    //Reset the progress bar Ball
+    resetBall()
     
     //Deixa o POP UP visível
     wrapper.classList.add("formPopUp--show")
@@ -24,9 +27,11 @@ function openFormPopUp(e){
     
 }
 
-function closeFormPopUp(){
+function closeFormPopUp(e){
     //Esconde o POP UP
-    wrapper.classList.remove("formPopUp--show")
+    if(e.target.classList[0] === "formPopUp"){
+        wrapper.classList.remove("formPopUp--show")
+    }
 
 }
 

@@ -81,7 +81,7 @@ func FormulaString(formula data.Formula, category string) string {
 	}
 
 	templ := fmt.Sprintf(`<div class='formula_card'
-	onclick="openFormPopUp(event)" data-set-case = "%s" data-play-form="%s">
+	hx-on:click="openFormPopUp(event)" data-set-case = "%s" data-play-form="%s">
 	<img class='img' src="../data/methods/CFOP/%s_images/compactadas/%s.jpg">
 	<div class='holder'>
 		<div class='formula'>

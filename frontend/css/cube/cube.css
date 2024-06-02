@@ -1,15 +1,56 @@
-.formPopUp{
-    position: absolute;
+.form_animation{
     width: 100dvw;
     height: 100dvh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
-    flex-direction: column;
+
     backdrop-filter: blur(3px);
+
+    position: absolute;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
 }
 
-.formPopUp--show{
+.form_animation--active{
     display: flex;
+}
+
+#form_animation__holder{
+    width: 80%;
+    height: 65%;
+
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.42);
+    background-color: white;
+
+    box-sizing: border-box;
+    padding: 40px 40px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#form_animation__holder__cube_holder{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    background-color: black;
+}
+
+#form_animation__holder__cube_holder__options{
+    width: 300px;
+    height: 40px;
+
+    display: flex;
+    justify-content: space-between;
+    margin-top: -40px;
+}
+
+.form_animation__holder__cube_holder__options__opt{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: rgb(119, 119, 119);
 }

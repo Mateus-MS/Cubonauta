@@ -1,6 +1,6 @@
 BACKEND
 
-- SOLVED Keeps sending the last formula
+SOLVED - Keeps sending the last formula
 from PLL category over and over
 
 DATA
@@ -11,13 +11,13 @@ FRONTEND
 
 CUBE
 
-- SOLVED Some times for some reason the little cubies seems
+SOLVED - Some times for some reason the little cubies seems
 to not complete his hole rotation, but complete his 
 position animation
 
 - Very likely the up one, when change the speed of rotation
 in middle an animation rotation, occours some round errors
 
-- Eventually the cube dont turn properly, like there is some
+SOLVED - Eventually the cube dont turn properly, like there is some
 problem in the translation matrix, each cubie piece seems to
 rotate in place, without translating

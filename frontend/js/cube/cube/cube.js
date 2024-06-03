@@ -128,12 +128,12 @@ export function reset(){
     //Reinicia a posição das peças do cubo
     cubeReset()
     //Reseta as variaveis de controle
-    formulaString = undefined;
+    formulaString = " ";
     formulaArray = [];
     formula_index = 0;
     animationFunction = undefined;
     set_caseArray = [];
-    set_case = undefined;
+    set_case = " ";
     animating = false;
     angle = 0;
     play = false
@@ -198,9 +198,7 @@ function update(){
         if(angle < maxAngle){
             animationFunction()
         } else {
-            if(formula_index < formulaArray.length - 1){
-                afterMovement()
-            }
+            afterMovement()
         }
     }
 
@@ -212,8 +210,12 @@ function beforeMovement(){
 
 function afterMovement(){
     //The formula_index should be increased before
-    formula_index += formula_direction
-    putOnCenter(formula_index)
+    if(formula_index <= formulaArray.length){
+        formula_index += formula_direction
+    }
+    if(formula_index < formulaArray.length){
+        putOnCenter(formula_index)
+    }
     angle = 0
     animating = false
     maxAngle = undefined

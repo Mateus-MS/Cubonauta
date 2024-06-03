@@ -32,6 +32,9 @@ export function putOnCenter(index){
 
 //DaFuck is this name
 export function removeEvidence(index){
+    if(index === children.length){
+        index -= 1
+    }
     children[index].classList.remove("form_animation__holder__slider__holder__movement--active")
 }
 

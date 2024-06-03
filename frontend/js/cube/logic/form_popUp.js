@@ -1,4 +1,5 @@
 import { setCase, setPlayFormula, reset, setPlayState, incrementSpeed, getSpeed, callNextMovement, callPreviousMovement, refresh } from "../cube/cube.js"
+import { putOnCenter, initiateMovements } from "./slider.js"
 
 var wrapper = document.getElementsByClassName("form_animation")[0]
 var playElement = document.getElementById("form_animation__holder__controls__play")
@@ -18,6 +19,8 @@ function openFormPopUp(e){
     setPlayFormula(e.target.dataset.playForm)
     //Deixa o POP UP visível
     wrapper.classList.add("form_animation--active")
+    initiateMovements(e.target.dataset.playForm.split(' '))
+    putOnCenter(0)
     
 }
 

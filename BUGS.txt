@@ -17,3 +17,7 @@ position animation
 
 - Very likely the up one, when change the speed of rotation
 in middle an animation rotation, occours some round errors
+
+- Eventually the cube dont turn properly, like there is some
+problem in the translation matrix, each cubie piece seems to
+rotate in place, without translating

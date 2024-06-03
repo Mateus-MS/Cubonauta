@@ -4,8 +4,6 @@
 
     display: flex;
     justify-content: space-between;
-
-    border: 1px solid black;
 }
 
 .form_animation__holder__controls__btn{

@@ -2,5 +2,30 @@
     width: 100%;
     height: 60px;
 
-    background-color: black;
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+    margin-bottom: -30px;
+}
+
+#form_animation__holder__slider__holder{    
+    width: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+
+    transition: transform ease .3s;
+}
+
+.form_animation__holder__slider__holder__movement{
+    margin-right: 10px;
+    font-size: 1.6em;
+    font-weight: bolder;
+    color: rgb(178, 178, 178);
+}
+
+.form_animation__holder__slider__holder__movement--active{
+    font-size: 2.3em;
+    color: rgb(72, 235, 102);
 }

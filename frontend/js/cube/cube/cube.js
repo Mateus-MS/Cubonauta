@@ -5,6 +5,7 @@ import { Piece } from "./piece.js";
 import { Matrix } from "./matrix.js";
 
 import { togglePlayButton } from "../logic/form_popUp.js";
+import { putOnCenter, removeMovements, removeEvidence } from "../logic/slider.js"
 
 //#region SETUP
 const scene = new THREE.Scene();
@@ -15,7 +16,10 @@ camera.lookAt(0, 0, 0)
 
 var cube_holder = document.getElementById("form_animation__holder__cube_holder__render")
 const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0] });
-renderer.setSize(300, 300);
+
+let width = window.innerWidth * .8 - 80
+
+renderer.setSize(width, width);
 renderer.setClearColor("rgb(255, 255, 255)")
 cube_holder.appendChild(renderer.domElement);
 //#endregion
@@ -134,6 +138,7 @@ export function reset(){
     angle = 0;
     play = false
     formula_direction = 1
+    removeMovements()
 
     setTimeout(()=>{
         play = true
@@ -193,7 +198,9 @@ function update(){
         if(angle < maxAngle){
             animationFunction()
         } else {
-            afterMovement()
+            if(formula_index < formulaArray.length - 1){
+                afterMovement()
+            }
         }
     }
 
@@ -206,6 +213,7 @@ function beforeMovement(){
 function afterMovement(){
     //The formula_index should be increased before
     formula_index += formula_direction
+    putOnCenter(formula_index)
     angle = 0
     animating = false
     maxAngle = undefined
@@ -238,6 +246,7 @@ export function refresh(){
     //Put the pieces in place of the formula
     setCase(set_case)
     //Reset the variables
+    removeEvidence(formula_index)
     formula_index = 0
     angle = 0
     animating = false
@@ -245,6 +254,7 @@ export function refresh(){
     animationFunction = undefined
     play = false
     formula_direction = 1
+    putOnCenter(0)
 
     setTimeout(()=>{    
         play = true

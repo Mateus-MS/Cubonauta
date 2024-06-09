@@ -15,7 +15,7 @@ camera.position.set(4, 4, 4);
 camera.lookAt(0, 0, 0)
 
 var cube_holder = document.getElementById("form_animation__holder__cube_holder__render")
-const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0] });
+const renderer = new THREE.WebGLRenderer({canvas: cube_holder.children[0], antialias: true });
 
 let width = window.innerWidth * .8 - 80
 

@@ -19,7 +19,8 @@ func main() {
 
 	router := http.NewServeMux()
 
-	router.HandleFunc("/test", custom_routes.Skeleton)
+	router.HandleFunc("/skeleton", custom_routes.Skeleton)
+	router.HandleFunc("/formula", custom_routes.FormulaCard)
 
 	client, err := db.GetClient()
 	if err != nil {

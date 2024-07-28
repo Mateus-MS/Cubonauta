@@ -29,7 +29,7 @@ func GetClient() (*mongo.Client, error) {
 			return
 		}
 
-		if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{"ping", 1}}).Err(); err != nil {
+		if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Err(); err != nil {
 			clientError = err
 			return
 		}

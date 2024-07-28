@@ -8,14 +8,6 @@ import (
 	"text/template"
 )
 
-type Skeleton_Data struct {
-	ID             int32    `bson:"_id,omitempty"   json:"id"`
-	Name           string   `bson:"Name"            json:"name"`
-	Formula        string   `bson:"Formula"         json:"formula"`
-	FormulaReverse string   `bson:"Formula_Reverse" json:"formula_reverse"`
-	FormulaArray   []string `bson:"Formula_Array"   json:"formula_array"`
-}
-
 func Skeleton(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -34,10 +26,22 @@ func Skeleton(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var id int = query.ID_Query(r)
+	var size int = query.Size_Resolve(r)
 
-	formula := db.GetFormula("F2L", id)
+	formula, new_id := db.GetFormula("F2L", id, size)
 
-	template, _ := template.ParseFiles("./elements/card--skeleton.html")
+	w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, new_id))
+
+	fmt.Println(formula)
+
+	template := template.Must(
+		template.New("card--skeleton.html").Funcs(
+			template.FuncMap{"repeat": func(times int) []int {
+				return make([]int, times)
+			}},
+		).ParseFiles("./elements/card--skeleton.html"),
+	)
+
 	template.Execute(w, formula)
 
 }

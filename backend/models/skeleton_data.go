@@ -1,6 +1,6 @@
 package models
 
-type Skeleton_Data struct {
+type Formula_Skeleton_Data struct {
 	ID             int32    `bson:"_id,omitempty"   json:"id"`
 	Name           string   `bson:"Name"            json:"name"`
 	Formula        string   `bson:"Formula"         json:"formula"`

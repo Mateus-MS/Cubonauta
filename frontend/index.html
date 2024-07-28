@@ -5,20 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubonauta</title>
 
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/card-formula/formula_card--skeleton.css">
+    <link rel="stylesheet" href="./css/card-formula/formula_card.css">
+
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <style>
         *{
             margin: 0;
             padding: 0;
-            border: 0;
         }
     </style>
+
+    <script src="./js/indexAtt.js" defer></script>
 
 </head>
 <body>
     
     <div 
-        hx-get     = "http://192.168.1.69:8080/test?id=2"
+        hx-get     = "http://192.168.1.69:8080/skeleton"
+        hx-vars    = "{id:formula_index}"
         hx-trigger = "load"
         hx-swap    = "outerHTML"
     ></div>

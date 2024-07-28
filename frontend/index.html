@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cubonauta</title>
+
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div 
+        hx-get     = "http://192.168.1.69:8080/test"
+        hx-trigger = "load"
+        hx-swap    = "outerHTML"
+    ></div>
+
+</body>
+</html>

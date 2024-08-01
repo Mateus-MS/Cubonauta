@@ -1,4 +1,4 @@
-package query
+package routes_query
 
 import (
 	"net/http"

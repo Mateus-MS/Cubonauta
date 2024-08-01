@@ -1,8 +1,10 @@
-package custom_routes
+package custom_routes_elements
 
 import (
 	"Cubonauta/db"
-	"Cubonauta/query"
+	"Cubonauta/models"
+	routes_query "Cubonauta/routes/query"
+	"Cubonauta/utils"
 	"fmt"
 	"net/http"
 	"text/template"
@@ -25,14 +27,20 @@ func Skeleton(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var id int = query.ID_Query(r)
-	var size int = query.Size_Resolve(r)
+	var id int = routes_query.ID_Query(r)
+	var filters []string = routes_query.Filters_Query(r)
+	var card_skeleton models.Card_Skeleton
 
-	formula, new_id := db.GetFormula("F2L", id, size)
+	if len(filters) == 1 && filters[0] == "" {
+		formulas := db.GetFormula("F2L", id)
+		card_skeleton = utils.ConvertCaseToCard_Skeleton(formulas)
+	} else {
+		//Must Have at least one of the passed filters to be returned
+		formulas := db.GetFormulaFiltred("F2L", id, filters)
+		card_skeleton = utils.ConvertCaseToCard_Skeleton(formulas)
+	}
 
-	w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, new_id))
-
-	fmt.Println(formula)
+	//w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, new_id))
 
 	template := template.Must(
 		template.New("card--skeleton.html").Funcs(
@@ -42,6 +50,6 @@ func Skeleton(w http.ResponseWriter, r *http.Request) {
 		).ParseFiles("./elements/card--skeleton.html"),
 	)
 
-	template.Execute(w, formula)
+	template.Execute(w, card_skeleton)
 
 }

@@ -2,7 +2,7 @@ package main
 
 import (
 	"Cubonauta/db"
-	custom_routes "Cubonauta/routes"
+	custom_routes_elements "Cubonauta/routes/elements"
 	"context"
 	"fmt"
 	"net/http"
@@ -19,8 +19,8 @@ func main() {
 
 	router := http.NewServeMux()
 
-	router.HandleFunc("/skeleton", custom_routes.Skeleton)
-	router.HandleFunc("/formula", custom_routes.FormulaCard)
+	router.HandleFunc("/elements/skeleton", custom_routes_elements.Skeleton)
+	router.HandleFunc("/elements/formulas", custom_routes_elements.FormulaCard)
 
 	client, err := db.GetClient()
 	if err != nil {

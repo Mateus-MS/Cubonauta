@@ -1,8 +1,9 @@
-package custom_routes
+package custom_routes_elements
 
 import (
-	"Cubonauta/models"
-	"Cubonauta/query"
+	"Cubonauta/db"
+	routes_query "Cubonauta/routes/query"
+	"Cubonauta/utils"
 	"fmt"
 	"net/http"
 	"text/template"
@@ -25,15 +26,10 @@ func FormulaCard(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var name = query.QueryURL("name", r)
-	var formula = query.QueryURL("formula", r)
+	var id int = utils.ConvertStringToInt(routes_query.QueryURL("id", r))
+	var valids = routes_query.QueryURL("valids", r)
 
-	formula_card_data := models.Formula_Data{
-		Name:    name,
-		Formula: formula,
-	}
-
-	fmt.Println(formula_card_data)
+	formula_card_data := db.GetFormulaCard("F2L", id, valids)
 
 	template, _ := template.ParseFiles("./elements/card.html")
 

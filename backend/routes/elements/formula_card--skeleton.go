@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"net/http"
 	"text/template"
+
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func Skeleton(w http.ResponseWriter, r *http.Request) {
@@ -27,20 +29,47 @@ func Skeleton(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var id int = routes_query.ID_Query(r)
-	var filters []string = routes_query.Filters_Query(r)
-	var card_skeleton models.Card_Skeleton
+	var id int = getID(r)
+	var size int = getSize(r)
 
-	if len(filters) == 1 && filters[0] == "" {
-		formulas := db.GetFormula("F2L", id)
-		card_skeleton = utils.ConvertCaseToCard_Skeleton(formulas)
-	} else {
-		//Must Have at least one of the passed filters to be returned
-		formulas := db.GetFormulaFiltred("F2L", id, filters)
-		card_skeleton = utils.ConvertCaseToCard_Skeleton(formulas)
+	var filters []string = routes_query.Filters_Query(r)
+	var length = getCollectionLength("F2L")
+
+	var cards_data []models.Card_Skeleton
+
+	for id <= length {
+
+		if len(cards_data) >= size {
+			break
+		}
+
+		var card_skeleton models.Card_Skeleton
+		var db_case models.DB_Case
+
+		if len(filters) == 1 && filters[0] == "" {
+			db_case = db.GetFormula("F2L", id)
+		} else {
+			//Must Have at least one of the passed filters to be returned
+			db_case = db.GetFormulaFiltred("F2L", id, filters)
+		}
+
+		card_skeleton = utils.ConvertCaseToCard_Skeleton(db_case)
+
+		if len(db_case.Formulas) != 0 {
+			cards_data = append(cards_data, card_skeleton)
+		}
+
+		id += 1
+
 	}
 
-	//w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, new_id))
+	if len(cards_data) == 0 {
+		//If does not found a formula matching the filters
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, id))
 
 	template := template.Must(
 		template.New("card--skeleton.html").Funcs(
@@ -50,6 +79,39 @@ func Skeleton(w http.ResponseWriter, r *http.Request) {
 		).ParseFiles("./elements/card--skeleton.html"),
 	)
 
-	template.Execute(w, card_skeleton)
+	template.Execute(w, cards_data)
 
+}
+
+func getCollectionLength(collection_name string) int {
+	client, err := db.GetClient()
+	if err != nil {
+		fmt.Println("Erro na função getClient ao chamar no getFormula")
+		panic(err)
+	}
+	var collection *mongo.Collection = client.Database("CFOP").Collection(collection_name)
+
+	return int(utils.GetCollectionSize(collection))
+}
+
+func getID(r *http.Request) int {
+	str := routes_query.QueryURL("id", r)
+	number := utils.ConvertStringToInt(str)
+
+	if number == 0 {
+		return 1
+	} else {
+		return number
+	}
+}
+
+func getSize(r *http.Request) int {
+	str := routes_query.QueryURL("size", r)
+	number := utils.ConvertStringToInt(str)
+
+	if number == 0 {
+		return 1
+	} else {
+		return number
+	}
 }

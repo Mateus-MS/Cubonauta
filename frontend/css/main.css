@@ -1,0 +1,16 @@
+body{
+    width: 100dvw;
+    height: 100dvh;
+
+    --main-color:      #434343;
+    --secondary-color: #787878;
+    --thirdy-color:    #D6D6D6;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'arial';
+}

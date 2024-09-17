@@ -1,0 +1,36 @@
+#navbar{
+
+    --vertical-spacing: 20px;
+    --horizontal-spacing: 30px;
+
+    width: 100dvw;
+    height: 100px;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: var(--vertical-spacing) var(--horizontal-spacing);
+}
+
+#navbar > .holder{
+    width: fit-content;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+}
+
+#profile{
+    height: 70%;
+    aspect-ratio: 1 / 1;
+
+    background-color: var(--main-color);
+    border-radius: 100%;
+
+    margin-left: 20px;
+}
+
+.bolder{
+    font-size: 1.3em;
+    color: var(--main-color);
+}

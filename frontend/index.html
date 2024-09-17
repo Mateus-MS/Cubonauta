@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./css/main.css">
+
+    <link rel="stylesheet" href="./css/navbar/navbar.css">
+    <link rel="stylesheet" href="./css/navbar/left.css">
+    <link rel="stylesheet" href="./css/navbar/right.css">
+
+    <script src="./scripts/placeholdersFunctions.js" defer></script>
+</head>
+<body>
+
+    <div id="navbar">
+
+        <div class="holder">
+            <img 
+                id="navbar__left__menu"   
+                class="navbar__left__icon" 
+                src="./src/icons/menu.svg"
+                onclick="openMenu()"
+            >
+
+            <img 
+                id="navbar__left__filter" 
+                class="navbar__left__icon" 
+                src="./src/icons/filter.svg"
+                onclick="openFilter()"    
+            >
+        </div>
+
+        <div class="holder">
+            <div id="navbar__right__section">
+                <p onclick="switchPages()">Tutorial</p>
+                <div class="little_dot"></div>
+                <p onclick="switchPages()" class="bolder">Formulas</p>
+            </div>
+            <div onclick="openProfile()" id="profile"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>

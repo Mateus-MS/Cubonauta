@@ -1,0 +1,82 @@
+#formulas_holder{
+
+    margin: 20px var(--left-margin) 0 var(--left-margin);
+    width: calc(100dvw - (var(--left-margin) * 2));
+    height: 69.5dvh;
+
+    overflow: scroll;
+
+    --photo-size: 25dvw;
+    --elemnt-margins: .7em;
+
+}
+
+.formula_card{
+
+    width: 100%;
+    height: 100px;
+
+    margin-bottom: 2em;
+
+}
+
+.formula_card__holder{
+    display: flex;
+}
+
+.formula_card__case_name{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--secondary-color);
+
+    margin-bottom: var(--elemnt-margins);
+}
+
+.formula_card__case_photo{
+    width: var(--photo-size);
+    height: var(--photo-size);
+    margin-right: var(--elemnt-margins);
+
+    background-color: var(--main-color);
+}
+
+.formula_card__formula{
+    font-weight: bolder;
+    font-size: 1.5em;
+    color: var(--main-color);
+}
+
+.formula_card__tags{
+
+    width: fit-content;
+    display: flex;
+
+}
+
+.formula_card__tag{
+    font-size: .8em;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.formula_card__tag::after{
+    content: '•';
+    margin: 0 10px;
+}
+
+.formula_card__tag:last-child::after{
+    content: none;
+}
+
+.formula_card__formula__name{
+
+    font-weight: bold;
+    font-size: .9em;
+    color: var(--secondary-color);
+
+}
+
+.formula_card__formula__actions{
+    font-size: 1.5em;
+    color: var(--secondary-color);
+}

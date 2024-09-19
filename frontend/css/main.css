@@ -1,6 +1,12 @@
+@font-face {
+    font-family: icons;
+    src: url(../src/fonts/icons.ttf);
+}
+
 body{
     width: 100dvw;
     height: 100dvh;
+    overflow: hidden;
 
     --main-color:      #434343;
     --secondary-color: #787878;
@@ -17,4 +23,20 @@ body{
     user-select: none;
 
     font-family: 'arial';
+}
+
+/* Hide scrollbars in Firefox, Chrome, Edge */
+* {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Edge */
+}
+
+.icons{
+
+    font-family: icons;
+
 }

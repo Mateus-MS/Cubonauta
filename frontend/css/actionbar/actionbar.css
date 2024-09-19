@@ -1,0 +1,36 @@
+@font-face {
+    font-family: icons;
+    src: url(../../src/fonts/icons.ttf) format('truetype');
+}
+
+#actionbar{
+    width: 100dvw;
+    height: 4.3em;
+    background-color: var(--main-color);
+
+    position: absolute;
+    bottom: 0;
+
+    --b-radius: 25px;
+
+    border-radius: var(--b-radius) var(--b-radius) 0 0;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.actionbar__icons{
+
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    font-family: icons;
+    font-size: 2em;
+    color: var(--thirdy-color);
+
+}
+
+.actionbar__option > img {
+    height: 55%;
+}

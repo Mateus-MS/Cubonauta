@@ -1,0 +1,24 @@
+#category{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 var(--left-margin);
+
+    text-align: center;
+    font-size: 1.4em;
+    font-family: bold;
+    color: var(--secondary-color);
+}
+
+.category__option{
+    width: calc((100dvw - (var(--left-margin) * 2)) / 3);
+}
+
+.category__option--active{
+    font-size: 1.30em;
+    font-weight: bolder;
+    color: var(--main-color);
+
+    /* color: white; */
+    /* background-color: var(--main-color); */
+}

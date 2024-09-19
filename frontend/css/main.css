@@ -5,12 +5,16 @@ body{
     --main-color:      #434343;
     --secondary-color: #787878;
     --thirdy-color:    #D6D6D6;
+
+    --left-margin: 30px;
+
 }
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 
     font-family: 'arial';
 }

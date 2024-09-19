@@ -1,7 +1,7 @@
 #navbar{
 
     --vertical-spacing: 20px;
-    --horizontal-spacing: 30px;
+    --horizontal-spacing: var(--left-margin);
 
     width: 100dvw;
     height: 100px;

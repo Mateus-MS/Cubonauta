@@ -18,6 +18,11 @@
     <link rel="stylesheet" href="./css/formula_card/formula_card.css">
 
     <script src="./scripts/placeholdersFunctions.js" defer></script>
+
+    <script src="./scripts/changePage.js"     defer></script>
+    <script src="./scripts/changeCategory.js" defer></script>
+    <script src="./scripts/changeScreen.js"   defer></script>
+
 </head>
 <body>
 
@@ -41,26 +46,26 @@
 
         <div class="holder">
             <div id="navbar__right__section">
-                <p onclick="switchPages()">Tutorial</p>
+                <p onclick="switchPages(this)">Tutorial</p>
                 <div class="little_dot"></div>
-                <p onclick="switchPages()" class="bolder">Formulas</p>
+                <p onclick="switchPages(this)" class="bolder">Formulas</p>
             </div>
-            <div onclick="openProfile()" id="profile"></div>
+            <div onclick="changeToScreen('profile_screen')" id="profile"></div>
         </div>
 
     </div>
 
     <div id="category">
 
-        <div class="category__option category__option--active">
+        <div class="category__option category__option--active" onclick="changeCategory(this)">
             <span>F2L</span>
         </div>
         
-        <div class="category__option">
+        <div class="category__option" onclick="changeCategory(this)">
             <span>OLL</span>
         </div>
         
-        <div class="category__option">
+        <div class="category__option" onclick="changeCategory(this)">
             <span>PLL</span>
         </div>
 
@@ -75,20 +80,42 @@
             <div class="formula_card__holder">
                 <div class="formula_card__case_photo"></div>
             
-                <div style="height: var(--photo-size); display: flex; flex-direction: column;">
-                    <p class="formula_card__formula">F' L R U L' F</p>
+                <div class="formula_card__formulas_holder">
 
-                    <div class="formula_card__tags">
-                        <p class="formula_card__tag">Faster</p>
-                        <p class="formula_card__tag">Fridrich</p>
-                    </div>
+                    <div class="formula_card__formulas_holder__container">
+                        <p class="formula_card__formula">F' L R U L' F</p>
 
-                    <div style="display: flex; margin-top: auto;">
-                        <p class="formula_card__formula__name">Pesca</p>
-                        <div style="margin-left: auto;">
-                            <span class="icons formula_card__formula__actions">&#xe807;</span>
-                            <span class="icons formula_card__formula__actions">&#xe808;</span>
+                        <div class="formula_card__tags">
+                            <p class="formula_card__tag">Faster</p>
+                            <p class="formula_card__tag">Fridrich</p>
                         </div>
+
+                        <div style="display: flex; margin-top: auto; width: 100%;">
+                            <p class="formula_card__formula__name">Pesca</p>
+                            <div style="margin-left: auto;">
+                                <span class="icons formula_card__formula__actions">&#xe807;</span>
+                                <span class="icons formula_card__formula__actions">&#xe808;</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="formula_card__formulas_holder__container">
+                        <p class="formula_card__formula">R L' F B D R'</p>
+
+                        <div class="formula_card__tags">
+                            <p class="formula_card__tag">Faster</p>
+                        </div>
+
+                        <div style="display: flex; margin-top: auto; width: 100%;">
+                            <p class="formula_card__formula__name">Pesca invertida</p>
+                            <div style="margin-left: auto;">
+                                <span class="icons formula_card__formula__actions">&#xe807;</span>
+                                <span class="icons formula_card__formula__actions">&#xe808;</span>
+                            </div>
+                        </div>
+
+                
                     </div>
 
                 </div>
@@ -108,25 +135,15 @@
 
     <div id="actionbar">
 
-        <div class="actionbar__option">
-            <span class="icons actionbar__icons">&#xe802;</span>
-        </div>
+        <span id="trhopy_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe802;</span>
 
-        <div class="actionbar__option">
-            <span class="icons actionbar__icons">&#xe803;</span>
-        </div>
+        <span id="learn_screen" class="icons actionbar__icons actionbar__icons--active" onclick="changeScreen(this)">&#xe803;</span>
+        
+        <span id="home_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe804;</span>
 
-        <div class="actionbar__option">
-            <span class="icons actionbar__icons">&#xe804;</span>
-        </div>
+        <span id="training_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe801;</span>
 
-        <div class="actionbar__option">
-            <span class="icons actionbar__icons">&#xe801;</span>
-        </div>
-
-        <div class="actionbar__option">
-            <span class="icons actionbar__icons">&#xe800;</span>
-        </div>
+        <span id="profile_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe800;</span>
 
     </div>
 

@@ -33,7 +33,7 @@
 }
 
 .formula_card__case_photo{
-    width: var(--photo-size);
+    aspect-ratio: 1/1;
     height: var(--photo-size);
     margin-right: var(--elemnt-margins);
 
@@ -79,4 +79,26 @@
 .formula_card__formula__actions{
     font-size: 1.5em;
     color: var(--secondary-color);
+}
+
+.formula_card__formulas_holder{
+    display: flex;
+    height: var(--photo-size);
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.formula_card__formulas_holder__container{
+    display: flex;
+    flex-direction: column;
+    
+    height: var(--photo-size);
+    width: 100%;
+    flex-shrink: 0;
+
+    scroll-snap-align: start;
+    margin-right: 30px;
 }

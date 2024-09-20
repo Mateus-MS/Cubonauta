@@ -23,6 +23,9 @@
     <script src="./scripts/changeCategory.js" defer></script>
     <script src="./scripts/changeScreen.js"   defer></script>
 
+    <script src="./scripts/case_card/formulaCarrossel.js" defer></script>
+    <script src="./scripts/case_card/actions.js"          defer></script>
+
 </head>
 <body>
 
@@ -73,7 +76,7 @@
 
     <div id="formulas_holder">
 
-        <div class="formula_card">
+        <!-- <div class="formula_card">
 
             <p class="formula_card__case_name">Case 01</p>
 
@@ -122,157 +125,95 @@
             
             </div>
 
-        </div>
+        </div> -->
 
         <div class="formula_card">
 
             <p class="formula_card__case_name">Case 01</p>
+            <div class="formula_card__case_container">
 
-            <div class="formula_card__holder">
-                <div class="formula_card__case_photo"></div>
-            
-                <div class="formula_card__formulas_holder">
+                <div class="formula_card__case_container__photo"></div>
 
-                    <div class="formula_card__formulas_holder__container">
-                        <p class="formula_card__formula">F' L R U L' F</p>
+                <div class="formula_card__case_container__holder">
 
-                        <div class="formula_card__tags">
-                            <p class="formula_card__tag">Faster</p>
-                            <p class="formula_card__tag">Fridrich</p>
+                    <div onscroll="swipeCarrossel(this)" class="formula_card__case_container__holder__formulas_holder">
+
+                        <div class="formula_card__case_container__holder__formulas_holder__formula">
+
+                            <p class="formula_card__case_container__holder__formulas_holder__formula__movements">F' L R U L' F</p>
+
+                            <div class="formula_card__case_container__holder__formulas_holder__formula__tags">
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__tag">Faster</p>
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__tag">Fridrich</p>
+                            </div>
+
+                            <div class="formula_card__case_container__holder__formulas_holder__formula__bottom">
+
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__bottom__formula_name">Pesca</p>
+
+                                <div class="formula_card__case_container__holder__formulas_holder__formula__bottom__actions">
+                                    <p onclick="formulaAction('learn')" class="icons formula_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe807</p>
+                                    <p onclick="formulaAction('fav')" class="icons formula_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe808</p>
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        <div style="display: flex; margin-top: auto; width: 100%;">
-                            <p class="formula_card__formula__name">Pesca</p>
-                            <div style="margin-left: auto;">
-                                <span class="icons formula_card__formula__actions">&#xe807;</span>
-                                <span class="icons formula_card__formula__actions">&#xe808;</span>
+                        <div class="formula_card__case_container__holder__formulas_holder__formula">
+
+                            <p class="formula_card__case_container__holder__formulas_holder__formula__movements">F' L R U L' F</p>
+
+                            <div class="formula_card__case_container__holder__formulas_holder__formula__tags">
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__tag">Faster</p>
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__tag">Fridrich</p>
                             </div>
+
+                            <div class="formula_card__case_container__holder__formulas_holder__formula__bottom">
+
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__bottom__formula_name">Pesca</p>
+
+                                <div class="formula_card__case_container__holder__formulas_holder__formula__bottom__actions">
+                                    <p onclick="formulaAction('learn')" class="icons formula_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe807</p>
+                                    <p onclick="formulaAction('fav')" class="icons formula_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe808</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="formula_card__case_container__holder__formulas_holder__formula">
+
+                            <p class="formula_card__case_container__holder__formulas_holder__formula__movements">F' L R U L' F</p>
+
+                            <div class="formula_card__case_container__holder__formulas_holder__formula__tags">
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__tag">Faster</p>
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__tag">Fridrich</p>
+                            </div>
+
+                            <div class="formula_card__case_container__holder__formulas_holder__formula__bottom">
+
+                                <p class="formula_card__case_container__holder__formulas_holder__formula__bottom__formula_name">Pesca</p>
+
+                                <div class="formula_card__case_container__holder__formulas_holder__formula__bottom__actions">
+                                    <p onclick="formulaAction('learn')" class="icons formula_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe807</p>
+                                    <p onclick="formulaAction('fav')" class="icons formula_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe808</p>
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div>
-                    
-                    <div class="formula_card__formulas_holder__container">
-                        <p class="formula_card__formula">R L' F B D R'</p>
 
-                        <div class="formula_card__tags">
-                            <p class="formula_card__tag">Faster</p>
-                        </div>
-
-                        <div style="display: flex; margin-top: auto; width: 100%;">
-                            <p class="formula_card__formula__name">Pesca invertida</p>
-                            <div style="margin-left: auto;">
-                                <span class="icons formula_card__formula__actions">&#xe807;</span>
-                                <span class="icons formula_card__formula__actions">&#xe808;</span>
-                            </div>
-                        </div>
-
-                
-                    </div>
-
-                </div>
-            
-            </div>
-
-        </div>
-
-        <div class="formula_card">
-
-            <p class="formula_card__case_name">Case 01</p>
-
-            <div class="formula_card__holder">
-                <div class="formula_card__case_photo"></div>
-            
-                <div class="formula_card__formulas_holder">
-
-                    <div class="formula_card__formulas_holder__container">
-                        <p class="formula_card__formula">F' L R U L' F</p>
-
-                        <div class="formula_card__tags">
-                            <p class="formula_card__tag">Faster</p>
-                            <p class="formula_card__tag">Fridrich</p>
-                        </div>
-
-                        <div style="display: flex; margin-top: auto; width: 100%;">
-                            <p class="formula_card__formula__name">Pesca</p>
-                            <div style="margin-left: auto;">
-                                <span class="icons formula_card__formula__actions">&#xe807;</span>
-                                <span class="icons formula_card__formula__actions">&#xe808;</span>
-                            </div>
-                        </div>
-
-                    </div>
-                    
-                    <div class="formula_card__formulas_holder__container">
-                        <p class="formula_card__formula">R L' F B D R'</p>
-
-                        <div class="formula_card__tags">
-                            <p class="formula_card__tag">Faster</p>
-                        </div>
-
-                        <div style="display: flex; margin-top: auto; width: 100%;">
-                            <p class="formula_card__formula__name">Pesca invertida</p>
-                            <div style="margin-left: auto;">
-                                <span class="icons formula_card__formula__actions">&#xe807;</span>
-                                <span class="icons formula_card__formula__actions">&#xe808;</span>
-                            </div>
-                        </div>
-
-                
+                    <div class="formula_card__case_container__holder__carrossel_holder">
+                        <div class="formula_card__case_container__holder__carrossel_holder__dot formula_card__case_container__holder__carrossel_holder__dot--active"></div>
+                        <div class="formula_card__case_container__holder__carrossel_holder__dot"></div>
+                        <div class="formula_card__case_container__holder__carrossel_holder__dot"></div>
                     </div>
 
                 </div>
-            
-            </div>
 
-        </div>
-
-        <div class="formula_card">
-
-            <p class="formula_card__case_name">Case 01</p>
-
-            <div class="formula_card__holder">
-                <div class="formula_card__case_photo"></div>
-            
-                <div class="formula_card__formulas_holder">
-
-                    <div class="formula_card__formulas_holder__container">
-                        <p class="formula_card__formula">F' L R U L' F</p>
-
-                        <div class="formula_card__tags">
-                            <p class="formula_card__tag">Faster</p>
-                            <p class="formula_card__tag">Fridrich</p>
-                        </div>
-
-                        <div style="display: flex; margin-top: auto; width: 100%;">
-                            <p class="formula_card__formula__name">Pesca</p>
-                            <div style="margin-left: auto;">
-                                <span class="icons formula_card__formula__actions">&#xe807;</span>
-                                <span class="icons formula_card__formula__actions">&#xe808;</span>
-                            </div>
-                        </div>
-
-                    </div>
-                    
-                    <div class="formula_card__formulas_holder__container">
-                        <p class="formula_card__formula">R L' F B D R'</p>
-
-                        <div class="formula_card__tags">
-                            <p class="formula_card__tag">Faster</p>
-                        </div>
-
-                        <div style="display: flex; margin-top: auto; width: 100%;">
-                            <p class="formula_card__formula__name">Pesca invertida</p>
-                            <div style="margin-left: auto;">
-                                <span class="icons formula_card__formula__actions">&#xe807;</span>
-                                <span class="icons formula_card__formula__actions">&#xe808;</span>
-                            </div>
-                        </div>
-
-                
-                    </div>
-
-                </div>
-            
             </div>
 
         </div>

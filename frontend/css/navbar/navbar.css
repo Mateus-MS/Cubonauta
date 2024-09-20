@@ -4,12 +4,13 @@
     --horizontal-spacing: var(--left-margin);
 
     width: 100dvw;
-    height: 100px;
+    height: 75px;
 
     display: flex;
     justify-content: space-between;
 
-    padding: var(--vertical-spacing) var(--horizontal-spacing);
+    padding: var(--vertical-spacing) var(--horizontal-spacing) 0 var(--horizontal-spacing);
+
 }
 
 #navbar > .holder{
@@ -21,7 +22,7 @@
 }
 
 #profile{
-    height: 70%;
+    height: 100%;
     aspect-ratio: 1 / 1;
 
     background-color: var(--main-color);

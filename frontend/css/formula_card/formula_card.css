@@ -3,11 +3,8 @@
     --workable-width: calc(100dvw - (var(--left-margin) * 2));
     --formula-width:  calc(var(--workable-width) - var(--photo-size) - var(--elemnt-margins));
 
-    margin: 20px var(--left-margin) 0 var(--left-margin);
+    margin: 0 var(--left-margin) 0 var(--left-margin);
     width: var(--workable-width);
-    height: 69.5dvh;
-
-    overflow: scroll;
 
     --photo-size: 30dvw;
     --elemnt-margins: .7em;
@@ -21,17 +18,19 @@
 
     display: flex;
     flex-direction: column;
+    margin-bottom: 2em;
 
 }
 
 .formula_card__case_name{
     margin-bottom: var(--elemnt-margins);
-    background-color: red;
+    
+    font-size: 1.25em;
+    font-weight: bold;
+    color: var(--secondary-color);
 }
 
 .formula_card__case_container{
-
-    background-color: black;
 
     width: inherit;
     height: var(--photo-size);
@@ -41,7 +40,7 @@
 }
 
 .formula_card__case_container__photo{
-    background-color: green;
+    background-color: var(--main-color);
 
     width: var(--photo-size);
     height: var(--photo-size);
@@ -50,7 +49,6 @@
 }
 
 .formula_card__case_container__holder{
-    background-color: yellow;
     height: 100%;
 
     flex-grow: 1;
@@ -64,10 +62,9 @@
     width: var(--formula-width);
     height: 100%;
 
-    background-color: blue;
-
     display: flex;
     overflow-x: scroll;
+    overflow-y: hidden;
 
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -85,8 +82,6 @@
     height: 100%;
     flex-shrink: 0;
 
-    background-color: chocolate;
-
     margin-right: 20px;
 
     /*To let the bottom be always at bottom*/
@@ -96,8 +91,11 @@
 }
 
 .formula_card__case_container__holder__formulas_holder__formula__movements{
-    margin-bottom: .3em;
+    font-size: 1.5em;
+    font-weight: bolder;
+    color: var(--main-color);
     
+    margin-bottom: .3em;
 }
 
 /* #region TAGS */
@@ -109,7 +107,9 @@
 
 /* CSS to style the tag */
 .formula_card__case_container__holder__formulas_holder__formula__tag{
-
+    font-size: .8em;
+    font-weight: bold;
+    color: var(--thirdy-color);
 }
 
 /* Add a little dot after every tag */
@@ -134,7 +134,9 @@
 }
 
 .formula_card__case_container__holder__formulas_holder__formula__bottom__formula_name{
-
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--secondary-color);
 }
 
 .formula_card__case_container__holder__formulas_holder__formula__bottom__actions{
@@ -143,6 +145,7 @@
 
 .formula_card__case_container__holder__formulas_holder__formula__bottom__actions__action{
     font-size: 25px;
+    color: var(--secondary-color);
 
     margin-left: 10px;
 
@@ -173,8 +176,6 @@
     width: var(--formula-width);
     height: 20px;
 
-    background-color: aquamarine;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -188,7 +189,7 @@
     width: var(--dot-size);
     height: var(--dot-size);
 
-    background-color: black;
+    background-color: var(--main-color);
     border-radius: var(--dot-size);
 
     margin: 0 3px;

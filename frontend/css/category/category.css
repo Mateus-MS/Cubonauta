@@ -8,6 +8,12 @@
     font-size: 1.4em;
     font-family: bold;
     color: var(--secondary-color);
+
+    position: sticky;
+    top: 0;
+
+    padding: 20px 0;
+    background-color: white;
 }
 
 .category__option{

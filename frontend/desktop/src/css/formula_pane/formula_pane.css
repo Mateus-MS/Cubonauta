@@ -3,6 +3,9 @@
     width: calc(100dvw - var(--formulas-selection-width));
     height: 100dvh;
 
+    display: flex;
+    flex-direction: column;
+
 }
 
 /* #region HEADER */
@@ -74,6 +77,188 @@
 /*Makes the line bellow the P visible when hover the div that holds all together*/
 .formula_pane__header__pages:hover.formula_pane__header__pages > p::after{
     width: 100%;
+}
+
+/* #endregion */
+
+/* #region BODY */
+
+#formula_pane__body{
+
+    width: 100%;
+    height: 100%;
+
+    margin: 30px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* #region BODY__HEADER */
+
+#formula_pane__body__header{
+    width: 50%;
+    margin-bottom: 30px;
+    height: fit-content;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* #region BODY__HEADER__INFO */
+
+#formula_pane__body__header__info{
+    display: flex;
+    font-size: 1.1em;
+    font-weight: bold;
+
+    user-select: none;
+}
+
+#formula_pane__body__header__info__case_name{
+    color: var(--secondary-color);
+}
+
+#formula_pane__body__header__info__case_name::after{
+    content: '•';
+    margin: 0 10px;
+    color: var(--secondary-color);
+}
+
+#formula_pane__body__header__info__formula_name{
+    color: var(--main-color);
+}
+
+/* #endregion */
+
+/* #region BODY__HEADER__ACTIONS */
+
+#formula_pane__body__header__actions{
+    display: flex;
+    font-size: 1.7em;
+    user-select: none;
+}
+
+.formula_pane__body__header__actions__action{
+    margin-left: 10px;
+    cursor: pointer;
+    color: var(--secondary-color);
+}
+
+/* #endregion BODY__HEADER__ACTIONS */
+
+/* #endregion BODY__HEADER */
+
+/* #region BODY__GUIDE */
+
+#formula_pane__body__guide{
+    width: 50%;
+    height: fit-content;
+
+    overflow: hidden;
+}
+
+#formula_pane__body__guide__slider{
+    width: fit-content;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    left: 270px;
+}
+
+.formula_pane__body__guide__slider__move{
+    margin-right: 10px;
+    font-size: 1.6em;
+    color: var(--secondary-color);
+    font-weight: bold;
+
+    user-select: none;
+}
+
+.formula_pane__body__guide__slider__move--active{
+    font-size: 2em;
+    color: var(--main-color);
+}
+
+/* #endregion BODY__GUIDE */
+
+#formula_pane__body__cube_render{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    margin: 30px 0;
+
+    background-color: var(--secondary-color);
+}
+
+/* #region BODY__CONTROLS */
+
+#formula_pane__body__controls{
+    width: 50%;
+    height: 9%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formula_pane__body__controls__btn{
+    color: var(--main-color);
+    font-size: 1.9em;
+    margin: 0 15px;
+
+    cursor: pointer;
+}
+
+#formula_pane__body__controls__play{
+    font-size: 3em;
+}
+
+/* #endregion BODY__CONTROLS */
+
+/* #endregion BODY */
+
+/* #region INFOS */
+
+#formula_pane__infos{
+    width: 100%;
+    height: 10%;
+    padding-bottom: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Div that holds the number and the title together*/
+.formula_pane__infos__info{
+    width: fit-content;
+    text-wrap: nowrap;
+
+    padding: 0 4%;
+    border-right: 1px solid var(--thirdy-color);
+
+    user-select: none;
+}
+
+.formula_pane__infos__info__number{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.formula_pane__infos__info__title{
+    color: var(--thirdy-color);
+}
+
+/*Remove the right stroke from last info*/
+.formula_pane__infos__info:last-child{
+    border-right: none;
 }
 
 /* #endregion */

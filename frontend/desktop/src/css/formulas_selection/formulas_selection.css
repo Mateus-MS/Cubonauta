@@ -1,5 +1,8 @@
 #formulas_selection{
 
+    min-width: 380px;
+    max-width: 450px;
+
     width: var(--formulas-selection-width);
     height: 100dvh;
 
@@ -71,10 +74,18 @@
     justify-content: center;
 
     border-right: 2px solid var(--secondary-color);
+
+    transition: all ease .3s;
 }
 
 .formulas_selection__category:last-child{
     border-right: none;
+}
+
+.formulas_selection__category:hover:not(.formulas_selection__category--active){
+    font-size: 1.9em;
+    font-weight: bold;
+    color: white;
 }
 
 .formulas_selection__category--active{
@@ -83,6 +94,9 @@
     color: var(--main-color);
     background-color: white;
     border-right: none;
+    
+    transition: none;
+    cursor: default;
 }
 
 /* #endregion */

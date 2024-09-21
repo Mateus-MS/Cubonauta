@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	components "Cubonauta/components/case_card"
 	"Cubonauta/routes"
 )
 
@@ -20,6 +21,10 @@ func main() {
 	router.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../frontend/static"))))
 
 	router.HandleFunc("/learn", routes.LearnRoute)
+
+	//components Handle
+
+	router.HandleFunc("/components/case_card", components.Case_card)
 
 	startServer(router)
 

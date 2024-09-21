@@ -9,6 +9,11 @@
 
     <link rel="stylesheet" href="/static/desktop/src/css/formulas_selection/formulas_selection.css">
     <link rel="stylesheet" href="/static/desktop/src/css/formula_pane/formula_pane.css">
+    
+    <link rel="stylesheet" href="/static/desktop/src/css/formula_card/formula_card.css">
+
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+
 </head>
 <body>
     
@@ -32,10 +37,41 @@
 
         <div id="formulas_selection__holder">
 
-            <div class="formulas_selection__holder__case"></div>
-            <div class="formulas_selection__holder__case"></div>
-            <div class="formulas_selection__holder__case"></div>
-            <div class="formulas_selection__holder__case"></div>
+            <div 
+                hx-get     = "http://148.63.246.10/components/case_card"
+                hx-trigger = "load"
+                hx-swap   = "outerHTML"
+            ></div>
+            
+            <div 
+                hx-get     = "http://148.63.246.10/components/case_card"
+                hx-trigger = "load"
+                hx-swap   = "outerHTML"
+            ></div>
+
+            <div 
+                hx-get     = "http://148.63.246.10/components/case_card"
+                hx-trigger = "load"
+                hx-swap   = "outerHTML"
+            ></div>
+
+            <div 
+                hx-get     = "http://148.63.246.10/components/case_card"
+                hx-trigger = "load"
+                hx-swap   = "outerHTML"
+            ></div>
+            
+            <div 
+                hx-get     = "http://148.63.246.10/components/case_card"
+                hx-trigger = "load"
+                hx-swap   = "outerHTML"
+            ></div>
+
+            <div 
+                hx-get     = "http://148.63.246.10/components/case_card"
+                hx-trigger = "load"
+                hx-swap   = "outerHTML"
+            ></div>
 
         </div>
 

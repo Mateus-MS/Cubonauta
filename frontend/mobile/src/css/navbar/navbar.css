@@ -37,7 +37,9 @@
 }
 
 .navbar__left__icon{
-    height: 45%;
+    font-size: 25px;
+    color: var(--main-color);
+    margin-right: 12px;
 }
 
 #navbar__left__menu{

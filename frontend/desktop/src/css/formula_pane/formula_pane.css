@@ -1,0 +1,79 @@
+#formula_pane{
+
+    width: calc(100dvw - var(--formulas-selection-width));
+    height: 100dvh;
+
+}
+
+/* #region HEADER */
+
+#formula_pane__header{
+
+    margin-top: 30px;
+    margin-left: -40px;
+
+    width: 100%;
+    height: 9%;
+
+    display: flex;
+    flex-direction: row-reverse;
+
+    align-items: center;
+
+
+}
+
+#formula_pane__header__profile{
+
+    height: 100%;
+    aspect-ratio: 1 / 1;
+
+    background-color: var(--thirdy-color);
+    border-radius: 100%;
+    margin-left: 40px;
+
+    cursor: pointer;
+
+}
+
+/*Is the div that holds the P and the ::before*/
+.formula_pane__header__pages{
+    color: var(--thirdy-color);
+    font-size: 1.2em;
+    cursor: pointer;
+
+    display: flex;
+}
+
+/*Add a little dot after every page*/
+.formula_pane__header__pages::before{
+    content: '•';
+    margin: 0 15px;
+    color: var(--thirdy-color);
+}
+
+/*Remove the little dot from last page*/
+.formula_pane__header__pages:last-child::before{
+    content: none;
+}
+
+/*Creates the line bellow the P*/
+.formula_pane__header__pages > p::after{
+    display: block;
+
+    content: "";
+
+    width: 0%;
+    height: 1.5px;
+    margin-top: 4px;
+    background-color: var(--thirdy-color);
+
+    transition: width ease .3s;
+}
+
+/*Makes the line bellow the P visible when hover the div that holds all together*/
+.formula_pane__header__pages:hover.formula_pane__header__pages > p::after{
+    width: 100%;
+}
+
+/* #endregion */

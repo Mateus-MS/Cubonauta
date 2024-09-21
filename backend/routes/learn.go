@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strings"
@@ -9,12 +8,18 @@ import (
 
 func LearnRoute(w http.ResponseWriter, h *http.Request) {
 
-	//Serve windows version
 	if strings.Contains(h.UserAgent(), "Windows") {
-		fmt.Println("Entrando pelo windows")
+		page, err := template.ParseFiles("../frontend/desktop/pages/learn/learn_formulas.html")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		if err := page.Execute(w, nil); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
 	}
 
-	if strings.Contains(h.UserAgent(), "Android") {
+	if strings.Contains(h.UserAgent(), "Mobile") {
 		page, err := template.ParseFiles("../frontend/mobile/pages/learn/learn_formulas.html")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)

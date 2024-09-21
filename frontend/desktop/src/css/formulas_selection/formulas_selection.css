@@ -1,0 +1,112 @@
+#formulas_selection{
+
+    width: var(--formulas-selection-width);
+    height: 100dvh;
+
+    background-color: var(--main-color);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    --side-margins: 10%;
+    --workable-width: calc(100% - var(--side-margins) * 2);
+
+}
+
+
+/* #region HEADER */
+
+#formulas_selection__header{
+
+    width: var(--workable-width);
+    height: fit-content;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 45px;
+}
+
+.formulas_selection__header__icons{
+    font-size: 2.3em;
+    color: white;
+
+    cursor: pointer;
+}
+
+#formulas_selection__header__logo{
+    font-size: 30px;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    color: white;
+    user-select: none;
+}
+
+/* #endregion */
+
+/* #region CATEGORYS */
+
+#formulas_selection__categorys{
+    width: var(--workable-width);
+    height: 8%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    margin: 45px 0;
+}
+
+.formulas_selection__category{
+    width: 100%;
+    padding: 5px 0;
+    font-size: 1.8em;
+    cursor: pointer;
+
+    color: var(--secondary-color);
+
+    display: flex;
+    justify-content: center;
+
+    border-right: 2px solid var(--secondary-color);
+}
+
+.formulas_selection__category:last-child{
+    border-right: none;
+}
+
+.formulas_selection__category--active{
+    font-size: 1.9em;
+    font-weight: bold;
+    color: var(--main-color);
+    background-color: white;
+    border-right: none;
+}
+
+/* #endregion */
+
+/* #region FORMULAS HOLDER */
+
+#formulas_selection__holder{
+
+    width: var(--workable-width);
+    height: 100%;
+
+    overflow-y: scroll;
+
+}
+
+.formulas_selection__holder__case{
+
+    width: 100%;
+    height: 160px;
+
+    background-color: white;
+
+    margin-bottom: 30px;
+
+}
+
+/* #endregion */

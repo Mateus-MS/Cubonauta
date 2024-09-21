@@ -1,6 +1,6 @@
 #formulas_selection{
 
-    min-width: 380px;
+    min-width: 400px;
     max-width: 450px;
 
     width: var(--formulas-selection-width);

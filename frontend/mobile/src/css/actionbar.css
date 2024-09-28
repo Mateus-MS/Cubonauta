@@ -3,7 +3,7 @@
     height: 4.3em;
     background-color: var(--main-color);
 
-    position: sticky;
+    position: fixed;
     bottom: 0;
 
     --b-radius: 25px;

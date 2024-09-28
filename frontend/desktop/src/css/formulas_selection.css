@@ -12,7 +12,7 @@
     flex-direction: column;
     align-items: center;
 
-    --side-margins: 10%;
+    --side-margins: 30px;
     --workable-width: calc(100% - var(--side-margins) * 2);
 
 }
@@ -103,24 +103,11 @@
 
 /* #region FORMULAS HOLDER */
 
-#formulas_selection__holder{
-
+#case_holder{
     width: var(--workable-width);
     height: 100%;
 
     overflow-y: scroll;
-
-}
-
-.formulas_selection__holder__case{
-
-    width: 100%;
-    height: 160px;
-
-    background-color: white;
-
-    margin-bottom: 30px;
-
 }
 
 /* #endregion */

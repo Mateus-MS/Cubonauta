@@ -158,14 +158,16 @@
 
 #formula_pane__body__guide{
     width: 50%;
-    height: fit-content;
 
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 #formula_pane__body__guide__slider{
     width: fit-content;
     height: 100%;
+    /*BUG FIX NEEDS TO BE INVESTIGATED, THE SLIDER IS NOT AS BIG AS THE MOVE ACTIVE*/
+    /*THIS PADDING SOLVES BUT IS BEHAVING STRANGE*/
+    padding: 10px 0;
 
     display: flex;
     align-items: center;

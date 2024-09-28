@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubonauta</title>
 
-    <link rel="stylesheet" href="/static/mobile/src/css/main.css">
-
-    <link rel="stylesheet" href="/static/mobile/src/css/navbar/navbar.css">
-
-    <link rel="stylesheet" href="/static/mobile/src/css/category/category.css">
-
-    <link rel="stylesheet" href="/static/mobile/src/css/actionbar/actionbar.css">
-
-    <link rel="stylesheet" href="/static/mobile/src/css/formula_card/formula_card.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/0aa0.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/navbar.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/category.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/actionbar.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/case_card.css">
 
     <script src="/static/mobile/src/scripts/placeholdersFunctions.js" defer></script>
 
@@ -63,36 +59,27 @@
 
     </div>
 
-    <div id="formulas_holder">
+    <div id="case_holder">
 
         <div 
-            hx-get     = "http://148.63.246.10/components/case_card"
+            hx-get     = "https://cubonauta.com/components/case_card"
             hx-trigger = "load"
             hx-swap   = "outerHTML"
+            hx-vars   = "{case_id: 1}"
         ></div>
 
         <div 
-            hx-get     = "http://148.63.246.10/components/case_card"
+            hx-get     = "https://cubonauta.com/components/case_card"
             hx-trigger = "load"
             hx-swap   = "outerHTML"
+            hx-vars   = "{case_id: 2}"
         ></div>
 
         <div 
-            hx-get     = "http://148.63.246.10/components/case_card"
+            hx-get     = "https://cubonauta.com/components/case_card"
             hx-trigger = "load"
             hx-swap   = "outerHTML"
-        ></div>
-
-        <div 
-            hx-get     = "http://148.63.246.10/components/case_card"
-            hx-trigger = "load"
-            hx-swap   = "outerHTML"
-        ></div>
-
-        <div 
-            hx-get     = "http://148.63.246.10/components/case_card"
-            hx-trigger = "load"
-            hx-swap   = "outerHTML"
+            hx-vars   = "{case_id: 3}"
         ></div>
 
     </div>

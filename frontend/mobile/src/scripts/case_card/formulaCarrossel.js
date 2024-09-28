@@ -3,19 +3,18 @@ function swipeCarrossel(element){
     let dots     = element.nextElementSibling.children 
     let dot      = dots[dotIndex]
 
-    if(dot.classList.contains("formula_card__case_container__holder__carrossel_holder__dot--active")){
+    if(dot.classList.contains("case_card__case_container__holder__carrossel_holder__dot--active")){
         return
     }
 
     //Iterate over all dots
     for(let d of dots){
-        if(d.classList.contains("formula_card__case_container__holder__carrossel_holder__dot--active")){
-            d.classList.remove("formula_card__case_container__holder__carrossel_holder__dot--active")
+        if(d.classList.contains("case_card__case_container__holder__carrossel_holder__dot--active")){
+            d.classList.remove("case_card__case_container__holder__carrossel_holder__dot--active")
             break;
         }
     }
 
-    dot.classList.add("formula_card__case_container__holder__carrossel_holder__dot--active")
-
+    dot.classList.add("case_card__case_container__holder__carrossel_holder__dot--active")
 
 }

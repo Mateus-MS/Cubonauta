@@ -6,6 +6,9 @@ import (
 
 	components "Cubonauta/components/case_card"
 	"Cubonauta/routes"
+
+	/*TEMPORARIO*/
+	"golang.org/x/crypto/acme/autocert"
 )
 
 func main() {
@@ -20,7 +23,7 @@ func main() {
 	//Serve the js and css files to desktop
 	router.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../frontend/static"))))
 
-	router.HandleFunc("/learn", routes.LearnRoute)
+	router.HandleFunc("/", routes.LearnRoute)
 
 	//components Handle
 
@@ -31,7 +34,33 @@ func main() {
 }
 
 func startServer(router *http.ServeMux) {
-	if err := http.ListenAndServe(":80", router); err != nil {
-		fmt.Println(err.Error())
+	/*TEMPORARIO*/
+	certManager := &autocert.Manager{
+		Prompt:     autocert.AcceptTOS,                      // Automatically accept the Let's Encrypt Terms of Service
+		Cache:      autocert.DirCache("certs"),              // Directory to store the certificates
+		HostPolicy: autocert.HostWhitelist("cubonauta.com"), // Replace with your domain name
+	}
+
+	go func() {
+		httpServer := &http.Server{
+			Addr:    ":80",
+			Handler: certManager.HTTPHandler(nil), // Use certManager to handle HTTP-01 challenges
+		}
+		fmt.Println("Starting HTTP server on port 80 for certificate challenges and redirection to HTTPS")
+		if err := httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			fmt.Printf("HTTP server error: %s", err)
+		}
+	}()
+
+	// Start the HTTPS server
+	httpsServer := &http.Server{
+		Addr:      ":443",
+		Handler:   router,
+		TLSConfig: certManager.TLSConfig(),
+	}
+
+	fmt.Println("Starting HTTPS server on port 443")
+	if err := httpsServer.ListenAndServeTLS("", ""); err != nil {
+		fmt.Println("HTTPS server error:", err)
 	}
 }

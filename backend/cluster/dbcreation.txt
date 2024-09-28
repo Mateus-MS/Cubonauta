@@ -1,0 +1,43 @@
+CREATE TABLE tags (
+    ID SERIAL PRIMARY KEY, 
+    tag VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE formula (
+    formula_id SERIAL PRIMARY KEY,
+    nome VARCHAR(25),
+    solver VARCHAR(50),
+    setter VARCHAR(50)
+);
+
+CREATE TABLE j_formula_tags (
+    formula_id INT NOT NULL, 
+    tag_id     INT NOT NULL,
+    PRIMARY KEY (formula_id, tag_id),
+  
+    FOREIGN KEY (formula_id) REFERENCES formula(formula_id),
+    FOREIGN KEY (tag_id) REFERENCES tags(ID)
+);
+
+CREATE TABLE cases (
+  case_id   SERIAL PRIMARY KEY,
+  case_nome VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE j_cases_formulas(
+	case_id    INT NOT NULL,
+    formula_id INT NOT NULL,
+  
+  	PRIMARY KEY (case_id, formula_id),
+  
+  	FOREIGN KEY (case_id) REFERENCES cases(case_id),
+    FOREIGN KEY (formula_id) REFERENCES formula(formula_id) 
+);
+
+CREATE TABLE f2l (
+    f2l_id SERIAL PRIMARY KEY,
+    f2l_name VARCHAR(50) NOT NULL, -- You can replace this with other columns you need
+    case_id INT NOT NULL,
+  
+    FOREIGN KEY (case_id) REFERENCES cases(case_id) 
+);

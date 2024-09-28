@@ -1,0 +1,15 @@
+.case_card{
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+
+    --photo-size: 120px;
+    --elemnt-margins: 10px;
+
+    --formula-width: calc((30dvw - (30px * 2)) - var(--photo-size) - var(--elemnt-margins));
+
+    background-color: yellow;
+}

@@ -1,0 +1,59 @@
+<div class="case_card">
+
+    <p class="case_card__case_name"> {{ .Name }} </p>
+    <div class="case_card__case_container">
+
+        <div class="case_card__case_container__photo"></div>
+
+        <div class="case_card__case_container__holder">
+
+            <div onscroll="swipeCarrossel(this)" class="case_card__case_container__holder__formulas_holder">
+
+            {{ range .Formulas }}
+
+                <div class="case_card__case_container__holder__formulas_holder__formula">
+
+                    <p class="case_card__case_container__holder__formulas_holder__formula__movements"> {{ .Solver }} </p>
+
+                    <div class="case_card__case_container__holder__formulas_holder__formula__tags">
+
+                        {{ range .Tags }}
+
+                            <p class="case_card__case_container__holder__formulas_holder__formula__tag"> {{ .Name }} </p>
+
+                        {{ end }}
+
+                    </div>
+
+                    <div class="case_card__case_container__holder__formulas_holder__formula__bottom">
+
+                        <p class="case_card__case_container__holder__formulas_holder__formula__bottom__formula_name"> {{ .Name }} </p>
+
+                        <div class="case_card__case_container__holder__formulas_holder__formula__bottom__actions">
+                            <p onclick="formulaAction('learn')" class="icons case_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe807</p>
+                            <p onclick="formulaAction('fav')" class="icons case_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe808</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {{ end }}
+
+            </div>
+
+            <div class="case_card__case_container__holder__carrossel_holder">
+                {{ range $index, $form := .Formulas }}
+                    {{ if eq $index 1 }}
+                        <div class="case_card__case_container__holder__carrossel_holder__dot case_card__case_container__holder__carrossel_holder__dot--active"></div>
+                    {{ else }}
+                        <div class="case_card__case_container__holder__carrossel_holder__dot"></div>
+                    {{ end }}
+                {{ end }}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

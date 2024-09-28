@@ -1,0 +1,28 @@
+INSERT INTO tags (tag) VALUES ('Faster');
+INSERT INTO tags (tag) VALUES ('Fridrich');
+INSERT INTO tags (tag) VALUES ('No-Regrip');
+INSERT INTO tags (tag) VALUES ('Blindfolded');
+
+INSERT INTO formula (nome, solver, setter) VALUES ('Pesca', 'solver', 'setter');
+INSERT INTO formula (nome, solver, setter) VALUES ('Malandro', 'solver', 'setter');
+INSERT INTO formula (nome, solver, setter) VALUES ('Solteiro', 'solver', 'setter');
+INSERT INTO formula (nome, solver, setter) VALUES ('Fugiu de casa', 'solver', 'setter');
+
+INSERT INTO j_formula_tags (formula_id, tag_id) VALUES (1, 3), (1, 1);
+INSERT INTO j_formula_tags (formula_id, tag_id) VALUES (2, 3), (2, 1), (2, 2);
+INSERT INTO j_formula_tags (formula_id, tag_id) VALUES (3, 3), (3, 1);
+INSERT INTO j_formula_tags (formula_id, tag_id) VALUES (4, 3);
+
+INSERT INTO cases (case_nome) VALUES ('Case 01');
+INSERT INTO cases (case_nome) VALUES ('Case 02');
+INSERT INTO cases (case_nome) VALUES ('Case 03');
+INSERT INTO cases (case_nome) VALUES ('Case 04');
+INSERT INTO cases (case_nome) VALUES ('Case 05');
+
+INSERT INTO j_cases_formulas (case_id, formula_id) VALUES (1, 1), (1, 3);
+
+SELECT c.case_nome, f.formula_id, f.nome, f.solver, f.setter
+FROM j_cases_formulas jcf
+JOIN formula f ON jcf.formula_id = f.formula_id
+JOIN cases c ON jcf.case_id = c.case_id
+WHERE c.case_nome = 'Case 01';

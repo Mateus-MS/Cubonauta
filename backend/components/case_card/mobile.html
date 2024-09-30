@@ -19,7 +19,7 @@
 
                         {{ range .Tags }}
 
-                            <p class="case_card__case_container__holder__formulas_holder__formula__tag"> {{ .Name }} </p>
+                            <p class="case_card__case_container__holder__formulas_holder__formula__tag"> {{ . }} </p>
 
                         {{ end }}
 
@@ -42,15 +42,19 @@
 
             </div>
 
-            <div class="case_card__case_container__holder__carrossel_holder">
-                {{ range $index, $form := .Formulas }}
-                    {{ if eq $index 1 }}
-                        <div class="case_card__case_container__holder__carrossel_holder__dot case_card__case_container__holder__carrossel_holder__dot--active"></div>
-                    {{ else }}
-                        <div class="case_card__case_container__holder__carrossel_holder__dot"></div>
+            {{ if gt (len .Formulas) 1 }}
+
+                <div class="case_card__case_container__holder__carrossel_holder">
+                    {{ range $index, $form := .Formulas }}
+                        {{ if eq $index 0 }}
+                            <div class="case_card__case_container__holder__carrossel_holder__dot case_card__case_container__holder__carrossel_holder__dot--active"></div>
+                        {{ else }}
+                            <div class="case_card__case_container__holder__carrossel_holder__dot"></div>
+                        {{ end }}
                     {{ end }}
-                {{ end }}
-            </div>
+                </div>
+
+            {{ end }}
 
         </div>
 

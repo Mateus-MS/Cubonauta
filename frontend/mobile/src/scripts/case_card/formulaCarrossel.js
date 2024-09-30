@@ -1,4 +1,9 @@
 function swipeCarrossel(element){
+
+    if(element.nextElementSibling == null){
+        return
+    }
+
     let dotIndex = Math.round(element.scrollLeft / element.children[0].clientWidth)
     let dots     = element.nextElementSibling.children 
     let dot      = dots[dotIndex]
@@ -16,5 +21,4 @@ function swipeCarrossel(element){
     }
 
     dot.classList.add("case_card__case_container__holder__carrossel_holder__dot--active")
-
 }

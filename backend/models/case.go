@@ -1,6 +1,6 @@
 package models
 
 type Case struct {
-	Name     string
-	Formulas []Formula
+	Name     string    `bson:"Name"`
+	Formulas []Formula `bson:"Formulas"`
 }

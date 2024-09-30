@@ -46,4 +46,5 @@ body{
 #case_holder{
     width: 100%;
     padding: 0 var(--left-margin);
+    padding-bottom: 70px;
 }

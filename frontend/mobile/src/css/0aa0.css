@@ -48,3 +48,10 @@ body{
     padding: 0 var(--left-margin);
     padding-bottom: 70px;
 }
+
+#trigger{
+    width: 100%;
+    height: 20px;
+
+    background-color: red;
+}

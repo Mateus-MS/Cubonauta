@@ -11,6 +11,7 @@ import (
 	"text/template"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func Case_card(w http.ResponseWriter, r *http.Request) {
@@ -38,22 +39,48 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 		database := cli.Cli.Database("CFOP")
 		collection := database.Collection("F2L")
 
-		filter := bson.D{{"_id", getUrlCaseIndex(r)}}
+		var id int = getUrlCaseIndex(r)
+		var size int = getUrlCaseSize(r)
 
-		var result models.Case
-
-		err := collection.FindOne(context.TODO(), filter).Decode(&result)
-
+		count, err := collection.CountDocuments(context.TODO(), bson.D{})
 		if err != nil {
 			fmt.Println(err)
 		}
+
+		//If asking for a formula out of bounds
+		if id == int(count) {
+			return
+		}
+
+		var formula models.Case
+		var formulas []models.Case
+
+		for i := 0; i < size; i++ {
+			filter := bson.D{{"_id", id}}
+			err := collection.FindOne(context.TODO(), filter).Decode(&formula)
+
+			//If formula index bigger than stored ammount
+			if err == mongo.ErrNoDocuments {
+				break
+			}
+
+			//Generic error
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			formulas = append(formulas, formula)
+			id += 1
+		}
+
+		w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, id))
 
 		// Render the template
 		template, err := template.ParseFiles("./components/case_card/mobile.html")
 		if err != nil {
 			fmt.Println(err)
 		}
-		template.Execute(w, result)
+		template.Execute(w, formulas)
 	}
 
 	if strings.Contains(r.UserAgent(), "Windows") {
@@ -64,14 +91,25 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 }
 
 func getUrlCaseIndex(r *http.Request) int {
-
 	string_index := r.URL.Query().Get("case_id")
 	index, err := strconv.Atoi(string_index)
 
 	if err != nil {
 		fmt.Println("Erro ao converter case index")
+		return 0
 	}
 
 	return index
+}
 
+func getUrlCaseSize(r *http.Request) int {
+	string_size := r.URL.Query().Get("size")
+	size, err := strconv.Atoi(string_size)
+
+	if err != nil {
+		fmt.Println("Erro ao converter case size")
+		return 1
+	}
+
+	return size
 }

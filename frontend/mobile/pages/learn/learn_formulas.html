@@ -17,6 +17,8 @@
     <script src="/static/mobile/src/scripts/changeCategory.js" defer></script>
     <script src="/static/mobile/src/scripts/changeScreen.js"   defer></script>
 
+    <script src="/static/mobile/src/scripts/attIndex.js"   defer></script>
+
     <script src="/static/mobile/src/scripts/case_card/formulaCarrossel.js" defer></script>
     <script src="/static/mobile/src/scripts/case_card/actions.js"          defer></script>
 
@@ -65,35 +67,15 @@
             hx-get     = "https://cubonauta.com/components/case_card"
             hx-trigger = "load"
             hx-swap   = "outerHTML"
-            hx-vars   = "{case_id: 0}"
+            hx-vars   = "{case_id: 0, size: 3}"
         ></div>
 
         <div 
+            id         = "trigger"
+            hx-swap    = "beforebegin"
+            hx-trigger = "intersect threshold:0.1"
             hx-get     = "https://cubonauta.com/components/case_card"
-            hx-trigger = "load"
-            hx-swap   = "outerHTML"
-            hx-vars   = "{case_id: 1}"
-        ></div>
-
-        <div 
-            hx-get     = "https://cubonauta.com/components/case_card"
-            hx-trigger = "load"
-            hx-swap   = "outerHTML"
-            hx-vars   = "{case_id: 2}"
-        ></div>
-
-        <div 
-            hx-get     = "https://cubonauta.com/components/case_card"
-            hx-trigger = "load"
-            hx-swap   = "outerHTML"
-            hx-vars   = "{case_id: 3}"
-        ></div>
-
-        <div 
-            hx-get     = "https://cubonauta.com/components/case_card"
-            hx-trigger = "load"
-            hx-swap   = "outerHTML"
-            hx-vars   = "{case_id: 4}"
+            hx-vars    = "{case_id: formula_index, size: 3}"
         ></div>
 
     </div>

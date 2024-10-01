@@ -3,10 +3,14 @@ package cluster
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
 	"sync"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+
+	"github.com/joho/godotenv"
 )
 
 type DB_Conn struct {
@@ -18,11 +22,18 @@ var once sync.Once
 
 // Works as a private constructor in a Singleton
 func startConnection() *DB_Conn {
-	connStr := "mongodb+srv://ADM231518:Mk231518.@main.ifzu4vt.mongodb.net/?retryWrites=true&w=majority&appName=main"
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	user := os.Getenv("DB_USER")
+	pass := os.Getenv("DB_PASS")
+	connStr := fmt.Sprintf("mongodb+srv://%s:%s@main.ifzu4vt.mongodb.net/?retryWrites=true&w=majority&appName=main", user, pass)
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(connStr))
 
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal("Error while trying to connecto to DB")
 	}
 
 	return &DB_Conn{Cli: client}

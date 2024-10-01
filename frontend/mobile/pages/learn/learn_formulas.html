@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/mobile/src/css/category.css">
     <link rel="stylesheet" href="/static/mobile/src/css/actionbar.css">
     <link rel="stylesheet" href="/static/mobile/src/css/case_card.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/filterpopup.css">
 
     <script src="/static/mobile/src/scripts/placeholdersFunctions.js" defer></script>
 
@@ -22,6 +23,11 @@
     <script src="/static/mobile/src/scripts/case_card/formulaCarrossel.js" defer></script>
     <script src="/static/mobile/src/scripts/case_card/actions.js"          defer></script>
 
+    <script src="/static/mobile/src/scripts/filter/openFilter.js"          defer></script>
+    <script src="/static/mobile/src/scripts/filter/closeFilter.js"          defer></script>
+    <script src="/static/mobile/src/scripts/filter/switchFilterState.js"          defer></script>
+    <script src="/static/mobile/src/scripts/filter/selectFilter.js"          defer></script>
+ 
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 
 </head>
@@ -31,7 +37,7 @@
 
         <div class="holder">
             <p class="icons navbar__left__icon">&#xe805</p>
-            <p class="icons navbar__left__icon">&#xe806</p>
+            <p class="icons navbar__left__icon" onclick="switchFilterState()">&#xe806</p>
         </div>
 
         <div class="holder">
@@ -92,6 +98,32 @@
 
         <span id="profile_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe800;</span>
 
+    </div>
+
+    <div id="filter_popup" onclick="switchFilterState(event)">
+        <div id="filter_popup__holder">
+
+            <div id="filter_popup__holder__search">
+                <input id="filter_popup__holder__search__input" type="text" placeholder="Search here">
+                <span id="filter_popup__holder__search__button" class="icons">&#xe80A;</span>
+            </div>
+
+            <div id="filter_popup__holder__filters">
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Faster</div>
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Fridrich</div>
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter filter_popup__holder__filters__filter--selected">News</div>
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter filter_popup__holder__filters__filter--selected">Movements</div>
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Single Grip</div>
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Onde Handed</div>
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Blindfolded</div>
+            </div>
+
+            <div id="filter_popup__holder__options">
+                <div id="filter_popup__holder__options__cancel">Remove all</div>
+                <div id="filter_popup__holder__options__confirm">Apply</div>
+            </div>
+
+        </div>
     </div>
 
 </body>

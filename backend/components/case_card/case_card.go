@@ -79,7 +79,7 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, id))
 
-		if formulas[0].Name == "" {
+		if len(formulas[0].Formulas) == 0 {
 			return
 		}
 

@@ -11,7 +11,6 @@ import (
 	"text/template"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func Case_card(w http.ResponseWriter, r *http.Request) {
@@ -41,6 +40,7 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 
 		var id int = getUrlCaseIndex(r)
 		var size int = getUrlCaseSize(r)
+		var filters []string = getUrlCaseFilters(r)
 
 		count, err := collection.CountDocuments(context.TODO(), bson.D{})
 		if err != nil {
@@ -55,25 +55,33 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 		var formula models.Case
 		var formulas []models.Case
 
-		for i := 0; i < size; i++ {
-			filter := bson.D{{"_id", id}}
-			err := collection.FindOne(context.TODO(), filter).Decode(&formula)
-
-			//If formula index bigger than stored ammount
-			if err == mongo.ErrNoDocuments {
-				break
+		if filters[0] != "" && len(filters) > 0 {
+			for i := 0; i < size; i++ {
+				formula = cluster.GetFormulaFiltered("F2L", id, filters)
+				if formula.Name != "" {
+					formulas = append(formulas, formula)
+					id += 1
+				} else {
+					break
+				}
 			}
-
-			//Generic error
-			if err != nil {
-				fmt.Println(err)
+		} else {
+			for i := 0; i < size; i++ {
+				formula = cluster.GetFormula("F2L", id)
+				if formula.Name != "" {
+					formulas = append(formulas, formula)
+					id += 1
+				} else {
+					break
+				}
 			}
-
-			formulas = append(formulas, formula)
-			id += 1
 		}
 
 		w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, id))
+
+		if formulas[0].Name == "" {
+			return
+		}
 
 		// Render the template
 		template, err := template.ParseFiles("./components/case_card/mobile.html")
@@ -112,4 +120,8 @@ func getUrlCaseSize(r *http.Request) int {
 	}
 
 	return size
+}
+
+func getUrlCaseFilters(r *http.Request) []string {
+	return strings.Split(r.URL.Query().Get("filters"), ":")
 }

@@ -34,6 +34,8 @@ class FilterList{
 var temp_filters = new FilterList();
 var save_filters = new FilterList();
 
+var strg_filters = "";
+
 function selectFilter(element){
 
     if(element.classList.contains("filter_popup__holder__filters__filter--selected")){
@@ -80,6 +82,11 @@ function applyFilters(){
 
     temp_filters = new FilterList();
 
+    updateFilterString()
+
+    //Att elements on screen
+    callNewCards()
+
 }
 
 function addIfAlreadyOnRemove(list, filter){
@@ -104,4 +111,26 @@ function unSelectAllFilters(){
 function getFiltersElements(){
     let parent = document.getElementById("filter_popup__holder__filters");
     return parent.children;
+}
+
+function updateFilterString(){
+    strg_filters = ""
+
+    for(let i = 0; i < save_filters.filters.length; i++){
+        strg_filters += save_filters.filters[i];
+        if(i < save_filters.filters.length - 1){
+            strg_filters += ":";
+        }
+    }
+}
+
+function callNewCards(){
+    formula_index = 0;
+
+    let url = `https://cubonauta.com/components/case_card?case_id=${encodeURIComponent(formula_index)}&size=${encodeURIComponent(3)}&filters=${encodeURIComponent(strg_filters)}`
+
+    htmx.ajax("GET", url, {
+        target: "#case_holder__bag",
+        swap  : "innerHTML" 
+    })
 }

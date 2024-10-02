@@ -69,19 +69,24 @@
 
     <div id="case_holder">
 
-        <div 
-            hx-get     = "https://cubonauta.com/components/case_card"
-            hx-trigger = "load"
-            hx-swap   = "outerHTML"
-            hx-vars   = "{case_id: 0, size: 3}"
-        ></div>
+        <div id="case_holder__bag">
+
+            <div 
+                hx-get     = "https://cubonauta.com/components/case_card"
+                hx-trigger = "load"
+                hx-swap   = "outerHTML"
+                hx-vars   = "{case_id: 0, size: 3, filters:strg_filters}"
+            ></div>
+
+        </div>
 
         <div 
             id         = "trigger"
-            hx-swap    = "beforebegin"
+            hx-target  = "#case_holder__bag"
+            hx-swap    = "beforeend"
             hx-trigger = "intersect threshold:0.1"
             hx-get     = "https://cubonauta.com/components/case_card"
-            hx-vars    = "{case_id: formula_index, size: 3}"
+            hx-vars    = "{case_id: formula_index, size: 3, filters:strg_filters}"
         ></div>
 
     </div>

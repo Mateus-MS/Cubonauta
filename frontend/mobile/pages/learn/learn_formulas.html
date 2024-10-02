@@ -111,16 +111,16 @@
             <div id="filter_popup__holder__filters">
                 <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Faster</div>
                 <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Fridrich</div>
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter filter_popup__holder__filters__filter--selected">News</div>
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter filter_popup__holder__filters__filter--selected">Movements</div>
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">News</div>
+                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Movements</div>
                 <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Single Grip</div>
                 <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Onde Handed</div>
                 <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Blindfolded</div>
             </div>
 
             <div id="filter_popup__holder__options">
-                <div id="filter_popup__holder__options__cancel">Remove all</div>
-                <div id="filter_popup__holder__options__confirm">Apply</div>
+                <div id="filter_popup__holder__options__cancel" onclick="unSelectAllFilters()">Remove all</div>
+                <div id="filter_popup__holder__options__confirm" onclick="applyFilters()">Apply</div>
             </div>
 
         </div>

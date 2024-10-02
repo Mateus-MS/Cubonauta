@@ -7,6 +7,7 @@ function switchFilterState(event){
     }
 
     if(filterState){
+        unSelectFilters()
         closeFilter()
         filterState = !filterState
         return

@@ -67,7 +67,7 @@
     border: none;
     outline: none;
 
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: var(--main-color);
 
     caret-color: var(--fourty-color);
@@ -108,8 +108,8 @@
 .filter_popup__holder__filters__filter{
 
     border: 2px solid var(--secondary-color);
-    padding: 7px 20px;
-    font-size: 1.1em;
+    padding: 5px 17px;
+    font-size: .9em;
     font-weight: bold;
 
     width: fit-content;
@@ -119,10 +119,15 @@
 
     color: var(--secondary-color);
 
-    margin: 8px 5px;
+    margin: 4px 6px;
 
     transition: all ease-in-out .3s;
 
+}
+
+.filter_popup__holder__filters__filter:active{
+    transform: scale(.95);
+    background-color: var(--secondary-color);
 }
 
 .filter_popup__holder__filters__filter--selected{
@@ -172,6 +177,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: background-color .2s, transform .2s;
+}
+
+#filter_popup__holder__options__confirm:active{
+    background-color: var(--secondary-color);
+    transform: scale(.95);
 }
 
 /* #endregion */

@@ -1,4 +1,4 @@
-<div id="filter_popup__holder__filters">
+<div id="filter_popup__holder__filters" hx-on::load="restoreFilterStateInCache()">
     {{ range . }}
         <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter"> {{ . }} </div>
     {{ end }}

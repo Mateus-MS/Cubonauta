@@ -1,9 +1,7 @@
 package main
 
 import (
-	casecard "Cubonauta/components/case_card"
-	"Cubonauta/components/filter_tags"
-
+	"Cubonauta/components"
 	"Cubonauta/routes"
 	"fmt"
 	"net/http"
@@ -28,8 +26,8 @@ func main() {
 
 	//components Handle
 
-	router.HandleFunc("/components/case_card", casecard.Case_card)
-	router.HandleFunc("/components/filter_tags", filter_tags.Filter_tags)
+	router.HandleFunc("/components/case_card", components.Case_card)
+	router.HandleFunc("/components/filter_tags", components.Filter_tags)
 
 	startServer(router)
 

@@ -1,4 +1,4 @@
-package casecard
+package components
 
 import (
 	"Cubonauta/cluster"

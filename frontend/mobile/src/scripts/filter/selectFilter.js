@@ -86,7 +86,8 @@ function applyFilters(){
 
     //Att elements on screen
     callNewCards()
-
+    
+    saveFilterStateInCache()
 }
 
 function addIfAlreadyOnRemove(list, filter){
@@ -113,17 +114,6 @@ function getFiltersElements(){
     return parent.children;
 }
 
-function updateFilterString(){
-    strg_filters = ""
-
-    for(let i = 0; i < save_filters.filters.length; i++){
-        strg_filters += save_filters.filters[i];
-        if(i < save_filters.filters.length - 1){
-            strg_filters += ":";
-        }
-    }
-}
-
 function callNewCards(){
     formula_index = 0;
 
@@ -133,4 +123,16 @@ function callNewCards(){
         target: "#case_holder__bag",
         swap  : "innerHTML" 
     })
+}
+
+function updateFilterString(){
+
+    strg_filters = ""
+
+    for(let i = 0; i < save_filters.filters.length; i++){
+        strg_filters += save_filters.filters[i];
+        if(i < save_filters.filters.length - 1){
+            strg_filters += ":";
+        }
+    }
 }

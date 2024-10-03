@@ -60,3 +60,8 @@ body{
     overflow: hidden;
     height: 100dvh;
 }
+
+#initial_formulas{
+    height: 80dvh;
+    background-color: red;
+}

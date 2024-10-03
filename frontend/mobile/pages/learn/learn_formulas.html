@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubonauta</title>
 
+    <script src="/static/mobile/src/scripts/filter/filterCache.js" defer></script>
+
     <link rel="stylesheet" href="/static/mobile/src/css/0aa0.css">
     <link rel="stylesheet" href="/static/mobile/src/css/navbar.css">
     <link rel="stylesheet" href="/static/mobile/src/css/category.css">
@@ -32,6 +34,28 @@
 
 </head>
 <body>
+
+    <div id="filter_popup" onclick="switchFilterState(event)">
+        <div id="filter_popup__holder">
+
+            <div id="filter_popup__holder__search">
+                <input id="filter_popup__holder__search__input" type="text" placeholder="Search here">
+                <span id="filter_popup__holder__search__button" class="icons">&#xe80A;</span>
+            </div>
+
+            <div 
+                hx-get     = "https://cubonauta.com/components/filter_tags"
+                hx-trigger = "load"
+                hx-swap    = "outerHTML"
+            ></div>
+
+            <div id="filter_popup__holder__options">
+                <div id="filter_popup__holder__options__cancel" onclick="unSelectAllFilters()">Remove all</div>
+                <div id="filter_popup__holder__options__confirm" onclick="applyFilters()">Apply</div>
+            </div>
+
+        </div>
+    </div>
 
     <div id="navbar">
 
@@ -69,24 +93,15 @@
 
     <div id="case_holder">
 
-        <div id="case_holder__bag">
-
-            <div 
-                hx-get     = "https://cubonauta.com/components/case_card"
-                hx-trigger = "load"
-                hx-swap   = "outerHTML"
-                hx-vars   = "{case_id: 0, size: 3, filters:strg_filters}"
-            ></div>
-
-        </div>
+        <div id="case_holder__bag"></div>
 
         <div 
             id         = "trigger"
             hx-target  = "#case_holder__bag"
             hx-swap    = "beforeend"
-            hx-trigger = "intersect threshold:0.1"
+            hx-trigger = "load delay:500ms, intersect threshold:0.1"
             hx-get     = "https://cubonauta.com/components/case_card"
-            hx-vars    = "{case_id: formula_index, size: 3, filters:strg_filters}"
+            hx-vars    = "{case_id: formula_index, size: 6, filters:strg_filters}"
         ></div>
 
     </div>
@@ -103,28 +118,6 @@
 
         <span id="profile_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe800;</span>
 
-    </div>
-
-    <div id="filter_popup" onclick="switchFilterState(event)">
-        <div id="filter_popup__holder">
-
-            <div id="filter_popup__holder__search">
-                <input id="filter_popup__holder__search__input" type="text" placeholder="Search here">
-                <span id="filter_popup__holder__search__button" class="icons">&#xe80A;</span>
-            </div>
-
-            <div 
-                hx-get     = "https://cubonauta.com/components/filter_tags"
-                hx-trigger = "load"
-                hx-swap   = "outerHTML"
-            ></div>
-
-            <div id="filter_popup__holder__options">
-                <div id="filter_popup__holder__options__cancel" onclick="unSelectAllFilters()">Remove all</div>
-                <div id="filter_popup__holder__options__confirm" onclick="applyFilters()">Apply</div>
-            </div>
-
-        </div>
     </div>
 
 </body>

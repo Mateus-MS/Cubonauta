@@ -1,4 +1,4 @@
-package filter_tags
+package components
 
 import (
 	"Cubonauta/cluster"

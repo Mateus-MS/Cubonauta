@@ -113,15 +113,11 @@
                 <span id="filter_popup__holder__search__button" class="icons">&#xe80A;</span>
             </div>
 
-            <div id="filter_popup__holder__filters">
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Faster</div>
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Fridrich</div>
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">News</div>
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Movements</div>
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Single Grip</div>
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Onde Handed</div>
-                <div onclick="selectFilter(this)" class="filter_popup__holder__filters__filter">Blindfolded</div>
-            </div>
+            <div 
+                hx-get     = "https://cubonauta.com/components/filter_tags"
+                hx-trigger = "load"
+                hx-swap   = "outerHTML"
+            ></div>
 
             <div id="filter_popup__holder__options">
                 <div id="filter_popup__holder__options__cancel" onclick="unSelectAllFilters()">Remove all</div>

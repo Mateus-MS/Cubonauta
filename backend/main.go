@@ -1,14 +1,14 @@
 package main
 
 import (
+	casecard "Cubonauta/components/case_card"
+	"Cubonauta/components/filter_tags"
+
+	"Cubonauta/routes"
 	"fmt"
 	"net/http"
 
-	components "Cubonauta/components/case_card"
-	"Cubonauta/routes"
-
 	/*TEMPORARIO*/
-
 	"golang.org/x/crypto/acme/autocert"
 )
 
@@ -28,7 +28,8 @@ func main() {
 
 	//components Handle
 
-	router.HandleFunc("/components/case_card", components.Case_card)
+	router.HandleFunc("/components/case_card", casecard.Case_card)
+	router.HandleFunc("/components/filter_tags", filter_tags.Filter_tags)
 
 	startServer(router)
 

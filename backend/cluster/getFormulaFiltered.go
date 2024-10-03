@@ -13,7 +13,6 @@ func GetFormulaFiltered(method string, id int, filters []string) models.Case {
 	connection := GetInstance()
 
 	var collection *mongo.Collection = connection.Cli.Database("CFOP").Collection("F2L")
-	//Convert Filters to Tags format
 	var tags bson.A = getTags(filters)
 	var pipeline mongo.Pipeline = getPipeline(id, tags)
 
@@ -25,9 +24,28 @@ func GetFormulaFiltered(method string, id int, filters []string) models.Case {
 	return result
 }
 
+// Compare te receivede tag with a list to see if it is valid, if it is, it can be used as filter in search
+func validateTags(filter string) bool {
+	filters := GetFilters()
+	for i := 0; i < len(filters); i++ {
+		if filter == filters[i] {
+			return true
+		}
+	}
+	return false
+}
+
+// Validate all tags received by http request and create a bson if is valid
 func getTags(filters []string) bson.A {
-	var tags bson.A = make(bson.A, len(filters))
-	for index, item := range filters {
+	var valids []string
+	for i := 0; i < len(filters); i++ {
+		if validateTags(filters[i]) {
+			valids = append(valids, filters[i])
+		}
+	}
+
+	var tags bson.A = make(bson.A, len(valids))
+	for index, item := range valids {
 		tags[index] = item
 	}
 	return tags

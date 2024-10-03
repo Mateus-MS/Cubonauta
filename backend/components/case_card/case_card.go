@@ -1,4 +1,4 @@
-package components
+package casecard
 
 import (
 	"Cubonauta/cluster"
@@ -61,8 +61,6 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 				if formula.Name != "" {
 					formulas = append(formulas, formula)
 					id += 1
-				} else {
-					break
 				}
 			}
 		} else {
@@ -71,8 +69,6 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 				if formula.Name != "" {
 					formulas = append(formulas, formula)
 					id += 1
-				} else {
-					break
 				}
 			}
 		}

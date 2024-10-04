@@ -18,7 +18,6 @@ function createFilterStringFromCache(){
     }
 
     return str
-
 }
 
 function restoreFilterStateInCache(){
@@ -52,7 +51,7 @@ document.body.addEventListener("htmx:configRequest", function(e){
 
     //If the object is empty
     if(e.detail.parameters.filters == ""){
-        e.detail.parameters = {case_id: formula_index, size: 6, filters: createFilterStringFromCache()}
+        e.detail.parameters = {case_id: formula_index, size: 6, filters: createFilterStringFromCache(), category: getCategoryInCache()}
     }
 
 });

@@ -1,7 +1,6 @@
-function changeCategory(element){
-
-    //Se o elemento clicado já estiver selecionado
-    if(element.classList.contains("category__option--active")){
+function switchCategory(element){
+     //Se o elemento clicado já estiver selecionado
+     if(element.classList.contains("category__option--active")){
         return;
     }
 
@@ -18,6 +17,8 @@ function changeCategory(element){
     //Adiciona destaque no elemento clicado
     element.classList.add("category__option--active")
 
-    console.log("Trocando a categoria")
+    category = element.innerText;
+    saveCategoryInCache()
 
+    callNewCards()
 }

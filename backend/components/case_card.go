@@ -35,12 +35,13 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 
 		cli := cluster.GetInstance()
 
-		database := cli.Cli.Database("CFOP")
-		collection := database.Collection("F2L")
-
 		var id int = getUrlCaseIndex(r)
 		var size int = getUrlCaseSize(r)
 		var filters []string = getUrlCaseFilters(r)
+		var category string = getUrlCaseCategory(r)
+
+		database := cli.Cli.Database("CFOP")
+		collection := database.Collection(category)
 
 		count, err := collection.CountDocuments(context.TODO(), bson.D{})
 		if err != nil {
@@ -48,24 +49,27 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 		}
 
 		//If asking for a formula out of bounds
-		if id == int(count) {
+		if id >= int(count) {
 			return
 		}
+
+		//fmt.Println(id, size, filters, category)
 
 		var formula models.Case
 		var formulas []models.Case
 
 		if filters[0] != "" && len(filters) > 0 {
 			for i := 0; i < size; i++ {
-				formula = cluster.GetFormulaFiltered("F2L", id, filters)
-				if formula.Name != "" {
+				formula, err := cluster.GetFormulaFiltered(category, id, filters)
+
+				if err == 0 {
 					formulas = append(formulas, formula)
 					id += 1
 				}
 			}
 		} else {
 			for i := 0; i < size; i++ {
-				formula = cluster.GetFormula("F2L", id)
+				formula = cluster.GetFormula(category, id)
 				if formula.Name != "" {
 					formulas = append(formulas, formula)
 					id += 1
@@ -75,7 +79,7 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 
 		w.Header().Set("Hx-Trigger", fmt.Sprintf(`{"att-ID" : "%d"}`, id))
 
-		if len(formulas[0].Formulas) == 0 {
+		if len(formulas) == 0 {
 			return
 		}
 
@@ -92,6 +96,10 @@ func Case_card(w http.ResponseWriter, r *http.Request) {
 		template.Execute(w, nil)
 	}
 
+}
+
+func removeFromArray(array []models.Case, index int) []models.Case {
+	return append(array[:index], array[index+1:]...)
 }
 
 func getUrlCaseIndex(r *http.Request) int {
@@ -120,4 +128,14 @@ func getUrlCaseSize(r *http.Request) int {
 
 func getUrlCaseFilters(r *http.Request) []string {
 	return strings.Split(r.URL.Query().Get("filters"), ":")
+}
+
+func getUrlCaseCategory(r *http.Request) string {
+	category := r.URL.Query().Get("category")
+
+	if category == "" {
+		return "F2L"
+	}
+
+	return category
 }

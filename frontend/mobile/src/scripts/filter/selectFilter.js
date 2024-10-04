@@ -117,7 +117,7 @@ function getFiltersElements(){
 function callNewCards(){
     formula_index = 0;
 
-    let url = `https://cubonauta.com/components/case_card?case_id=${encodeURIComponent(formula_index)}&size=${encodeURIComponent(3)}&filters=${encodeURIComponent(strg_filters)}`
+    let url = `https://cubonauta.com/components/case_card?case_id=${encodeURIComponent(formula_index)}&size=${encodeURIComponent(3)}&filters=${encodeURIComponent(strg_filters)}&category=${encodeURIComponent(category)}`
 
     htmx.ajax("GET", url, {
         target: "#case_holder__bag",

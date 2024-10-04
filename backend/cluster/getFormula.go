@@ -8,10 +8,10 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func GetFormula(method string, id int) models.Case {
+func GetFormula(category string, id int) models.Case {
 	connection := GetInstance()
 
-	var collection *mongo.Collection = connection.Cli.Database("CFOP").Collection(method)
+	var collection *mongo.Collection = connection.Cli.Database("CFOP").Collection(category)
 
 	var result bson.M
 	collection.FindOne(context.TODO(), bson.M{"_id": id}).Decode(&result)

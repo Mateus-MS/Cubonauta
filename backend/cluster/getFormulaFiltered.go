@@ -3,25 +3,30 @@ package cluster
 import (
 	"Cubonauta/models"
 	"context"
+	"fmt"
 	"log"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func GetFormulaFiltered(method string, id int, filters []string) models.Case {
+func GetFormulaFiltered(category string, id int, filters []string) (models.Case, int) {
 	connection := GetInstance()
 
-	var collection *mongo.Collection = connection.Cli.Database("CFOP").Collection("F2L")
+	var collection *mongo.Collection = connection.Cli.Database("CFOP").Collection(category)
 	var tags bson.A = getTags(filters)
 	var pipeline mongo.Pipeline = getPipeline(id, tags)
 
 	cursor, _ := collection.Aggregate(context.TODO(), pipeline)
 	defer cursor.Close(context.TODO())
 
-	var result models.Case = getResult(cursor)
+	result, err := getResult(cursor)
 
-	return result
+	if err == 1 {
+		return result, err
+	}
+
+	return result, 0
 }
 
 // Compare te receivede tag with a list to see if it is valid, if it is, it can be used as filter in search
@@ -72,7 +77,7 @@ func getPipeline(id int, tags bson.A) mongo.Pipeline {
 	}
 }
 
-func getResult(cursor *mongo.Cursor) models.Case {
+func getResult(cursor *mongo.Cursor) (models.Case, int) {
 	var result bson.M
 
 	if cursor.Next(context.TODO()) {
@@ -82,9 +87,9 @@ func getResult(cursor *mongo.Cursor) models.Case {
 			log.Fatal("Error during unmarshaling the document in getResult")
 		}
 		var result_object = ConvertBsonToObject(result)
-		return result_object
+		return result_object, 0
 	} else {
-		log.Fatal("Document not founded")
-		return models.Case{}
+		fmt.Println("Document not founded")
+		return models.Case{}, 1
 	}
 }

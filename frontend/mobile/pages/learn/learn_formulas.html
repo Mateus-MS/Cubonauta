@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubonauta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="/static/mobile/src/scripts/filter/filterCache.js" defer></script>
-
+    
     <link rel="stylesheet" href="/static/mobile/src/css/0aa0.css">
     <link rel="stylesheet" href="/static/mobile/src/css/navbar.css">
     <link rel="stylesheet" href="/static/mobile/src/css/category.css">
@@ -15,21 +14,24 @@
     <link rel="stylesheet" href="/static/mobile/src/css/filterpopup.css">
 
     <script src="/static/mobile/src/scripts/placeholdersFunctions.js" defer></script>
-
+    
     <script src="/static/mobile/src/scripts/changePage.js"     defer></script>
-    <script src="/static/mobile/src/scripts/changeCategory.js" defer></script>
     <script src="/static/mobile/src/scripts/changeScreen.js"   defer></script>
-
+    
     <script src="/static/mobile/src/scripts/attIndex.js"   defer></script>
-
+    
     <script src="/static/mobile/src/scripts/case_card/formulaCarrossel.js" defer></script>
     <script src="/static/mobile/src/scripts/case_card/actions.js"          defer></script>
-
+    
     <script src="/static/mobile/src/scripts/filter/openFilter.js"          defer></script>
     <script src="/static/mobile/src/scripts/filter/closeFilter.js"          defer></script>
     <script src="/static/mobile/src/scripts/filter/switchFilterState.js"          defer></script>
     <script src="/static/mobile/src/scripts/filter/selectFilter.js"          defer></script>
- 
+    <script src="/static/mobile/src/scripts/filter/filterCache.js" defer></script>
+
+    <script src="/static/mobile/src/scripts/category/switchCategory.js" defer></script>
+    <script src="/static/mobile/src/scripts/category/categoryCache.js" defer></script>
+    
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 
 </head>
@@ -77,15 +79,15 @@
 
     <div id="category">
 
-        <div class="category__option category__option--active" onclick="changeCategory(this)">
+        <div class="category__option category__option--active" onclick="switchCategory(this)">
             <span>F2L</span>
         </div>
         
-        <div class="category__option" onclick="changeCategory(this)">
+        <div class="category__option" onclick="switchCategory(this)">
             <span>OLL</span>
         </div>
         
-        <div class="category__option" onclick="changeCategory(this)">
+        <div class="category__option" onclick="switchCategory(this)">
             <span>PLL</span>
         </div>
 
@@ -101,7 +103,7 @@
             hx-swap    = "beforeend"
             hx-trigger = "load delay:500ms, intersect threshold:0.1"
             hx-get     = "https://cubonauta.com/components/case_card"
-            hx-vars    = "{case_id: formula_index, size: 6, filters:strg_filters}"
+            hx-vars    = "{case_id: formula_index, size: 6, filters:strg_filters, category:category}"
         ></div>
 
     </div>

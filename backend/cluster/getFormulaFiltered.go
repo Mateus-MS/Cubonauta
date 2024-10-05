@@ -2,11 +2,12 @@ package cluster
 
 import (
 	"Cubonauta/models"
+	"Cubonauta/utils"
 	"context"
 	"fmt"
-	"log"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -77,19 +78,29 @@ func getPipeline(id int, tags bson.A) mongo.Pipeline {
 	}
 }
 
+/*
+*
+0 = Success
+1 = Formulas array empty
+2 = Document not founded in mongo DB
+*/
 func getResult(cursor *mongo.Cursor) (models.Case, int) {
 	var result bson.M
 
 	if cursor.Next(context.TODO()) {
-		//If found any formula
 		err := cursor.Decode(&result)
 		if err != nil {
-			log.Fatal("Error during unmarshaling the document in getResult")
+			fmt.Println("Error during unmarshaling the document in getResult")
 		}
-		var result_object = ConvertBsonToObject(result)
+
+		if len(result["Formulas"].(primitive.A)) == 0 {
+			return models.Case{}, 1
+		}
+
+		var result_object = utils.ConvertBsonToObject(result)
 		return result_object, 0
 	} else {
 		fmt.Println("Document not founded")
-		return models.Case{}, 1
+		return models.Case{}, 2
 	}
 }

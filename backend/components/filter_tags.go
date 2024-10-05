@@ -2,8 +2,7 @@ package components
 
 import (
 	"Cubonauta/cluster"
-	"fmt"
-	"html/template"
+	"Cubonauta/utils"
 	"net/http"
 	"strings"
 )
@@ -27,12 +26,7 @@ func Filter_tags(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if strings.Contains(r.UserAgent(), "Mobile") {
-		// Render the template
-		template, err := template.ParseFiles("./components/filter_tags/mobile.html")
-		if err != nil {
-			fmt.Println(err)
-		}
-		template.Execute(w, cluster.GetFilters())
+		utils.RenderTemplate[[]string]("./components/filter_tags/mobile.html", w, cluster.GetFilters())
 	}
 
 }

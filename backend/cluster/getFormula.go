@@ -2,6 +2,7 @@ package cluster
 
 import (
 	"Cubonauta/models"
+	"Cubonauta/utils"
 	"context"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -15,13 +16,5 @@ func GetFormula(category string, id int) models.Case {
 
 	var result bson.M
 	collection.FindOne(context.TODO(), bson.M{"_id": id}).Decode(&result)
-	return ConvertBsonToObject(result)
-}
-
-func ConvertBsonToObject(formula bson.M) models.Case {
-	var obj models.Case
-	bsonBytes, _ := bson.Marshal(formula)
-	bson.Unmarshal(bsonBytes, &obj)
-
-	return obj
+	return utils.ConvertBsonToObject(result)
 }

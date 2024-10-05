@@ -6,7 +6,11 @@ function saveCategoryInCache(){
 
 function getCategoryInCache(){
     let cache = JSON.parse(localStorage.getItem("category_selected")); 
-    return cache === null ? "F2L" : cache;
+    if(cache === null){
+        document.getElementById("category").children[0].classList.add("category__option--active")
+        return "F2L"
+    }
+    return cache;
 }
 
 function restoreCategoryInCache(){

@@ -1,5 +1,5 @@
 {{ range . }}
-    <div class="case_card">
+    <div class="case_card" onclick="switchCasePopup(this)">
 
         <p class="case_card__case_name"> {{ .Name }} </p>
         <div class="case_card__case_container">

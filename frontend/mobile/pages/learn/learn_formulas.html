@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/static/mobile/src/css/actionbar.css">
     <link rel="stylesheet" href="/static/mobile/src/css/case_card.css">
     <link rel="stylesheet" href="/static/mobile/src/css/filterpopup.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/case_popup.css">
 
     <script src="/static/mobile/src/scripts/placeholdersFunctions.js" defer></script>
     
@@ -31,6 +32,10 @@
 
     <script src="/static/mobile/src/scripts/category/switchCategory.js" defer></script>
     <script src="/static/mobile/src/scripts/category/categoryCache.js" defer></script>
+
+    <script src="/static/mobile/src/scripts/case/createFormulaSlider.js" defer></script>
+    <script src="/static/mobile/src/scripts/case/switchCasePopup.js" defer></script>
+    <script src="/static/mobile/src/scripts/case/closeCasePopup.js" defer></script>
     
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 
@@ -59,11 +64,28 @@
         </div>
     </div>
 
+    <div id="case_popup" onclick="closeCasePopup(event)">
+        <div id="case_popup__holder">
+            <div id="case_popup__holder__display">
+                <div id="case_popup__holder__display__slider">
+                </div>
+            </div>
+
+            <div id="case_popup__holder__canvas"></div>
+
+            <div id="case_popup__holder__controlls">
+                <p id="case_popup__holder__controlls__prev" class="icons">&#xf011;</p>
+                <p id="case_popup__holder__controlls__play" class="icons">&#xe809;</p>
+                <p id="case_popup__holder__controlls__next" class="icons">&#xf010;</p>
+            </div>
+        </div>
+    </div>
+
     <div id="navbar">
 
         <div class="holder">
-            <p class="icons navbar__left__icon">&#xe805</p>
-            <p class="icons navbar__left__icon" onclick="switchFilterState()">&#xe806</p>
+            <p class="icons navbar__left__icon">&#xe805;</p>
+            <p class="icons navbar__left__icon" onclick="switchFilterState()">&#xe806;</p>
         </div>
 
         <div class="holder">

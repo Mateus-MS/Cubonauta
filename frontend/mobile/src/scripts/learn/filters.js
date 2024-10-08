@@ -214,6 +214,16 @@ var filters = {
                 }
             }
 
+            
+            let after = document.getElementById("navbar__left__icon__filter")
+            let temp  = filters.strg_filters.split(":")
+            if(temp.length > 0){
+                after.setAttribute("data-filter-visible", "true")
+            } else {
+                after.setAttribute("data-filter-visible", "false")
+            }
+            after.setAttribute("data-filter-count", `${temp.length}`)
+
             return filters.strg_filters
         }
     }

@@ -1,0 +1,7 @@
+#navbar{
+    height: 95px;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    padding: var(--vertical-spacing) var(--horizontal-spacing) var(--vertical-spacing) var(--horizontal-spacing);
+}

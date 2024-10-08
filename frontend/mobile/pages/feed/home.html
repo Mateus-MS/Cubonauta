@@ -6,9 +6,13 @@
 
     <link rel="stylesheet" href="/static/mobile/src/css/0aa0.css">
     <link rel="stylesheet" href="/static/mobile/src/css/navbar.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/navbarHome.css">
     <link rel="stylesheet" href="/static/mobile/src/css/actionbar.css">
 
+    <link rel="stylesheet" href="/static/mobile/src/css/post.css">
+
     <title>Cubonauta</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 </head>
 <body>
     
@@ -29,7 +33,33 @@
 
     </div>
 
-    
+    <div id="post_holder">
+        <div
+            hx-get     = "https://cubonauta.com/components/post"
+            hx-trigger = "load"
+            hx-swap    = "outerHTML"
+        >
+        </div>
+        <div
+            hx-get     = "https://cubonauta.com/components/post"
+            hx-trigger = "load"
+            hx-swap    = "outerHTML"
+        >
+        </div>
+        <div
+            hx-get     = "https://cubonauta.com/components/post"
+            hx-trigger = "load"
+            hx-swap    = "outerHTML"
+        >
+        </div>
+        <div
+            hx-get     = "https://cubonauta.com/components/post"
+            hx-trigger = "load"
+            hx-swap    = "outerHTML"
+        >
+        </div>
+    </div>
+
 
     <div id="actionbar">
 

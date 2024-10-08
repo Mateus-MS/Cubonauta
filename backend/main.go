@@ -29,6 +29,7 @@ func main() {
 
 	router.HandleFunc("/components/case_card", components.Case_card)
 	router.HandleFunc("/components/filter_tags", components.Filter_tags)
+	router.HandleFunc("/components/post", components.Post)
 
 	startServer(router)
 

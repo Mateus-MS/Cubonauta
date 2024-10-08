@@ -8,6 +8,7 @@
 
     display: flex;
     justify-content: space-between;
+    z-index: 2;
 
     padding: var(--vertical-spacing) var(--horizontal-spacing) 0 var(--horizontal-spacing);
 
@@ -89,7 +90,7 @@
     font-weight: bold;
     color: var(--main-color);
     font-size: 1.3em;
-    margin-right: 15px;
+    margin-right: 10px;
 }
 
 /* #region Filter selection indicator */

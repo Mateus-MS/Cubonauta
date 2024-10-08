@@ -66,3 +66,33 @@
 
     margin: 0 10px;
 }
+
+#navbar__left__icon__filter::after{
+    visibility: hidden;
+
+    content: attr(data-filter-count);
+    font-size: 10px;
+    font-family: Arial;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+    color: white;
+    width: 16px;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    border: 3px solid white;
+    background-color: var(--main-color);
+
+    position: relative;
+    transform: translate(-12px, -12px);
+
+}
+
+#navbar__left__icon__filter[data-filter-visible="false"]::after {
+    visibility: hidden;
+}
+
+#navbar__left__icon__filter[data-filter-visible="true"]::after {
+    visibility: visible;
+}

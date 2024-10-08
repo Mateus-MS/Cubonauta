@@ -78,13 +78,13 @@ var filters = {
     },
     
     applyFilters: function(){
-        let filters = this.getFiltersElement();
+        let elements = this.getFiltersElement();
 
         this.save_filters = []
 
-        for(let i = 0; i < filters.length; i++){
-            if(filters[i].classList.contains("filter_popup__holder__filters__filter--selected")){
-                this.addToList(this.save_filters, filters[i].innerText)
+        for(let i = 0; i < elements.length; i++){
+            if(elements[i].classList.contains("filter_popup__holder__filters__filter--selected")){
+                this.addToList(this.save_filters, elements[i].innerText)
             }
         }
 
@@ -93,6 +93,14 @@ var filters = {
         this.updateFiltersString()
         this.callNewCards()
         this.cache.save()
+
+        let after = document.getElementById("navbar__left__icon__filter")
+        if(filters.save_filters.length > 0){
+            after.setAttribute("data-filter-visible", "true")
+        } else {
+            after.setAttribute("data-filter-visible", "false")
+        }
+        after.setAttribute("data-filter-count", `${filters.save_filters.length}`)
     },
 
     callNewCards: function(){

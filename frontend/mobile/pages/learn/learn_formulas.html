@@ -4,45 +4,28 @@
     <meta charset="UTF-8">
     <title>Cubonauta</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     
     <link rel="stylesheet" href="/static/mobile/src/css/0aa0.css">
     <link rel="stylesheet" href="/static/mobile/src/css/navbar.css">
-    <link rel="stylesheet" href="/static/mobile/src/css/category.css">
     <link rel="stylesheet" href="/static/mobile/src/css/actionbar.css">
+    
+    <link rel="stylesheet" href="/static/mobile/src/css/category.css">
     <link rel="stylesheet" href="/static/mobile/src/css/case_card.css">
     <link rel="stylesheet" href="/static/mobile/src/css/filterpopup.css">
     <link rel="stylesheet" href="/static/mobile/src/css/case_popup.css">
-
-    <script src="/static/mobile/src/scripts/placeholdersFunctions.js" defer></script>
-    
-    <script src="/static/mobile/src/scripts/changePage.js"     defer></script>
-    <script src="/static/mobile/src/scripts/changeScreen.js"   defer></script>
     
     <script src="/static/mobile/src/scripts/attIndex.js"   defer></script>
     
-    <script src="/static/mobile/src/scripts/case_card/formulaCarrossel.js" defer></script>
-    <script src="/static/mobile/src/scripts/case_card/actions.js"          defer></script>
-    
-    <script src="/static/mobile/src/scripts/filter/openFilter.js"          defer></script>
-    <script src="/static/mobile/src/scripts/filter/closeFilter.js"          defer></script>
-    <script src="/static/mobile/src/scripts/filter/switchFilterState.js"          defer></script>
-    <script src="/static/mobile/src/scripts/filter/selectFilter.js"          defer></script>
-    <script src="/static/mobile/src/scripts/filter/filterCache.js" defer></script>
+    <script src="/static/mobile/src/scripts/learn/filters.js"   defer></script>
+    <script src="/static/mobile/src/scripts/learn/category.js"  defer></script>
+    <script src="/static/mobile/src/scripts/learn/case_card.js" defer></script>
+    <script src="/static/mobile/src/scripts/learn/formulaPopup.js" defer></script>
 
-    <script src="/static/mobile/src/scripts/category/switchCategory.js" defer></script>
-    <script src="/static/mobile/src/scripts/category/categoryCache.js" defer></script>
-
-    <script src="/static/mobile/src/scripts/case/createFormulaSlider.js" defer></script>
-    <script src="/static/mobile/src/scripts/case/switchCasePopup.js" defer></script>
-    <script src="/static/mobile/src/scripts/case/closeCasePopup.js" defer></script>
-    
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
-
 </head>
 <body>
 
-    <div id="filter_popup" onclick="switchFilterState(event)">
+    <div id="filter_popup" onclick="filters.switch(event)">
         <div id="filter_popup__holder">
 
             <div id="filter_popup__holder__search">
@@ -57,14 +40,14 @@
             ></div>
 
             <div id="filter_popup__holder__options">
-                <div id="filter_popup__holder__options__cancel" onclick="unSelectAllFilters()">Remove all</div>
-                <div id="filter_popup__holder__options__confirm" onclick="applyFilters()">Apply</div>
+                <div class="filter_popup__holder__options__button" id="filter_popup__holder__options__cancel" onclick="filters.unSelectAllFilters()">Remove all</div>
+                <div class="filter_popup__holder__options__button" id="filter_popup__holder__options__confirm" onclick="filters.applyFilters()">Apply</div>
             </div>
 
         </div>
     </div>
 
-    <div id="case_popup" onclick="closeCasePopup(event)">
+    <div id="case_popup" onclick="formulaPopup.close(event)">
         <div id="case_popup__holder">
             <div id="case_popup__holder__display">
                 <div id="case_popup__holder__display__slider">
@@ -85,7 +68,7 @@
 
         <div class="holder">
             <p class="icons navbar__left__icon">&#xe805;</p>
-            <p class="icons navbar__left__icon" onclick="switchFilterState()">&#xe806;</p>
+            <p class="icons navbar__left__icon" onclick="filters.switch()">&#xe806;</p>
         </div>
 
         <div class="holder">
@@ -101,15 +84,15 @@
 
     <div id="category">
 
-        <div class="category__option" onclick="switchCategory(this)">
+        <div class="category__option" onclick="category.switch(this)">
             <span>F2L</span>
         </div>
         
-        <div class="category__option" onclick="switchCategory(this)">
+        <div class="category__option" onclick="category.switch(this)">
             <span>OLL</span>
         </div>
         
-        <div class="category__option" onclick="switchCategory(this)">
+        <div class="category__option" onclick="category.switch(this)">
             <span>PLL</span>
         </div>
 
@@ -123,24 +106,24 @@
             id         = "trigger"
             hx-target  = "#case_holder__bag"
             hx-swap    = "beforeend"
-            hx-trigger = "load delay:500ms, intersect threshold:0.1"
+            hx-trigger = "load, intersect threshold:0.1"
             hx-get     = "https://cubonauta.com/components/case_card"
-            hx-vars    = "{case_id: formula_index, size: 6, filters:strg_filters, category:category}"
+            hx-vars    = "{case_id: formula_index, size: 6, filters:filters.strg_filters, category:category.cache.value}"
         ></div>
 
     </div>
 
     <div id="actionbar">
 
-        <span id="trhopy_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe802;</span>
+        <span id="trhopy_screen" class="icons actionbar__icons">&#xe802;</span>
 
-        <span id="learn_screen" class="icons actionbar__icons actionbar__icons--active" onclick="changeScreen(this)">&#xe803;</span>
+        <span id="learn_screen" class="icons actionbar__icons actionbar__icons--active">&#xe803;</span>
         
-        <span id="home_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe804;</span>
+        <a id="home_screen" class="icons actionbar__icons" href="http://cubonauta.com">&#xe804;</a>
 
-        <span id="training_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe801;</span>
+        <span id="training_screen" class="icons actionbar__icons">&#xe801;</span>
 
-        <span id="profile_screen" class="icons actionbar__icons" onclick="changeScreen(this)">&#xe800;</span>
+        <span id="profile_screen" class="icons actionbar__icons">&#xe800;</span>
 
     </div>
 

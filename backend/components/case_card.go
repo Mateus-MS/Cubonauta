@@ -61,6 +61,8 @@ func mobile(w http.ResponseWriter, r *http.Request) {
 	var formula models.Case
 	var formulas []models.Case
 
+	fmt.Println(id, size, filters, category)
+
 	if len(filters) > 0 {
 		for i := 0; i < size; i++ {
 			if id >= int(count) {

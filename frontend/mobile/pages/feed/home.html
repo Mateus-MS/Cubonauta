@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/mobile/src/css/0aa0.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/navbar.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/actionbar.css">
+
+    <title>Cubonauta</title>
+</head>
+<body>
+    
+    <div id="navbar">
+
+        <div class="holder">
+            <p class="icons navbar__left__icon">&#xe805;</p>
+            <p class="icons navbar__left__icon" onclick="filters.switch()">&#xe806;</p>
+        </div>
+
+        <div class="holder">
+            <div id="navbar__right__section">
+                <p onclick="switchPages(this)">Tutorial</p>
+                <div class="little_dot"></div>
+                <p onclick="switchPages(this)" class="bolder">Formulas</p>
+            </div>
+            <div onclick="changeToScreen('profile_screen')" id="profile"></div>
+        </div>
+
+    </div>
+
+    
+
+    <div id="actionbar">
+
+        <span id="trhopy_screen" class="icons actionbar__icons">&#xe802;</span>
+
+        <a id="learn_screen" class="icons actionbar__icons" href="http://cubonauta.com/learn">&#xe803;</a>
+        
+        <span id="home_screen" class="icons actionbar__icons actionbar__icons--active">&#xe804;</span>
+
+        <span id="training_screen" class="icons actionbar__icons">&#xe801;</span>
+
+        <span id="profile_screen" class="icons actionbar__icons">&#xe800;</span>
+
+    </div>
+
+</body>
+</html>

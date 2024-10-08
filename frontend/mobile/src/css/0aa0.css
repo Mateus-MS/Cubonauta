@@ -38,6 +38,10 @@ body{
     display: none; /* Chrome, Safari, and Edge */
 }
 
+a{
+    text-decoration: none;
+}
+
 .icons{
 
     font-family: icons;

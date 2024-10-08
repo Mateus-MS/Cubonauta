@@ -1,5 +1,5 @@
 {{ range . }}
-    <div class="case_card" onclick="switchCasePopup(this)">
+    <div class="case_card" onclick="formulaPopup.open(this)">
 
         <p class="case_card__case_name"> {{ .Name }} </p>
         <div class="case_card__case_container">
@@ -8,7 +8,7 @@
     
             <div class="case_card__case_container__holder">
     
-                <div onscroll="swipeCarrossel(this)" class="case_card__case_container__holder__formulas_holder">
+                <div onscroll="caseCard.swipe(this)" class="case_card__case_container__holder__formulas_holder">
     
                 {{ range .Formulas }}
     
@@ -31,8 +31,8 @@
                             <p class="case_card__case_container__holder__formulas_holder__formula__bottom__formula_name"> {{ .Name }} </p>
     
                             <div class="case_card__case_container__holder__formulas_holder__formula__bottom__actions">
-                                <p onclick="formulaAction('learn')" class="icons case_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe807</p>
-                                <p onclick="formulaAction('fav')" class="icons case_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe808</p>
+                                <p onclick="caseCard.actions.learn()"    class="icons case_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe807</p>
+                                <p onclick="caseCard.actions.favorite()" class="icons case_card__case_container__holder__formulas_holder__formula__bottom__actions__action">&#xe808</p>
                             </div>
     
                         </div>

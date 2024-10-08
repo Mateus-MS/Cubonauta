@@ -22,7 +22,8 @@ func main() {
 	//Serve the js and css files to desktop
 	router.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../frontend/static"))))
 
-	router.HandleFunc("/", routes.LearnRoute)
+	router.HandleFunc("/learn", routes.LearnRoute)
+	router.HandleFunc("/", routes.HomeRoute)
 
 	//components Handle
 

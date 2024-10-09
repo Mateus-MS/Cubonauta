@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="/static/mobile/src/css/post.css">
 
+    <script src="/static/mobile/src/scripts/feed/imageCarrossel.js" defer></script>
+
     <title>Cubonauta</title>
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 </head>
@@ -35,25 +37,25 @@
 
     <div id="post_holder">
         <div
-            hx-get     = "https://cubonauta.com/components/post"
+            hx-get     = "https://cubonauta.com/components/post?type=publi"
             hx-trigger = "load"
             hx-swap    = "outerHTML"
         >
         </div>
         <div
-            hx-get     = "https://cubonauta.com/components/post"
+            hx-get     = "https://cubonauta.com/components/post?type=image"
             hx-trigger = "load"
             hx-swap    = "outerHTML"
         >
         </div>
         <div
-            hx-get     = "https://cubonauta.com/components/post"
+            hx-get     = "https://cubonauta.com/components/post?type=image"
             hx-trigger = "load"
             hx-swap    = "outerHTML"
         >
         </div>
         <div
-            hx-get     = "https://cubonauta.com/components/post"
+            hx-get     = "https://cubonauta.com/components/post?type=text"
             hx-trigger = "load"
             hx-swap    = "outerHTML"
         >

@@ -26,7 +26,7 @@ func Filter_tags(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if strings.Contains(r.UserAgent(), "Mobile") {
-		utils.RenderTemplate[[]string]("./components/filter_tags/mobile.html", w, cluster.GetFilters())
+		utils.RenderTemplate[[]string]([]string{"./components/filter_tags/mobile.html"}, w, cluster.GetFilters())
 	}
 
 }

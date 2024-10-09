@@ -99,5 +99,5 @@ func mobile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.RenderTemplate("./components/case_card/mobile.html", w, formulas)
+	utils.RenderTemplate([]string{"./components/case_card/mobile.html"}, w, formulas)
 }

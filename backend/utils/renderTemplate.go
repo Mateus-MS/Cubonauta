@@ -1,16 +1,11 @@
 package utils
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
 
-func RenderTemplate[Data any](path string, w http.ResponseWriter, data Data) {
-	template, err := template.ParseFiles(path)
-	if err != nil {
-		fmt.Println(err)
-	}
-
+func RenderTemplate[Data any](path []string, w http.ResponseWriter, data Data) {
+	template := template.Must(template.ParseFiles(path...))
 	template.Execute(w, data)
 }

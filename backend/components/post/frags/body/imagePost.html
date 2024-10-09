@@ -1,0 +1,21 @@
+{{ define "body" }}
+<div class="text_post__body--image">
+    <div class="text_post__body--image__holder" onscroll="feed.post.swipe(this)">
+    {{ range .ImagePaths }}
+        <div class="text_post__body--image__image"></div>
+    {{ end }}
+    </div>
+    <div class="text_post__body--image__carrossel">
+    {{ range $index, $value := .ImagePaths }}
+        {{ if eq $index 0 }}
+            <div class="text_post__body--image__carrossel__indicator --selected"></div>
+        {{ else }}
+            <div class="text_post__body--image__carrossel__indicator"></div>
+        {{ end }}
+    {{ end }}
+    </div>
+    <p class="text_post__body--image__text">
+        {{ .Text }}
+    </p>
+</div>
+{{ end }}

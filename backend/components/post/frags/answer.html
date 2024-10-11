@@ -1,0 +1,17 @@
+{{ define "answer" }}
+<div class="answer">
+    <div class="answer__photo"></div>
+    <div class="answer__body">
+        <span class="answer__body__name"> {{ .Author }} </span>
+        <span class="answer__body__date"> {{ .Date }} </span>
+        <p    class="answer__body__body"> {{ .Body }} </p>
+    </div>
+    <div class="answer__actions">
+        <div class="answer__like">
+            <span class="answer__like icons">&#xE808;</span> 
+            {{ .Likes }}
+        </div>
+        <div class="answer__reply">@</div>
+    </div>
+</div>
+{{ end }}

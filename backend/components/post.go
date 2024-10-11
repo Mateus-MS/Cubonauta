@@ -45,7 +45,7 @@ func Post(w http.ResponseWriter, r *http.Request) {
 		Comments: []models.Comment{
 			{
 				Author: "Khelbia Terminelis",
-				Date:   "22 aug 2024 • 14:37",
+				Date:   "3 hours",
 				Body:   "Let's consider, that the optimization of the mechanism can hardly be compared with The Dynamics of Large-Scale Facility (Paris Mead in The Book of the Application Interface)",
 			},
 		},
@@ -67,12 +67,63 @@ func Post(w http.ResponseWriter, r *http.Request) {
 				Icon:  template.HTML("&#xE80C;"),
 				Count: 34,
 			},
+			{
+				Icon:  template.HTML("&#xE80E;"),
+				Count: 2,
+			},
 		},
 		Comments: []models.Comment{
 			{
 				Author: "Khelbia Terminelis",
-				Date:   "22 aug 2024 • 14:37",
+				Date:   "4 hours",
 				Body:   "Let's consider, that the optimization of the mechanism can hardly be compared with The Dynamics of Large-Scale Facility (Paris Mead in The Book of the Application Interface)",
+				Interations: []models.Iteration{
+					{
+						Icon:  template.HTML("&#xE80C;"),
+						Count: 25,
+					},
+					{
+						Icon:  template.HTML("&#xE80E;"),
+						Count: 4,
+					},
+				},
+				Answers: []models.Answer{
+					{
+						Author: "Khelbia Terminelis",
+						Date:   "4 hours",
+						Body:   "Let's consider, that the optimization of the mechanism can hardly be compared with The Dynamics of Large-Scale Facility (Paris Mead in The Book of the Application Interface)",
+						Likes:  24,
+					},
+					{
+						Author: "Khelbia Terminelis",
+						Date:   "4 hours",
+						Body:   "Let's consider, that the optimization of the mechanism can hardly be compared with The Dynamics of Large-Scale Facility (Paris Mead in The Book of the Application Interface)",
+						Likes:  24,
+					},
+				},
+			},
+			{
+				Author: "Popi Francis",
+				Date:   "6 hours",
+				Body:   "Let's consider, that the optimization of the mechanism can hardly be compared with The Dynamics of Large-Scale Facility",
+				Interations: []models.Iteration{
+					{
+						Icon:  template.HTML("&#xE80C;"),
+						Count: 25,
+					},
+					{
+						Icon:  template.HTML("&#xE80E;"),
+						Count: 1,
+					},
+				},
+				Answers: []models.Answer{
+					{
+						Author: "Khelbia Terminelis",
+						Date:   "4 hours",
+						Body:   "Let's consider, that the optimization of the mechanism can hardly be compared with The Dynamics of Large-Scale Facility (Paris Mead in The Book of the Application Interface)",
+						Likes:  24,
+					},
+				},
 			},
 		},
 	}
@@ -80,11 +131,11 @@ func Post(w http.ResponseWriter, r *http.Request) {
 	if strings.Contains(r.UserAgent(), "Mobile") {
 		switch postType {
 		case "text":
-			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/body/textPost.html"}, w, dataTextBody)
+			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/textPost.html"}, w, dataTextBody)
 		case "image":
-			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/body/imagePost.html"}, w, dataImageBody)
+			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/imagePost.html"}, w, dataImageBody)
 		case "publi":
-			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/body/imagePost.html"}, w, dataImageBody)
+			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/imagePost.html"}, w, dataImageBody)
 		}
 	}
 

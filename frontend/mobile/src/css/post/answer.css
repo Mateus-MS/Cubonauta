@@ -1,0 +1,141 @@
+.comment__holder{
+    
+}
+
+.answer{
+    width: 100%;
+    padding: 2px 0;
+
+    display: flex;
+    align-items: start;
+    margin-bottom: 18px; 
+
+    /* padding-bottom: 14px; */
+    /* border-bottom: 1px solid rgb(196, 196, 196); */
+}
+
+.answer:last-child{
+    margin-bottom: 0;
+}
+
+.answer__photo{
+    width: 30px;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+    margin-right: 10px;
+    
+    flex-shrink: 0;
+
+    background-color: var(--fourty-color);
+}
+
+.answer__body{
+    flex-grow: 1;
+    height: 100%;
+}
+
+.answer__body__name{
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--thirdy-color);
+
+    margin-right: 6px;
+}
+
+.answer__body__date{
+    font-size: .75em;
+    font-weight: 400;
+    color: var(--thirdy-color);
+
+    white-space: nowrap;
+}
+
+.answer__body__body{
+    font-size: .85em;
+    font-weight: 500;
+    color: var(--thirdy-color);
+
+    margin-top: 6px;
+}
+
+.answer__actions{
+    width: fit-content;
+    margin-left: 15px;
+    align-self: stretch;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.answer__like{
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--thirdy-color);
+    padding: 3px 0;
+
+    transition: transform ease .3s;
+}
+
+.answer__like.icons{
+    font-size: 1.3em;
+    color: inherit;
+    transform: color ease .3s;
+    width: fit-content;
+}
+
+
+.answer__like:active{
+    transform: scale(.90);
+    color: var(--secondary-color);
+}
+
+.answer__reply{
+    padding: 3px 0 5px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    border-radius: 50px;
+    background-color: var(--thirdy-color);
+
+    transition: transform ease .3s, color ease .3s;
+}
+
+.answer__reply:active{
+    transform: scale(.95);
+    background-color: var(--secondary-color);
+}
+
+.comment__answers__load-more{
+    width: 100%;
+    height: 15px;
+    font-size: .85em;
+    color: var(--main-color);
+    font-weight: bold;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: calc(-18px + 10px);
+    margin-bottom: 10px;
+
+    transition: transform .3s ease, color .3s ease;
+}
+
+.comment__answers__load-more.hidden{
+    visibility: hidden;
+    display: none;
+}
+
+.comment__answers__load-more:active{
+    transform: scale(.95);
+    color: var(--thirdy-color);
+}

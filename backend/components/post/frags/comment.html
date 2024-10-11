@@ -1,14 +1,40 @@
 {{ define "comment" }}
-<div class="text_post__comments__comment">
-    <div class="text_post__comments__comment__header">
-        <div class="text_post__comments__comment__header__profile"></div>
-        <div class="text_post__comments__comment__header__info">
-            <p class="text_post__comments__comment__header__info__name"> {{ .Author }} </p>
-            <p class="text_post__comments__comment__header__info__date"> {{ .Date }} </p>
+<div class="comment">
+    <div class="comment__header">
+        <div class="comment__header__photo"></div>
+        <div class="comment__header__body">
+            <span class="comment__header__body__name"> {{ .Author }} </span>
+            <span class="comment__header__body__date"> {{ .Date }} </span>
+            <p    class="comment__header__body__body"> {{ .Body }} </p>
         </div>
     </div>
-    <p class="text_post__comments__comment__body">
-        {{ .Body }}
-    </p>
+    <div class="comment__actions">
+       
+        <div class="post_footer">
+            <div class="answer_footer__line"></div>
+            <div class="post_footer__holder">
+            {{ range .Interations }}
+                {{ if eq .Icon "&#xE80E;" }}
+                    <div class="post_footer__action" hx-on:click="feed.answer.switch(this)">
+                        <span class="post_footer__icon   like icons"> {{ .Icon }} </span>
+                        <span class="post_footer__number like"> {{ .Count }} </span>
+                    </div>
+                {{ else }}
+                    <div class="post_footer__action">
+                        <span class="post_footer__icon   like icons"> {{ .Icon }} </span>
+                        <span class="post_footer__number like"> {{ .Count }} </span>
+                    </div>
+                {{ end }}
+            {{ end }}
+            </div>
+        </div>
+
+    </div>
+    <div class="comment__answers hidden">
+        {{ range .Answers }}
+            {{ template "answer" . }}
+        {{ end }}
+        <div class="comment__answers__load-more">Load more</div>
+    </div>
 </div>
 {{ end }}

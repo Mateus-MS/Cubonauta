@@ -3,17 +3,39 @@
         <p class="text_post__header__title"> {{ .Title }} </p>
         <p class="text_post__header__time"> {{ .Date }} </p>
     </div>
+    
     {{ template "body" .Body }}
-    {{ template "footer" .Interations }}
-    <div class="text_post__comments">
-        <div class="text_post__comments__holder hidden">
+    
+    <div class="post_footer">
+        <div class="post_footer__line"></div>
+        <div class="post_footer__holder">
+        {{ range .Interations }}
+            {{ if eq .Icon "&#xE80E;" }}
+                <div class="post_footer__action" hx-on:click="feed.comment.switch(this)">
+                    <span class="post_footer__icon   like icons"> {{ .Icon }} </span>
+                    <span class="post_footer__number like"> {{ .Count }} </span>
+                </div>
+            {{ else }}
+                <div class="post_footer__action">
+                    <span class="post_footer__icon   like icons"> {{ .Icon }} </span>
+                    <span class="post_footer__number like"> {{ .Count }} </span>
+                </div>
+            {{ end }}
+        {{ end }}
+        </div>
+    </div>
+
+    <div class="text_post__comments compact">
+        <div class="text_post__comments__holder compact">
         {{ range .Comments }}
             {{ template "comment" . }}
         {{ end }}
         </div>
         {{ if .Comments }}
-            <div class="text_post__comments__expand">See more</div>
-            <div class="text_post__comments__shadow"></div>
+        <div class="hidden">
+            <div hx-on:click="feed.comment.open(this)" class="hidden__shadow"></div>
+            <div hx-on:click="feed.comment.open(this)" class="hidden__button">See more</div>
+        </div>
         {{ end }}
     </div>
 </div>

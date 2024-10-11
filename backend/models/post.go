@@ -27,9 +27,18 @@ type PostText struct {
 
 //****** GENERAL ******//
 type Comment struct {
+	Author      string
+	Date        string
+	Body        string
+	Interations []Iteration
+	Answers     []Answer
+}
+
+type Answer struct {
 	Author string
 	Date   string
 	Body   string
+	Likes  int
 }
 
 type Iteration struct {

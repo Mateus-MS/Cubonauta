@@ -1,4 +1,6 @@
 var feed = {
+    commentOppened: null,
+
     post: {
         swipe: function(element){
             if(element.nextElementSibling == null){
@@ -28,7 +30,9 @@ var feed = {
             if(commentsHolder.style.maxHeight === "70px"){
                 this.openComments(commentsHolder);  
                 this.hideShowMoreButton(commentsHolder);
-                return
+
+                this.closePreviousOpenedComment(commentsHolder)
+                return 
             }
 
             this.closeComments(commentsHolder);
@@ -43,6 +47,20 @@ var feed = {
             holder.parentNode.style.maxHeight= "70px"
 
             feed.commentInput.unMention()
+        },
+        closePreviousOpenedComment: function(commentsHolder){
+            if(feed.commentOppened === null){
+                feed.commentOppened = commentsHolder;
+                return
+            }
+
+            if(feed.commentOppened === commentsHolder){
+                return
+            }
+
+            feed.comment.closeComments(feed.commentOppened)
+            feed.comment.showShowMoreButton(feed.commentOppened)
+            feed.commentOppened = commentsHolder
         },
         hideShowMoreButton(holder){
             let hidden = holder.nextElementSibling
@@ -60,6 +78,7 @@ var feed = {
         //It temporaly will:
         //  just get the number inside the comment button, since there show the ammount of comments when the post was loaded
         //  and compare with the ammount of comments loaded
+
         //Replace with:
         //  an request to an endpoint that respond with the ammount of comments
         //  and compare with the ammount of comments loaded

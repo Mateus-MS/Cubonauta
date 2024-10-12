@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cubonauta</title>
+
+    <link rel="stylesheet" href="/static/mobile/src/css/0aa0.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/sign-in_up.css">
+
+    <script src="/static/mobile/src/scripts/sign-in_up/sign-in_up.js" defer></script>
+    
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="logo"></div>
+    <div id="form-selector">
+        <div class="form-selector__option active" id="sign_in">Sign in</div>
+        <div class="form-selector__option"        id="sign_up">Sign up</div>
+    </div>
+
+    <div id="body">
+        <div id="steps_display">
+            <div id="user" class="step active" data-text="User"    ></div>
+            <div id="user" class="step"        data-text="Password"></div>
+            <div id="user" class="step"        data-text="U solve?"></div>
+        </div>
+
+        <div id="step_inputs">
+            <div id="step_inputs__holder">
+                
+                <div id="field__user" class="field">
+                    <span  class="field__tag">Username</span>
+                    <input class="field__input" type="text">
+    
+                    <div id="text_balloon" hx-on:click="sign.balloon.close(this)">Chose wisely, this is how every one will know you. <u>But can be changed later</u>. 🤠</div>
+                </div>
+
+                <div style="flex-shrink: 0; width: 100%;">
+                    <div id="field__pass" class="field">
+                        <span  class="field__tag">Password</span>
+                        <input class="field__input" type="text">
+                    </div>
+    
+                    <div id="field__pass--confirm" class="field hidden">
+                        <span  class="field__tag">Confirm password</span>
+                        <input class="field__input" type="text">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div id="next_step" class="disabled" hx-on:click="sign.nextButton.next()">Next step</div>
+        <div id="prev_step" class="hidden"   hx-on:click="sign.prevButton.prev()">Previous step</div>
+    </div>
+
+    <div id="other_methods">
+        <div>Facebook</div>
+        <div>Google</div>
+    </div>
+</body>
+</html>

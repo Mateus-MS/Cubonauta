@@ -38,7 +38,7 @@
     caret-color: rgb(36, 113, 190);
     padding-left: 15px;
     text-wrap: nowrap;
-
+    overflow-x: scroll;
 }
 
 #comment_input__input br {

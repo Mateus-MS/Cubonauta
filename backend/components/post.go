@@ -38,8 +38,8 @@ func Post(w http.ResponseWriter, r *http.Request) {
 				Count: 56,
 			},
 			{
-				Icon:  template.HTML("&#xE80C;"),
-				Count: 34,
+				Icon:  template.HTML("&#xE80E;"),
+				Count: 1,
 			},
 		},
 		Comments: []models.Comment{
@@ -47,6 +47,24 @@ func Post(w http.ResponseWriter, r *http.Request) {
 				Author: "Khelbia Terminelis",
 				Date:   "3 hours",
 				Body:   "Let's consider, that the optimization of the mechanism can hardly be compared with The Dynamics of Large-Scale Facility (Paris Mead in The Book of the Application Interface)",
+				Interations: []models.Iteration{
+					{
+						Icon:  template.HTML("&#xE80C;"),
+						Count: 25,
+					},
+					{
+						Icon:  template.HTML("&#xE80E;"),
+						Count: 1,
+					},
+				},
+				Answers: []models.Answer{
+					{
+						Author: "Khelbia Terminelis",
+						Date:   "4 hours",
+						Body:   "Let's consider, that the optimization of the mechanism can hardly be compared with The Dynamics of Large-Scale Facility (Paris Mead in The Book of the Application Interface)",
+						Likes:  24,
+					},
+				},
 			},
 		},
 	}

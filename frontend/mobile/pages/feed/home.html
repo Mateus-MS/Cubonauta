@@ -14,12 +14,20 @@
     <link rel="stylesheet" href="/static/mobile/src/css/post/answer.css">
     <link rel="stylesheet" href="/static/mobile/src/css/post/comment.css">
 
+    <link rel="stylesheet" href="/static/mobile/src/css/commentInput.css">
+
     <script src="/static/mobile/src/scripts/feed/imageCarrossel.js" defer></script>
 
     <title>Cubonauta</title>
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 </head>
 <body>
+
+    <div id="comment_input">
+        <div id="comment_input__input" contenteditable="true" data-placeholder="Type your reply...">
+        </div>
+        <div   id="comment_input__button">Send<span class="icons">&#xE810;</span></div>
+    </div>
     
     <div id="navbar">
 

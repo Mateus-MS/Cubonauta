@@ -131,11 +131,11 @@ func Post(w http.ResponseWriter, r *http.Request) {
 	if strings.Contains(r.UserAgent(), "Mobile") {
 		switch postType {
 		case "text":
-			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/textPost.html"}, w, dataTextBody)
+			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/textPost.html"}, w, dataTextBody)
 		case "image":
-			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/imagePost.html"}, w, dataImageBody)
+			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/imagePost.html"}, w, dataImageBody)
 		case "publi":
-			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/actions.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/imagePost.html"}, w, dataImageBody)
+			utils.RenderTemplate([]string{"./components/post/post.html", "./components/post/frags/comment.html", "./components/post/frags/answer.html", "./components/post/frags/body/imagePost.html"}, w, dataImageBody)
 		}
 	}
 

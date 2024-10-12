@@ -11,7 +11,7 @@
             <span class="answer__like icons">&#xE808;</span> 
             {{ .Likes }}
         </div>
-        <div class="answer__reply">@</div>
+        <div class="answer__reply" hx-on:click="feed.answer.mention(this)">@</div>
     </div>
 </div>
 {{ end }}

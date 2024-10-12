@@ -3,7 +3,7 @@
         <p class="text_post__header__title"> {{ .Title }} </p>
         <p class="text_post__header__time"> {{ .Date }} </p>
     </div>
-    
+
     {{ template "body" .Body }}
     
     <div class="post_footer">
@@ -11,7 +11,7 @@
         <div class="post_footer__holder">
         {{ range .Interations }}
             {{ if eq .Icon "&#xE80E;" }}
-                <div class="post_footer__action" hx-on:click="feed.comment.switch(this)">
+                <div class="post_footer__action" hx-on:click="feed.comment.switch(this.parentNode.parentNode.nextElementSibling.children[0])">
                     <span class="post_footer__icon   like icons"> {{ .Icon }} </span>
                     <span class="post_footer__number like"> {{ .Count }} </span>
                 </div>
@@ -33,8 +33,8 @@
         </div>
         {{ if .Comments }}
         <div class="hidden">
-            <div hx-on:click="feed.comment.open(this)" class="hidden__shadow"></div>
-            <div hx-on:click="feed.comment.open(this)" class="hidden__button">See more</div>
+            <div hx-on:click="feed.comment.switch(this.parentNode.previousElementSibling)" class="hidden__shadow"></div>
+            <div hx-on:click="feed.comment.switch(this.parentNode.previousElementSibling)" class="hidden__button">See more</div>
         </div>
         {{ end }}
     </div>

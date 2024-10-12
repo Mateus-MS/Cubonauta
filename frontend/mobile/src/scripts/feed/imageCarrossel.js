@@ -1,90 +1,4 @@
 var feed = {
-    comment: {
-        switch: function(element){
-            feed.commentInput.switch();
-
-            let parent = element.parentNode.parentNode.nextElementSibling
-
-            if(parent.classList.contains("compact")){
-                parent.classList.remove("compact")
-                parent.getElementsByClassName("text_post__comments__holder")[0].classList.remove("compact")    
-
-                if(!this.hasMoreComments(parent.parentNode.children[2])){
-                    parent.children[1].classList.add("invisible")
-                }
-                return
-            }
-
-            parent.classList.add("compact")
-            parent.getElementsByClassName("text_post__comments__holder")[0].classList.add("compact")
-            parent.children[1].classList.remove("invisible")
-        },
-        open: function(element){
-            feed.commentInput.switch();
-
-            let parent = element.parentNode.parentNode 
-            parent.classList.remove("compact")
-            parent.getElementsByClassName("text_post__comments__holder")[0].classList.remove("compact")
-
-            if(!this.hasMoreComments(parent.parentNode.children[2])){
-                parent.children[1].classList.add("invisible")
-            }
-        },
-        
-        //Check if there is more comments on the server that is not showing on the page
-        //It temporaly will:
-        //  just get the number inside the comment button, since there show the ammount of comments when the post was loaded
-        //  and compare with the ammount of comments loaded
-        //Replace with:
-        //  an request to an endpoint that respond with the ammount of comments
-        //  and compare with the ammount of comments loaded
-        hasMoreComments: function(footer){
-            let totalComments  = footer.children[1].lastElementChild.children[1].innerText 
-            let loadedComments = footer.nextElementSibling.children.length
-
-            return totalComments - loadedComments > 0
-        }
-    },
-    answer: {
-        switch: function(element){
-            let parent = element.parentNode.parentNode.parentNode.nextElementSibling;
-
-            if(parent.classList.contains("hidden")){
-                parent.classList.remove("hidden")
-
-                feed.commentInput.show();
-                feed.commentInput.mention(element.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("comment__header__body__name")[0].innerText.trim());
-                feed.commentInput.input.classList.add("empty")
-
-                if(!this.hasMoreAnswers(parent.parentNode.children[1].children[0])){
-                    console.log(parent.lastElementChild.classList.add("hidden"))
-                }
-                return
-            }
-
-            feed.commentInput.unMention()
-            parent.classList.add("hidden")
-            feed.commentInput.input.classList.remove("empty")
-        },
-
-        //Check if there is more answers on the server that is not showing on the page
-        //It temporaly will:
-        //  just get the number inside the comment button, since there show the ammount of answers when the comment was loaded
-        //  and compare with the ammount of answers loaded
-        //Replace with:
-        //  an request to an endpoint that respond with the ammount of answers
-        //  and compare with the ammount of answers loaded
-        hasMoreAnswers: function(footer){
-            let totalComments  = footer.children[1].lastElementChild.children[1].innerText 
-            let loadedComments = footer.parentNode.nextElementSibling.children.length
-            return totalComments - loadedComments > 0
-        },
-
-        mention: function(element){
-            let name = element.parentNode.parentNode.getElementsByClassName("answer__body__name")[0].innerText
-            feed.commentInput.mention(name)
-        }
-    },
     post: {
         swipe: function(element){
             if(element.nextElementSibling == null){
@@ -105,6 +19,110 @@ var feed = {
             }
         
             dot.classList.add("--selected")
+        }
+    },
+    comment: {
+        switch: function(commentsHolder){
+            feed.commentInput.switch();
+
+            if(commentsHolder.classList.contains("compact")){
+                this.openComments(commentsHolder);  
+                this.hideShowMoreButton(commentsHolder);
+                return
+            }
+
+            this.closeComments(commentsHolder);
+            this.showShowMoreButton(commentsHolder);
+        },
+        openComments: function(holder){
+            holder.classList.remove("compact")
+            holder.parentNode.classList.remove("compact")    
+        },
+        closeComments: function(holder){
+            holder.classList.add("compact")
+            holder.parentNode.classList.add("compact")
+
+            feed.commentInput.unMention()
+        },
+        hideShowMoreButton(holder){
+            let hidden = holder.nextElementSibling
+            let footer = holder.parentNode.previousElementSibling
+            if(!this.hasMoreComments(footer)){
+                hidden.classList.add("invisible")
+            }
+        },
+        showShowMoreButton(holder){
+            let hidden = holder.nextElementSibling
+            hidden.classList.remove("invisible")
+        },
+        
+        //Check if there is more comments on the server that is not showing on the page
+        //It temporaly will:
+        //  just get the number inside the comment button, since there show the ammount of comments when the post was loaded
+        //  and compare with the ammount of comments loaded
+        //Replace with:
+        //  an request to an endpoint that respond with the ammount of comments
+        //  and compare with the ammount of comments loaded
+        hasMoreComments: function(footer){
+            let totalComments  = footer.children[1].lastElementChild.children[1].innerText 
+            let loadedComments = footer.nextElementSibling.children.length
+
+            return totalComments - loadedComments > 0
+        }
+    },
+    answer: {
+        switch: function(element){
+            let answersHolder = element.parentNode.parentNode.parentNode.nextElementSibling;
+
+            if(answersHolder.classList.contains("hidden")){
+                this.showAnswers(element, answersHolder);
+                return
+            }
+            this.hideAnswers(answersHolder);
+        },
+
+        showAnswers: function(element, answersHolder){
+            //Reveal all answers
+            answersHolder.classList.remove("hidden")
+            //Open the input
+            feed.commentInput.show();
+
+            //mention the comment
+            let name = element.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("comment__header__body__name")[0].innerText.trim();
+            feed.commentInput.mention(name);
+
+            //remove the placeholder
+            feed.commentInput.input.classList.add("empty")
+
+            //When there is none answer left, hide the load more button
+            if(!this.hasMoreAnswers(answersHolder.parentNode.children[1].children[0])){
+                answersHolder.lastElementChild.classList.add("hidden")
+            }
+        },
+        hideAnswers: function(answersHolder){
+            feed.commentInput.unMention()
+            answersHolder.classList.add("hidden")
+            feed.commentInput.input.classList.remove("empty")
+        },
+
+        //Check if there is more answers on the server that is not showing on the page
+        //It temporaly will:
+        //  just get the number inside the comment button, since there show the ammount of answers when the comment was loaded
+        //  and compare with the ammount of answers loaded
+        //Replace with:
+        //  an request to an endpoint that respond with the ammount of answers
+        //  and compare with the ammount of answers loaded
+        hasMoreAnswers: function(footer){
+            let totalComments  = footer.children[1].lastElementChild.children[1].innerText 
+            let loadedComments = footer.parentNode.nextElementSibling.children.length
+            return totalComments - loadedComments > 0
+        },
+
+        //Called when click at mention button
+        mention: function(element){
+            let name = element.parentNode.parentNode.getElementsByClassName("answer__body__name")[0].innerText
+            feed.commentInput.mention(name)
+            feed.commentInput.focus()
         }
     },
     commentInput: {
@@ -153,6 +171,12 @@ var feed = {
             for(let mention of mentions){
                 this.input.removeChild(mention);
             }
+            
+            this.input.classList.remove("empty")
+        },
+
+        focus: function(){
+            this.input.focus()
         }
     }
 }
@@ -169,3 +193,15 @@ feed.commentInput.parent.addEventListener('input', (e)=>{
         element.classList.add('empty')
     }
 })
+
+//This is to fix:
+//   When the browser show up in mobile, the screen scrolls down a little, this prevent it
+let initialScrollY = window.scrollY;
+
+window.addEventListener('focusin', () => {
+    initialScrollY = window.scrollY;
+});
+
+window.addEventListener('focusout', () => {
+    window.scrollTo(0, initialScrollY);
+});

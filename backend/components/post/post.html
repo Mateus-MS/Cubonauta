@@ -25,8 +25,8 @@
         </div>
     </div>
 
-    <div class="text_post__comments compact">
-        <div class="text_post__comments__holder compact">
+    <div class="text_post__comments" style="max-height: 70px;">
+        <div class="text_post__comments__holder" style="max-height: 70px;">
         {{ range .Comments }}
             {{ template "comment" . }}
         {{ end }}

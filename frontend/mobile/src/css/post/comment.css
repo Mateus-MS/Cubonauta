@@ -61,9 +61,7 @@
 .comment__answers{
     width: 100%;
     padding-left: 20px;
-}
-
-.comment__answers.hidden{
-    height: 0;
     overflow-y: hidden;
+    /*Cant apply directly the transition, but probally will stay as a feature :D*/
+    /* transition: max-height ease-in-out .3s; */
 }

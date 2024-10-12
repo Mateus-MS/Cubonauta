@@ -25,7 +25,7 @@ var feed = {
         switch: function(commentsHolder){
             feed.commentInput.switch();
 
-            if(commentsHolder.classList.contains("compact")){
+            if(commentsHolder.style.maxHeight === "70px"){
                 this.openComments(commentsHolder);  
                 this.hideShowMoreButton(commentsHolder);
                 return
@@ -35,12 +35,12 @@ var feed = {
             this.showShowMoreButton(commentsHolder);
         },
         openComments: function(holder){
-            holder.classList.remove("compact")
-            holder.parentNode.classList.remove("compact")    
+            holder.style.maxHeight= holder.scrollHeight+"px"
+            holder.parentNode.style.maxHeight= holder.scrollHeight+"px"
         },
         closeComments: function(holder){
-            holder.classList.add("compact")
-            holder.parentNode.classList.add("compact")
+            holder.style.maxHeight= "70px"
+            holder.parentNode.style.maxHeight= "70px"
 
             feed.commentInput.unMention()
         },
@@ -74,7 +74,7 @@ var feed = {
         switch: function(element){
             let answersHolder = element.parentNode.parentNode.parentNode.nextElementSibling;
 
-            if(answersHolder.classList.contains("hidden")){
+            if(answersHolder.style.maxHeight === "0px"){
                 this.showAnswers(element, answersHolder);
                 return
             }
@@ -83,7 +83,9 @@ var feed = {
 
         showAnswers: function(element, answersHolder){
             //Reveal all answers
-            answersHolder.classList.remove("hidden")
+            answersHolder.style.maxHeight = answersHolder.scrollHeight+"px"
+            feed.comment.openComments(answersHolder.parentNode.parentNode)
+            
             //Open the input
             feed.commentInput.show();
 
@@ -100,8 +102,9 @@ var feed = {
             }
         },
         hideAnswers: function(answersHolder){
+            answersHolder.style.maxHeight= "0px"
+            feed.comment.openComments(answersHolder.parentNode.parentNode)
             feed.commentInput.unMention()
-            answersHolder.classList.add("hidden")
             feed.commentInput.input.classList.remove("empty")
         },
 
@@ -182,8 +185,6 @@ var feed = {
 }
 
 feed.commentInput.parent.addEventListener('input', (e)=>{
-
-    // e.data === "@"
 
     let element = feed.commentInput.input
     

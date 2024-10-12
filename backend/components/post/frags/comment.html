@@ -30,7 +30,7 @@
         </div>
 
     </div>
-    <div class="comment__answers hidden">
+    <div class="comment__answers" style="max-height: 0px;">
         {{ range .Answers }}
             {{ template "answer" . }}
         {{ end }}

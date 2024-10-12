@@ -158,15 +158,14 @@
 
 .text_post__comments{
     height: fit-content;
+    max-height: 70px;
+    transition: max-height ease-in-out .3s;
 }
 
-.text_post__comments.compact{
-    height: 70px;
-}
-
-.text_post__comments__holder.compact{
+.text_post__comments__holder{
     max-height: 70px;
     overflow-y: hidden;
+    transition: max-height ease-in .3s;
 }
 
 .hidden{

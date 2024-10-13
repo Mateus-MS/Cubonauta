@@ -1,4 +1,10 @@
 var sign = {
+    actual: 0,
+    steps : [
+        false,
+        false,
+        false
+    ],
     nextButton: {
         element: document.getElementById("next_step"),
         select: function(){
@@ -9,12 +15,19 @@ var sign = {
         },
 
         next: function(){
-            if(!sign.userSection.validated){
-                return
-            } 
-            sign.userSection.userInput.parentNode.scrollTo({ left: 200 })
-            sign.nextButton.unSelect()
-            sign.prevButton.show()
+            if(sign.actual < 3){
+                sign.actual += 1
+            }
+            sign.userSection.userInput.parentNode.scrollTo({ left: 300 * sign.actual - 2})
+            if(!sign.steps[sign.actual]){
+                sign.nextButton.unSelect()
+            }
+            
+            if(sign.actual > 0){
+                sign.prevButton.show()
+            }
+
+            sign.stepDisplay.select(sign.actual);
         }
     },
     prevButton: {
@@ -26,43 +39,100 @@ var sign = {
             this.element.classList.add("hidden")
         },
         prev: function(){
-            if(!sign.userSection.validated){
-                return
-            } 
+            if(sign.actual > 0){
+                sign.actual -= 1
+            }
+
             sign.userSection.userInput.parentNode.scrollTo({ left: 0 })
-            sign.nextButton.select()
+            
+            if(sign.steps[sign.actual]){
+                sign.nextButton.select()
+            }
+
+            if(sign.actual > 0){
+                sign.prevButton.show()
+            }
         } 
     },
     userSection: {
         userInput: document.getElementById("field__user"),
         erros    : new Map(),
         validated: false,
+
+        getBottomPixel: function(){
+            return this.userInput.getBoundingClientRect().bottom;
+        }
     },
     passSection: {
-        passInput: document.getElementById("field__pass"),
-        confInput: document.getElementById("field__pass--confirm"),
+        password: {
+            element: document.getElementById("field__pass"),
+            erros    : new Map(),
 
-        erros    : new Map(),
+            getBottomPixel: function(){
+                return this.element.getBoundingClientRect().bottom;
+            }
+        },
+        confirmation: {
+            element  : document.getElementById("field__pass--confirm"),
+            erros    : new Map(),
+
+            reveal   : function(){
+                this.element.classList.remove("hidden");
+            },
+            getBottomPixel: function(){
+                return this.element.getBoundingClientRect().bottom;
+            }
+        },
         validated: false,
     },
     balloon: {
         element: document.getElementById("text_balloon"),
-        open :      function(target){
+
+        target: function(height, message){
+            this.open();
+            this.changeHeightPosition(height);
+            this.changeMessage(message);
+
+            sign.nextButton.unSelect()
+        },
+
+        open :      function(){
             this.element.style.animationName = "none"
             void this.element.offsetWidth
             this.element.style.animationName = "pop-up"
-            
-            this.aim(target)
         },
         close:      function(){
             this.element.style.animationName = "pop-out"
         },
-        changeText: function(message){
+        changeHeightPosition: function(height){
+            this.element.style.top = height + "px";
+        },
+        changeMessage: function(message){
             //FATAL CRITIC, NOT ALLOWED IN PRODUCTION
             this.element.innerHTML = message;
-        },
-        aim:     function(target){
-            target.appendChild(this.element)
+        }
+    },
+    stepDisplay: {
+        element: document.getElementById("steps_display"),
+
+        select: function(index){
+            let value;
+
+            switch(index){
+                case 0: 
+                    value = "15%";
+                    break
+                case 1:
+                    value = "50%";
+                    break
+                case 2:
+                    value = "85%";
+                    break
+                default:
+                    console.log("INDEX INVALID")
+            }
+
+            this.element.style.setProperty("--percentage", value)
         }
     },
 
@@ -79,11 +149,23 @@ sign.userSection.erros.set("alreadyTaken", "Oops, seems like you late. ⏰ <br> 
 sign.userSection.erros.set("whiteSpaces" , "I know this is anoying, but you <u>can't put white spaces</u>. 🏳️");
 sign.userSection.erros.set("tooShort"    , "I swear that is for your safety. ✨✨ <br> Your username <u>shold be atleast 8 letters long</u>. 🤨");
 
-sign.passSection.erros.set("noSpecialCharacter", "I know what is missing... something especial. 😍😍 <br> <u>Try use some especial caracter</u>.")
-sign.passSection.erros.set("noNumber", "Numbers can be scarier 👻. <br> But here they just help to keep you more secure.")
-sign.passSection.erros.set("tooShort", "How bigger, the better! 😏 <u>At least 8 characters long</u>.")
+sign.passSection.password.erros.set("noSpecialCharacter", "I know what is missing... something especial. 😍😍 <br> <u>Try use some especial caracter</u>.")
+sign.passSection.password.erros.set("noNumber", "Numbers can be scarier 👻. <br> But here they just help to keep you more secure.")
+sign.passSection.password.erros.set("tooShort", "How bigger, the better! 😏 <u>At least 8 characters long</u>.")
 
-sign.passSection.erros.set("noMatch", "So strange... your user isn't dori and you already forgot your pass? 🤔")
+sign.passSection.confirmation.erros.set("noMatch", "So strange... your user isn't dori and you already forgot your pass? 🤔")
+sign.passSection.confirmation.erros.set("changeWithoutConf", "You changed your password. but did'nt changed the confirmation")
+
+//Align the pre-leaded balloon
+sign.balloon.changeHeightPosition(sign.userSection.userInput.getBoundingClientRect().bottom)
+//Override anyscroll saved in cache
+sign.userSection.userInput.parentNode.scrollTo({left: 0, behavior: "instant"})
+//Override any text saved in cache
+sign.userSection.userInput.children[1].value = "";
+//Override any text saved in cache
+sign.passSection.password.element.children[1].value = "";
+//Override any text saved in cache
+sign.passSection.confirmation.element.children[1].value = "";
 
 //The first time when the user start typing the username
 //Close the balloon
@@ -91,8 +173,22 @@ sign.userSection.userInput.addEventListener("focusin", ()=>{
     sign.balloon.close()
 }, {once: true})
 
+//#region USER
+
 sign.userSection.userInput.addEventListener("focusout", (e)=>{
     let userTyped = sign.userSection.userInput.children[1].value;
+    
+    sign.steps[sign.actual] = false
+    
+    if(userTyped.includes(" ")){
+        sign.balloon.target(sign.userSection.getBottomPixel(), sign.userSection.erros.get("whiteSpaces"))
+        return
+    }
+    
+    if(userTyped.length < 8){
+        sign.balloon.target(sign.userSection.getBottomPixel(), sign.userSection.erros.get("tooShort"))
+        return
+    }
 
     //Temporaly:
     //   To simulate when the user is already been taken
@@ -100,94 +196,77 @@ sign.userSection.userInput.addEventListener("focusout", (e)=>{
     //   Of course it will be changed
     let res = Math.floor(Math.random() * (Math.floor(3) - Math.ceil(1) + 1) + Math.ceil(1));
     if(res === 1){
-        sign.balloon.open(sign.userSection.userInput)
-        sign.nextButton.unSelect()
-        sign.balloon.changeText(sign.userSection.erros.get("alreadyTaken"))
-        sign.userSection.validated = false
+        sign.balloon.target(sign.userSection.getBottomPixel(), sign.userSection.erros.get("alreadyTaken"))
         return
     }
     
-    if(userTyped.includes(" ")){
-        sign.balloon.open(sign.userSection.userInput)
-        sign.nextButton.unSelect()
-        sign.balloon.changeText(sign.userSection.erros.get("whiteSpaces"))
-        sign.userSection.validated = false
-        return
-    }
-    
-    if(userTyped.length < 8){
-        sign.balloon.open(sign.userSection.userInput)
-        sign.nextButton.unSelect()
-        sign.balloon.changeText(sign.userSection.erros.get("tooShort"))
-        sign.userSection.validated = false
-        return
-    }
-    
+    sign.nextButton.select();
+    sign.steps[sign.actual] = true;
     sign.balloon.close();
-    sign.nextButton.select()
-    sign.userSection.validated = true
 })
 
-//Override anyscroll saved in cache
-sign.userSection.userInput.parentNode.scrollTo({left: 0, behavior: "instant"})
-//Override any text saved in cache
-sign.userSection.userInput.children[1].value = "";
-
-//#region PASSWORD
-sign.passSection.passInput.addEventListener("focusout", (e)=>{
-    let passTyped = sign.passSection.passInput.children[1].value;
-
-    if(passTyped.length < 8){
-        sign.balloon.open(sign.passSection.passInput)
-        sign.nextButton.unSelect()
-        sign.balloon.changeText(sign.passSection.erros.get("tooShort"))
-        sign.passSection.validated = false
-        return
-    }
-
-    if(!/[!@#\$%\^\&*\)\(+=._-]+/.test(passTyped)){
-        sign.balloon.open(sign.passSection.passInput)
-        sign.nextButton.unSelect()
-        sign.balloon.changeText(sign.passSection.erros.get("noSpecialCharacter"))
-        sign.passSection.validated = false
-        return
-    }
-
-    if(!/\d+/.test(passTyped)){
-        sign.balloon.open(sign.passSection.passInput)
-        sign.nextButton.unSelect()
-        sign.balloon.changeText(sign.passSection.erros.get("noNumber"))
-        sign.passSection.validated = false
-        return
-    }
-
-    sign.passSection.confInput.classList.remove("hidden")
-})
-
-//Override any text saved in cache
-sign.passSection.passInput.children[1].value = "";
 //#endregion
 
+//#region PASSWORD
+sign.passSection.password.element.addEventListener("focusout", (e)=>{
+    let passTyped = sign.passSection.password.element.children[1].value;
 
+    sign.steps[sign.actual] = false;
+    
+    if(passTyped.length < 8){
+        sign.balloon.target(sign.passSection.password.getBottomPixel(), sign.passSection.password.erros.get("tooShort"))
+        return
+    }
+    
+    if(!/[!@#\$%\^\&*\)\(+=._-]+/.test(passTyped)){
+        sign.balloon.target(sign.passSection.password.getBottomPixel(), sign.passSection.password.erros.get("noSpecialCharacter"))
+        return
+    }
+    
+    if(!/\d+/.test(passTyped)){
+        sign.balloon.target(sign.passSection.password.getBottomPixel(), sign.passSection.password.erros.get("noNumber"))
+        return
+    }
+    
+    sign.passSection.confirmation.reveal();
+
+    if(sign.passSection.confirmation.element.children[1].value !== ""){
+        let passTyped = sign.passSection.password.element.children[1].value;
+        let confTyped = sign.passSection.confirmation.element.children[1].value;
+        
+        sign.steps[sign.actual] = false;
+
+        if(confTyped !== passTyped){
+            sign.balloon.target(sign.passSection.confirmation.getBottomPixel(), sign.passSection.confirmation.erros.get("changeWithoutConf"))
+            return
+        }
+
+        sign.steps[sign.actual] = true
+        sign.nextButton.select()
+        sign.balloon.close();
+    }
+})
+
+//#endregion
 
 //#region CONFIRM
-sign.passSection.confInput.addEventListener("focusout", (e)=>{
-    let passTyped = sign.passSection.passInput.children[1].value;
-    let confTyped = sign.passSection.confInput.children[1].value;
+sign.passSection.confirmation.element.addEventListener("focusout", (e)=>{
+    let passTyped = sign.passSection.password.element.children[1].value;
+    let confTyped = sign.passSection.confirmation.element.children[1].value;
 
-    console.log(passTyped, confTyped)
-
+    sign.balloon.changeHeightPosition(sign.passSection.confirmation.getBottomPixel())
+    sign.nextButton.unSelect()
+    sign.steps[sign.actual] = false;
+    
     if(confTyped !== passTyped){
-        sign.balloon.open(sign.passSection.confInput)
-        sign.nextButton.unSelect()
-        sign.balloon.changeText(sign.passSection.erros.get("noMatch"))
-        sign.passSection.validated = false
+        sign.balloon.open()
+        sign.balloon.changeMessage(sign.passSection.confirmation.erros.get("noMatch"))
         return
     }
 
-    sign.passSection.validated = true;
+    sign.steps[sign.actual] = true
+    sign.nextButton.select()
+    sign.balloon.close();
 })
 
-//Override any text saved in cache
-sign.passSection.confInput.children[1].value = "";
 //#endregion

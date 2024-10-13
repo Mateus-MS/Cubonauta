@@ -32,23 +32,22 @@
                 <div id="field__user" class="field">
                     <span  class="field__tag">Username</span>
                     <input class="field__input" type="text">
-    
-                    <div id="text_balloon" hx-on:click="sign.balloon.close(this)">Chose wisely, this is how every one will know you. <u>But can be changed later</u>. 🤠</div>
                 </div>
 
                 <div style="flex-shrink: 0; width: 100%;">
                     <div id="field__pass" class="field">
                         <span  class="field__tag">Password</span>
-                        <input class="field__input" type="text">
+                        <input class="field__input" type="password">
                     </div>
     
                     <div id="field__pass--confirm" class="field hidden">
                         <span  class="field__tag">Confirm password</span>
-                        <input class="field__input" type="text">
+                        <input class="field__input" type="password">
                     </div>
                 </div>
 
             </div>
+            <div id="text_balloon" hx-on:click="sign.balloon.close(this)">Chose wisely, this is how every one will know you. <u>But can be changed later</u>. 🤠</div>
         </div>
         
         <div id="next_step" class="disabled" hx-on:click="sign.nextButton.next()">Next step</div>

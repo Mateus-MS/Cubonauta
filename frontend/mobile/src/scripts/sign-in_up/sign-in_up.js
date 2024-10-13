@@ -149,7 +149,7 @@ sign.userSection.erros.set("alreadyTaken", "Oops, seems like you late. ⏰ <br> 
 sign.userSection.erros.set("whiteSpaces" , "I know this is anoying, but you <u>can't put white spaces</u>. 🏳️");
 sign.userSection.erros.set("tooShort"    , "I swear that is for your safety. ✨✨ <br> Your username <u>shold be atleast 8 letters long</u>. 🤨");
 
-sign.passSection.password.erros.set("noSpecialCharacter", "I know what is missing... something especial. 😍😍 <br> <u>Try use some especial caracter</u>.")
+sign.passSection.password.erros.set("noSpecialCharacter", "I know what is missing... something especial. 😍😍 <br> <u>Try use some especial caracter</u>. <br> Like !@#$%¨&*,.")
 sign.passSection.password.erros.set("noNumber", "Numbers can be scarier 👻. <br> But here they just help to keep you more secure.")
 sign.passSection.password.erros.set("tooShort", "How bigger, the better! 😏 <u>At least 8 characters long</u>.")
 
@@ -228,6 +228,7 @@ sign.passSection.password.element.addEventListener("focusout", (e)=>{
         return
     }
     
+    sign.balloon.close();
     sign.passSection.confirmation.reveal();
 
     if(sign.passSection.confirmation.element.children[1].value !== ""){

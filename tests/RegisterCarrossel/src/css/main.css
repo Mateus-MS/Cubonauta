@@ -1,0 +1,44 @@
+@font-face {
+    font-family: icons;
+    src: url("/test/static/fonts/icons.ttf");
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    
+    box-sizing: border-box;
+    font-family: Arial;
+
+    user-select: none;
+
+    --black: rgb(54, 54, 54);
+}
+
+body{
+    width: 100dvw;
+    height: 100dvh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--black);
+}
+
+#container{
+    --width: calc(100% - 60px); 
+
+    max-width: 400px;
+
+    --v-padding: 160px;
+    --h-padding: 30px;
+
+    position: relative; /*To let the #buttonHolder be snapped at the bottom*/
+
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+    padding: var(--v-padding) var(--h-padding);
+
+    background-color: white;
+}

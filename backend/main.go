@@ -26,6 +26,9 @@ func main() {
 	router.HandleFunc("/learn", routes.LearnRoute)
 	router.HandleFunc("/", routes.HomeRoute)
 
+	router.HandleFunc("/test/register", routes.TestRegister)
+	router.Handle("/test/static/", http.StripPrefix("/test/static/", http.FileServer(http.Dir("../tests/RegisterCarrossel/src"))))
+
 	//components Handle
 
 	router.HandleFunc("/components/case_card", components.Case_card)

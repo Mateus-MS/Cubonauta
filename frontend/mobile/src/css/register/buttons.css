@@ -1,0 +1,74 @@
+#buttonsHolder{
+
+    .button{
+
+        width: 100%;
+        text-align: center; /*To align the text horizontally*/
+
+        border: none;
+        background: none;
+
+        transition: 
+            transform  ease .3s,
+            color      ease .3s;
+    }
+
+    #nextButton{
+
+        &:active{
+            transform: scale(.95);
+            background-color: rgb(134, 134, 134);
+        }
+
+        &:disabled{
+            &:active{
+                transform: none;
+            }
+
+            background-color: rgb(134, 134, 134);
+        }
+
+        height: 50px;
+
+        background-color: var(--main-color);
+        border-radius: 10px;
+
+        line-height: 50px ; /*To align the text vertically*/
+
+        color: white;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+
+    #prevButton{
+
+        &:active{
+            transform: scale(.95);
+            color: rgb(180, 180, 180);
+        }
+
+        &:disabled{
+            &:active{
+                transform: none;
+            }
+
+            visibility: hidden;
+        }
+
+        width: 100%;
+        height: 35px;
+
+        line-height: 35px ; /*To align the text vertically*/
+
+        color: rgb(134, 134, 134);
+        font-size: .9em;
+    }
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+
+    width: var(--width);
+    height: fit-content;
+}

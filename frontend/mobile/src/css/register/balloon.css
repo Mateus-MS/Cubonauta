@@ -1,0 +1,82 @@
+#balloon{
+
+    /*The tail*/
+    &::before{
+        content: '';
+        position: absolute; 
+        
+        left: 50%;
+        transform: translateX(-50%);
+        
+        bottom: 100%; 
+        
+        border-width: 10px;
+        border-style: solid;
+        border-color: transparent transparent var(--main-color) transparent; 
+    }
+
+    width: calc(100% - 60px);
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+
+    height: fit-content;
+
+    position: absolute;
+
+    border-radius: 10px;
+    background-color: var(--main-color);
+
+    transform-origin: top center;
+    visibility: hidden;
+
+    padding: 20px;
+    color: white;
+
+    transform: translateY(20px);
+
+    animation: 
+        pop-in
+        ease-in
+        .5s
+        forwards;
+}
+
+@keyframes pop-in {
+    0% {
+        visibility: visible;
+        transform: scale(0) translateY(20px); 
+        opacity: 0; 
+    }
+    50% {
+        transform: scale(1.1) translateY(20px); 
+        opacity: 1;
+    }
+    70% {
+        transform: scale(0.9) translateY(20px);
+    }
+    100% {
+        visibility: visible;
+        transform: scale(1) translateY(20px);
+    }
+}
+
+@keyframes pop-out {
+    0% {
+        visibility: visible;
+        transform: scale(1) translateY(20px);
+    }
+    50% {
+        transform: scale(0.9) translateY(20px);
+    }
+    70% {
+        transform: scale(1.1) translateY(20px); 
+        opacity: 1;
+    }
+    100% {
+        visibility: visible;
+        transform: scale(0) translateY(20px);
+        opacity: 0;
+    }
+}

@@ -5,59 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cubonauta</title>
 
-    <link rel="stylesheet" href="/static/mobile/src/css/0aa0.css">
-    <link rel="stylesheet" href="/static/mobile/src/css/sign-in_up.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/register/main.css">
 
-    <script src="/static/mobile/src/scripts/sign-in_up/sign-in_up.js" defer></script>
+    <link rel="stylesheet" href="/static/mobile/src/css/register/input.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/register/buttons.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/register/balloon.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/register/question.css">
+
+    <link rel="stylesheet" href="/static/mobile/src/css/register/loginMethods.css">
+
+    <script src="static/mobile/src/scripts/register/buttons.js" defer></script>
+    <script src="static/mobile/src/scripts/register/balloon.js" defer></script>
     
+    <script src="static/mobile/src/scripts/register/sections/user.js"      defer></script>
+    <script src="static/mobile/src/scripts/register/sections/pass.js"      defer></script>
+    <script src="static/mobile/src/scripts/register/sections/conf.js"      defer></script>
+    <script src="static/mobile/src/scripts/register/sections/question.js"  defer></script>
+
+    <script src="static/mobile/src/scripts/register/main.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <div id="logo"></div>
-    <div id="form-selector">
-        <div class="form-selector__option active" id="sign_in">Sign in</div>
-        <div class="form-selector__option"        id="sign_up">Sign up</div>
-    </div>
 
-    <div id="body">
-        <div id="steps_display">
-            <div id="user" class="step active" data-text="User"    ></div>
-            <div id="user" class="step"        data-text="Password"></div>
-            <div id="user" class="step"        data-text="U solve?"></div>
+    <div id="container">
+
+        <div id="userField" class="inputfield">
+            <span>User</span>
+            <input type="text" enterkeyhint="done">
         </div>
 
-        <div id="step_inputs">
-            <div id="step_inputs__holder">
-                
-                <div id="field__user" class="field">
-                    <span  class="field__tag">Username</span>
-                    <input class="field__input" type="text">
-                </div>
+        <div>
+            <div id="passField" class="inputfield right">
+                <span>Password</span>
+                <input class="pass" type="password" enterkeyhint="done">
+                <button class="hidden" onclick="hidePass(this.previousElementSibling, this)">&#xE811;</button>
+            </div>
 
-                <div style="flex-shrink: 0; width: 100%;">
-                    <div id="field__pass" class="field">
-                        <span  class="field__tag">Password</span>
-                        <input class="field__input" type="password">
-                        <button class="field__reveal">a</button>
-                    </div>
-    
-                    <div id="field__pass--confirm" class="field hidden">
-                        <span  class="field__tag">Confirm password</span>
-                        <input class="field__input" type="password">
-                    </div>
-                </div>
+            <div id="confField" class="inputfield hidden">
+                <span>Confirm password</span>
+                <input class="pass" type="password" enterkeyhint="done">
+                <button class="hidden" onclick="hidePass(this.previousElementSibling, this)">&#xE811;</button>
+            </div>
+        </div>
+
+        <div id="question" class="right">
+            <span>Did you solve the Rubik's Cube ever before?</span>
+
+            <div id="holder">
+
+                <input type="radio" id="opt1" value="opt1" name="options" onclick="question.onClick()" hidden>
+                <label for="opt1">
+                    <div>A lot of times 😎</div>
+                </label>
+
+                <input type="radio" id="opt2" value="opt2" name="options" onclick="question.onClick()" hidden>
+                <label for="opt2">
+                    <div>So long ago 🥺</div>
+                </label>
+
+                <input type="radio" id="opt3" value="opt3" name="options" onclick="question.onClick()" hidden>
+                <label for="opt3">
+                    <div>Never 🫡</div>
+                </label>
 
             </div>
-            <div id="text_balloon" hx-on:click="sign.balloon.close(this)">Chose wisely, this is how every one will know you. <u>But can be changed later</u>. 🤠</div>
         </div>
-        
-        <div id="next_step" class="disabled" hx-on:click="sign.nextButton.next()">Next step</div>
-        <div id="prev_step" class="hidden"   hx-on:click="sign.prevButton.prev()">Previous step</div>
+
+        <div id="buttonsHolder">
+            <button id="nextButton" class="button" disabled>Next step</button>
+            <button id="prevButton" class="button" disabled>Previous Step</button>
+        </div>
+
+    </div>
+    <div id="balloon">
+        Chose wisely, this is how every one will know you. <u>But can be changed later</u>. 🤠
     </div>
 
     <div id="other_methods">
-        <div>Facebook</div>
-        <div>Google</div>
+        <div class="alternate-login"><span class="icons">&#xE812;</span>Facebook</div>
+        <div class="alternate-login"><span class="icons">&#xF1A0;</span>Google</div>
     </div>
 </body>
 </html>

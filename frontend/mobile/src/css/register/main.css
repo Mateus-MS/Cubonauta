@@ -3,9 +3,10 @@
     src: url(/static/fonts/icons.ttf);
 }
 
+
 body{
     width: 100dvw;
-    height: fit-content;
+    height: 100dvh;
 
     --main-color:      #434343;
     --secondary-color: #787878;
@@ -17,6 +18,10 @@ body{
 
     --left-margin: 30px;
 
+    padding: 7dvh 0;
+
+    display: flex;
+    flex-direction: column;
 }
 
 *{
@@ -46,24 +51,28 @@ a{
     font-family: icons;
 }
 
-#case_holder{
-    width: 100%;
-    padding: 0 var(--left-margin);
-    padding-bottom: 70px;
-}
+#container{
+    --width: calc(100% - 60px); 
 
-#trigger{
-    width: 100%;
-    height: 20px;
-    background-color: transparent;
-}
+    --v-padding: 160px;
+    --h-padding: 30px;
 
-.no-scroll{
+    position: relative; /*To let the #buttonHolder be snapped at the bottom*/
+
+    width: 100dvw;
+    flex-grow: 1;
     overflow: hidden;
-    height: 100dvh;
+    padding: 0 var(--h-padding);
+
+    background-color: white;
+
+    margin: 8dvh 0;
 }
 
-#initial_formulas{
-    height: 80dvh;
-    background-color: red;
+#logo{
+    width: calc(100% - 60px);
+    margin: 0 auto;
+    height: 14dvh;
+
+    background-color: var(--main-color);
 }

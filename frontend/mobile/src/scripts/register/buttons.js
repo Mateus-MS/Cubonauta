@@ -43,6 +43,8 @@ var control = {
                 next.changeText("Register!");
                 break
         }
+
+        increaseBar(control.index);
     }
 };
 
@@ -50,18 +52,17 @@ var next = {
     element: document.getElementById("nextButton"),
     state  : false,
     onClick: function(){
-        if (control.index < 2){
-            control.index += 1
-            control.select(control.index)
+        if (control.index === 2){
+            if(control.complete.some((element) => element === false)){
+                return;
+            }     
+            register();
         }
 
-        if (control.index === 2){
-            for(let i = 0; i < 3; i++){
-                if(control.complete[i] === false){
-                    return;
-                }
-            }
-            register();
+        if (control.index < 2){
+            changeFocus(control.index + 1, control.index)
+            control.index += 1
+            control.select(control.index)
         }
     },
 
@@ -86,6 +87,7 @@ var prev = {
     state  : false,
     onClick: function(){
         if (control.index > 0){
+            changeFocus(control.index - 1, control.index)
             control.index -= 1
             control.select(control.index)
         }

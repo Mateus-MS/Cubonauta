@@ -17,6 +17,7 @@ body{
     --card-seco-color: #787878;
 
     --left-margin: 30px;
+    --width: calc(100% - 60px); 
 
     padding: 7dvh 0;
 
@@ -52,7 +53,6 @@ a{
 }
 
 #container{
-    --width: calc(100% - 60px); 
 
     --v-padding: 160px;
     --h-padding: 30px;
@@ -66,11 +66,11 @@ a{
 
     background-color: white;
 
-    margin: 8dvh 0;
+    margin: 7dvh 0 4dvh 0;
 }
 
 #logo{
-    width: calc(100% - 60px);
+    width: var(--width);
     margin: 0 auto;
     height: 14dvh;
 

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/static/mobile/src/css/register/question.css">
 
     <link rel="stylesheet" href="/static/mobile/src/css/register/loginMethods.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/register/display.css">
 
     <script src="static/mobile/src/scripts/register/buttons.js" defer></script>
     <script src="static/mobile/src/scripts/register/balloon.js" defer></script>
@@ -24,12 +25,20 @@
 
     <script src="static/mobile/src/scripts/register/main.js" defer></script>
 
+    <script src="static/mobile/src/scripts/register/display.js" defer></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 
 </head>
 <body>
     <div id="logo"></div>
+
+    <div id="display">
+        <div class="step active" data-text="Username"></div>
+        <div class="step"        data-text="Password"></div>
+        <div class="step"        data-text="U solve?"></div>
+    </div>
 
     <div id="container">
 

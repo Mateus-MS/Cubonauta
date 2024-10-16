@@ -1,0 +1,80 @@
+@property --percentage {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 15%;
+}
+
+#display{
+    width: var(--width);
+    height: 2px;
+    border-radius: 2px;
+    margin: 15% auto 0 auto;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    background: linear-gradient(to right, var(--main-color) var(--percentage), var(--fourty-color) var(--percentage));
+    transition: --percentage ease-in-out .3s;
+}
+
+.step{
+
+    &::before{
+        content: attr(data-text);
+        display: inline-block;
+
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, -153%);
+        
+        font-size: 1em;
+        color: var(--thirdy-color);
+        font-weight: 500;
+        
+        white-space: nowrap;
+
+        transition: 
+            width     .3s ease,
+            height    .3s ease,
+            color     .3s ease,
+            font-size .3s ease,
+            transform .3s ease;
+    }
+
+    &.active{
+        width : 18px;
+        height: 18px;
+
+        background-color: var(--main-color);
+    }
+    
+    &.active::before{
+        color: var(--main-color);
+        font-size: 1.15em;
+        transform: translate(-50%, -145%);
+    }
+
+    &.complete{
+        background-color: var(--secondary-color);
+    }
+
+    &.complete::before{
+        color: var(--secondary-color);
+    }
+
+    width : 10px;
+    height: 10px;
+    border-radius: 15px;
+
+    background-color: var(--fourty-color);
+
+    box-shadow: 0 0 0 10px white;
+
+    transition: 
+        width     .3s ease,
+        height    .3s ease,
+        color     .3s ease,
+        font-size .3s ease,
+        transform .3s ease;
+}

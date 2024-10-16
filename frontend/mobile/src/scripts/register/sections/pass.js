@@ -86,9 +86,11 @@ var pass = {
         if(isValid === true){
             conf.show()
             balloon.hide()
+            setAsComplete(1);
         } else {
             next.disable()
             control.complete[1] = false;
+            setAsUncomplete(1);
         }
     },
 

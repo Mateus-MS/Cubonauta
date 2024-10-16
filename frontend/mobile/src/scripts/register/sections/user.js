@@ -73,9 +73,11 @@ var user = {
         if(isValid === true){
             next.enable()
             control.complete[0] = true;
+            setAsComplete(0);
         } else {
             next.disable()
             control.complete[0] = false;
+            setAsUncomplete(0);
         }
     },
 

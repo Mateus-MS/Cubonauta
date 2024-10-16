@@ -4,6 +4,7 @@ var question = {
     onClick: function(){
         next.enable()
         control.complete[2] = true;
+        setAsComplete(2)
     },
 
     moveTo  : {

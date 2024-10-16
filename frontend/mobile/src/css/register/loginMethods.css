@@ -1,5 +1,5 @@
 #other_methods{ 
-    width: calc(100% - 60px);
+    width: var(--width);
     height: fit-content;
     margin: 0 auto;
 

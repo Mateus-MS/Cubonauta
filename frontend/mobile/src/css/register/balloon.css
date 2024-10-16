@@ -15,7 +15,7 @@
         border-color: transparent transparent var(--main-color) transparent; 
     }
 
-    width: calc(100% - 60px);
+    width: var(--width);
     left: 0;
     right: 0;
     margin-left: auto;

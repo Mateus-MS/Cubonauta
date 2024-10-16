@@ -52,9 +52,11 @@ var conf = {
         if(isValid === true){
             next.enable()
             control.complete[1] = true;
+            setAsComplete(1);
         } else {
             next.disable()
             control.complete[1] = false;
+            setAsUncomplete(1);
         }
     },
 

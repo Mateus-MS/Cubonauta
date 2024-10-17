@@ -26,9 +26,9 @@
 
         position: relative;
         left: 50%;
-        transform: translate(-50%, -153%);
+        transform: translate(-50%, -180%);
         
-        font-size: 1em;
+        font-size: .7em;
         color: var(--thirdy-color);
         font-weight: 500;
         
@@ -43,16 +43,16 @@
     }
 
     &.active{
-        width : 18px;
-        height: 18px;
+        width : 10px;
+        height: 10px;
 
         background-color: var(--main-color);
     }
     
     &.active::before{
         color: var(--main-color);
-        font-size: 1.15em;
-        transform: translate(-50%, -145%);
+        font-size: .8em;
+        transform: translate(-50%, -170%);
     }
 
     &.complete{
@@ -63,9 +63,9 @@
         color: var(--secondary-color);
     }
 
-    width : 10px;
-    height: 10px;
-    border-radius: 15px;
+    width : 8px;
+    height: 8px;
+    border-radius: 10px;
 
     background-color: var(--fourty-color);
 

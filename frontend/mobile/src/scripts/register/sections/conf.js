@@ -97,7 +97,7 @@ conf.element.addEventListener("input", (e)=>{
 
 conf.element.addEventListener("keydown", (e)=>{
     if(e.key === "Enter"){
-        let error = pass.validate(e.target.value); 
+        let error = conf.validate(e.target.value); 
         if(error === true){
             conf.element.children[1].blur();
             next.onClick();

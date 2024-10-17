@@ -22,15 +22,12 @@ func main() {
 	//Serve the js and css files to desktop
 	router.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../frontend/static"))))
 
+	router.HandleFunc("/login", routes.LoginRoute)
 	router.HandleFunc("/register", routes.RegisterRoute)
 	router.HandleFunc("/learn", routes.LearnRoute)
 	router.HandleFunc("/", routes.HomeRoute)
 
-	router.HandleFunc("/test/register", routes.TestRegister)
-	router.Handle("/test/static/", http.StripPrefix("/test/static/", http.FileServer(http.Dir("../tests/RegisterCarrossel/src"))))
-
 	//components Handle
-
 	router.HandleFunc("/components/case_card", components.Case_card)
 	router.HandleFunc("/components/filter_tags", components.Filter_tags)
 	router.HandleFunc("/components/post", components.Post)

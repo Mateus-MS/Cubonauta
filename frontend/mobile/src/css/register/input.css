@@ -1,135 +1,107 @@
-.inputfield{
-
-    &#confField{
-
-        --distance-from-top: 120%;
-
-        &.hidden{
-            transform: translate(0, var(--distance-from-top)) scale(0);
-            opacity  : 0;
-        }
-
-        &.right{
-            transform: translate(150%, var(--distance-from-top));
-        }
-    
-        &.left {
-            transform: translate(-150%, var(--distance-from-top));
-        }
-        
-        transform: translate(0, var(--distance-from-top)) scale(1);
-        opacity  : 1;
-    }
-
-    &.right{
-        transform: translate(150%, 0);
-    }
-
-    &.left {
-        transform: translate(-150%, 0);
-    }
-
-    span{
-        display: block;
-        margin-bottom: 10px;
-
-        font-weight: 500;
-        font-size: 1.2em;
-        color: rgb(126, 126, 126);
-    }
-
-    input{
-
-        &.pass{
-            padding-right: 15%;
-        }
-
-        &:active{
-            transform: scale(.95);
-        }
-
-        &::selection{
-            color: white;
-            background-color: var(--thirdy-color);
-        }
-
-        width: 100%;
-        height: 45px;
-
-        border: 2px solid var(--main-color);
-        border-radius: 10px;
-
-        outline: none;
-
-        padding: 0 10px;
-
-        letter-spacing: 1px;
-        color: var(--main-color);
-        font-size: 1.2em;
-
-        transition: 
-            transform ease .3s;
-    }
-
-    button{
-
-        &.hidden{
-
-            &::after{
-                width: 3px;
-                height: 20px;
-                border: 2px solid white;
-            }
-
-        }
-
-        &::after{
-            content: "";
-            position: absolute;
-
-            width : 0px;
-            height: 0px;
-            background-color: var(--main-color);
-            border: none;
-            border-radius: 10px;
-
-            transform: rotate(45deg);
-
-            inset: 0;
-            margin: auto;
-
-            transition: 
-                width  ease .3s,
-                height ease .3s;
-        }
-
-        &:active{
-            transform: translateY(50%) scale(.95);
-            background-color: rgb(180, 180, 180);
-            background: none;
-        }
-
-        position: absolute;
-        right: 4.8%;
-        bottom: calc(45px / 2);
-        transform: translateY(50%);
-
-        padding: 5px;
-
-        background: none;
-        border: none;
-
-        font-family: icons;
-        font-size: 1.2em;
-        color: var(--main-color);
-    }
-
+.inputfield {
     width: var(--width);
     height: fit-content;
-
     position: absolute;
     top: 0;
-    
-    transition: 
-        transform ease-in .3s;
+    transition: transform ease-in .3s;
+}
+
+.inputfield#confField {
+    --distance-from-top: 120%;
+    transform: translate(0, var(--distance-from-top)) scale(1);
+    opacity: 1;
+}
+
+.inputfield#confField.hidden {
+    transform: translate(0, var(--distance-from-top)) scale(0);
+    opacity: 0;
+}
+
+.inputfield#confField.right {
+    transform: translate(150%, var(--distance-from-top));
+}
+
+.inputfield#confField.left {
+    transform: translate(-150%, var(--distance-from-top));
+}
+
+.inputfield.right {
+    transform: translate(150%, 0);
+}
+
+.inputfield.left {
+    transform: translate(-150%, 0);
+}
+
+.inputfield span {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 1.2em;
+    color: rgb(126, 126, 126);
+}
+
+.inputfield input {
+    width: 100%;
+    height: 45px;
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    outline: none;
+    padding: 0 10px;
+    letter-spacing: 1px;
+    color: var(--main-color);
+    font-size: 1.2em;
+    transition: transform ease .3s;
+}
+
+.inputfield input.pass {
+    padding-right: 15%;
+}
+
+.inputfield input:active {
+    transform: scale(.95);
+}
+
+.inputfield input::selection {
+    color: white;
+    background-color: var(--thirdy-color);
+}
+
+.inputfield button {
+    position: absolute;
+    right: 4.8%;
+    bottom: calc(45px / 2);
+    transform: translateY(50%);
+    padding: 5px;
+    background: none;
+    border: none;
+    font-family: icons;
+    font-size: 1.2em;
+    color: var(--main-color);
+}
+
+.inputfield button.hidden::after {
+    width: 3px;
+    height: 20px;
+    border: 2px solid white;
+}
+
+.inputfield button::after {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 10px;
+    transform: rotate(45deg);
+    inset: 0;
+    margin: auto;
+    transition: width ease .3s, height ease .3s;
+}
+
+.inputfield button:active {
+    transform: translateY(50%) scale(.95);
+    background-color: rgb(180, 180, 180);
+    background: none;
 }

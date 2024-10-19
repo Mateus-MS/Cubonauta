@@ -7,8 +7,21 @@
 
     <link rel="stylesheet" href="/static/mobile/src/css/login/main.css">
 
+    <link rel="stylesheet" href="/static/mobile/src/css/login/input.css">
+    <link rel="stylesheet" href="/static/mobile/src/css/login/button.css">
+
+    <link rel="stylesheet" href="/static/mobile/src/css/login/balloon.css">
     <link rel="stylesheet" href="/static/mobile/src/css/loginMethods.css">
 
+    <script src="/static/mobile/src/scripts/login/input/input.js"     defer></script>
+    <script src="/static/mobile/src/scripts/login/input/userInput.js" defer></script>
+    <script src="/static/mobile/src/scripts/login/input/passInput.js" defer></script>
+
+    <script src="/static/mobile/src/scripts/login/button.js" defer></script>
+
+    <script src="/static/mobile/src/scripts/login/main.js" defer></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 
 </head>
@@ -17,8 +30,25 @@
 
     <div id="container">
 
-        
+        <div id="userField" class="inputfield">
+            <span>User</span>
+            <input type="text" enterkeyhint="done">
+        </div>
 
+        <div id="passField" class="inputfield">
+            <span>Password</span>
+            <input class="pass" type="password" enterkeyhint="done">
+            <button class="hidden" onclick="hidePass(this.previousElementSibling, this)">&#xE811;</button>
+        </div>
+
+        <button id="loginButton">Log-In</button>
+
+    </div>
+
+    <span id="forgotPass">Forgot your password?</span>
+
+    <div id="balloon">
+        Chose wisely, this is how every one will know you. <u>But can be changed later</u>. 🤠
     </div>
 
     <div id="other_methods">

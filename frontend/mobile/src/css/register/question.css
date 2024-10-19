@@ -1,72 +1,4 @@
 #question{
-
-    &.right{
-        transform: translate(150%, 0);
-    }
-
-    &.left {
-        transform: translate(-150%, 0);
-    }
-
-    span{
-        width: 100%;
-        text-align: center;
-        display: block;
-
-        color: var(--main-color);
-    }
-
-    #holder{
-
-        label{
-            --text-size: 60px;
-
-            width: 85%;
-            height: var(--text-size);
-            line-height: calc(var(--text-size) - 15px * 2);
-            text-align: center;
-            padding: 15px 0;
-
-            border-top   : 1px solid rgb(235, 235, 235);
-            border-bottom: 1px solid rgb(235, 235, 235);
-
-            color: rgb(128, 128, 128);
-
-            transition: 
-                border           ease .3s,
-                color            ease .3s,
-                font-size        ease .3s,
-                background-color ease .3s;
-        }
-        
-        label:first-of-type{
-            border-top   : 1px solid white;
-            border-bottom: 1px solid white;
-        }
-        
-        label:last-child{
-            border-top   : 1px solid white;
-            border-bottom: 1px solid white;
-        }
-
-        input[type="radio"]:checked + label {
-            background-color: rgb(235, 235, 235);
-            
-            border-top   : 1px solid rgb(235, 235, 235);
-            border-bottom: 1px solid rgb(235, 235, 235);
-
-            color: var(--main-color);
-
-            font-size: 1.2em;
-        }
-
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-    }
-
     width: 100%;
     height: 70%;
 
@@ -75,4 +7,70 @@
 
     transition: 
         transform ease-in .3s;
+}
+
+#question span {
+    width: 100%;
+    text-align: center;
+    display: block;
+
+    color: var(--main-color);
+}
+
+#holder{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#holder label {
+    --text-size: 60px;
+    
+    width: 85%;
+    height: var(--text-size);
+    line-height: calc(var(--text-size) - 15px * 2);
+    text-align: center;
+    padding: 15px 0;
+    
+    border-top   : 1px solid rgb(235, 235, 235);
+    border-bottom: 1px solid rgb(235, 235, 235);
+    
+    color: rgb(128, 128, 128);
+    
+    transition: 
+    border           ease .3s,
+    color            ease .3s,
+    font-size        ease .3s,
+    background-color ease .3s;
+}
+
+#holder label:first-of-type {
+    border-top   : 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+#holder label:last-child {
+    border-top   : 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+#holder input[type="radio"]:checked + label {
+    background-color: rgb(235, 235, 235);
+    
+    border-top   : 1px solid rgb(235, 235, 235);
+    border-bottom: 1px solid rgb(235, 235, 235);
+
+    color: var(--main-color);
+
+    font-size: 1.2em;
+}
+
+.right{
+    transform: translate(150%, 0);
+}
+
+.left {
+    transform: translate(-150%, 0);
 }

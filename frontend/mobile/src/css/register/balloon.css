@@ -1,20 +1,5 @@
 #balloon{
 
-    /*The tail*/
-    &::before{
-        content: '';
-        position: absolute; 
-        
-        left: 50%;
-        transform: translateX(-50%);
-        
-        bottom: 100%; 
-        
-        border-width: 10px;
-        border-style: solid;
-        border-color: transparent transparent var(--main-color) transparent; 
-    }
-
     width: var(--width);
     left: 0;
     right: 0;
@@ -41,6 +26,21 @@
         ease-in
         .5s
         forwards;
+}
+
+/*The tail*/
+#balloon::before{
+    content: '';
+    position: absolute; 
+    
+    left: 50%;
+    transform: translateX(-50%);
+    
+    bottom: 100%; 
+    
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent var(--main-color) transparent; 
 }
 
 @keyframes pop-in {

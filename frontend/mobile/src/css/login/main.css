@@ -63,7 +63,7 @@ a{
 #container{
     width: var(--width);
     flex-grow: 1;
-    margin: 7dvh auto 0 auto;
+    margin: 4dvh auto 0 auto;
     overflow: hidden;
     position: relative;
 }
@@ -77,4 +77,39 @@ a{
 
     margin-top: .8em;
     margin-bottom: 7dvh;
+}
+
+#actions{
+    width: 100%;
+    height: fit-content;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+#actions > p {
+    margin: 0 20px;
+    font-size: 1.2em;
+    color: var(--secondary-color);
+
+    transition: 
+        transform .3s ease,
+        color     .3s ease;
+}
+
+#actions > p:active {
+    transform: scale(.9);
+    color: var(--main-color);
+}
+
+#actions > p.active{
+    font-size: 1.4em;
+    color: var(--main-color);
+}
+
+#actions > p.active:active{
+    transform: none;
+    color: var(--main-color);
 }

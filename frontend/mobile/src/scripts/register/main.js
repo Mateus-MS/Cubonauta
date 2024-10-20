@@ -9,8 +9,32 @@ function hidePass(input, icon){
 }
 
 function register(){
-    console.log("Registering in cubonauta.com")
-    console.log("Username : " + user.element.children[1].value);
-    console.log("Password : " + pass.element.children[1].value);
-    console.log("Expertise: " + document.querySelector('input[name="options"]:checked').value);
+    let formData = new FormData();
+
+    formData.append('user', user.element.children[1].value);
+    formData.append('pass', pass.element.children[1].value);
+
+    fetch('https://cubonauta.com/register', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if(response.status === 200) {
+
+            fetch('https://cubonauta.com/login', {
+                method: 'POST',
+                body: formData,
+            }).then( response => {
+                if(response.status === 200){
+                    window.location.href = 'https://cubonauta.com'
+                }
+            }
+
+            )
+
+
+        } else {
+            alert("Error ao registrar")
+        }
+    })
 }

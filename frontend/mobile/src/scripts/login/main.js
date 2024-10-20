@@ -46,4 +46,21 @@ function login(){
     console.log("Logando em cubonauta.com")
     console.log("User: " + userInput.element.children[1].value)
     console.log("Pass: " + passInput.element.children[1].value)
+
+    let formData = new FormData();
+
+    formData.append('user', userInput.element.children[1].value);
+    formData.append('pass', passInput.element.children[1].value);
+
+    fetch('https://cubonauta.com/login', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if(response.status === 200) {
+            window.location.href = 'https://cubonauta.com'
+        } else {
+            alert("Error ao logar")
+        }
+    })
 }

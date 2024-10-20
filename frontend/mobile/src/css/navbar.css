@@ -32,6 +32,25 @@
     margin-left: 20px;
 }
 
+#Log-In_Button{
+    background-color: var(--main-color);
+    color: white;
+    
+    padding: 6px 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+
+    transition: 
+        transform        .3s ease,
+        background-color .3s ease;
+}
+
+#Log-In_Button:active{
+    transform: scale(.9);
+    background-color: var(--secondary-color);
+}
+
 .navbar__right__section{
     display: flex;
     align-items: center;

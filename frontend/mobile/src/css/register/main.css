@@ -66,7 +66,7 @@ a{
 
     background-color: white;
 
-    margin: 7dvh 0 4dvh 0;
+    margin: 4dvh 0 4dvh 0;
 }
 
 #logo{
@@ -75,4 +75,39 @@ a{
     height: 14dvh;
 
     background-color: var(--main-color);
+}
+
+#actions{
+    width: 100%;
+    height: fit-content;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#actions > p {
+    margin: 0 20px;
+    font-size: 1.2em;
+    color: var(--secondary-color);
+
+    transition: 
+        transform .3s ease,
+        color     .3s ease;
+}
+
+#actions > p:active {
+    transform: scale(.9);
+    color: var(--main-color);
+}
+
+#actions > p.active{
+    font-size: 1.4em;
+    color: var(--main-color);
+}
+
+#actions > p.active:active{
+    transform: none;
+    color: var(--main-color);
 }

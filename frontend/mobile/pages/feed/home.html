@@ -18,6 +18,8 @@
 
     <script src="/static/mobile/src/scripts/feed/imageCarrossel.js" defer></script>
 
+    <script src="/static/mobile/src/scripts/main.js"></script>
+
     <title>Cubonauta</title>
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
 </head>
@@ -42,7 +44,11 @@
                 <p class="navbar__right__section">Following</p>
                 <p class="navbar__right__section bolder">Feed</p>
             </div>
-            <div id="profile"></div>
+            <div 
+                hx-get     = "https://cubonauta.com/components/hotbar/profile"
+                hx-swap    = "outerHTML"
+                hx-trigger = "load"
+            ></div>
         </div>
 
     </div>

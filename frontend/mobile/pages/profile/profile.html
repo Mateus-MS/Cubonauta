@@ -10,7 +10,7 @@
 <body>
     <script>
         function logout(){
-            fetch('https://cubonauta.com/logout', {
+            fetch('https://cubonauta.com/user/logout', {
                 method: 'POST',
                 headers: {
                     'X-CSRF-Token': getCookie('csrf_token'),  // Adding the CSRF token from the cookie

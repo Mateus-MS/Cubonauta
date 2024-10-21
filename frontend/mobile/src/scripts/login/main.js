@@ -52,7 +52,7 @@ function login(){
     formData.append('user', userInput.element.children[1].value);
     formData.append('pass', passInput.element.children[1].value);
 
-    fetch('https://cubonauta.com/login', {
+    fetch('https://cubonauta.com/user/login', {
         method: 'POST',
         body: formData,
     })

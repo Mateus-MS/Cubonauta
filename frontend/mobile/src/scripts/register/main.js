@@ -14,24 +14,21 @@ function register(){
     formData.append('user', user.element.children[1].value);
     formData.append('pass', pass.element.children[1].value);
 
-    fetch('https://cubonauta.com/register', {
+    fetch('https://cubonauta.com/user/register', {
         method: 'POST',
         body: formData,
     })
     .then(response => {
         if(response.status === 200) {
 
-            fetch('https://cubonauta.com/login', {
+            fetch('https://cubonauta.com/user/login', {
                 method: 'POST',
                 body: formData,
             }).then( response => {
                 if(response.status === 200){
                     window.location.href = 'https://cubonauta.com'
                 }
-            }
-
-            )
-
+            })
 
         } else {
             alert("Error ao registrar")

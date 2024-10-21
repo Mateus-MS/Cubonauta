@@ -5,6 +5,7 @@ import (
 	"Cubonauta/routes"
 	"fmt"
 	"net/http"
+	"strings"
 
 	/*TEMPORARIO*/
 	"golang.org/x/crypto/acme/autocert"
@@ -14,46 +15,41 @@ func main() {
 
 	router := http.NewServeMux()
 
-	//Serve the js and css files to mobile
 	router.Handle("/static/mobile/", http.StripPrefix("/static/mobile/", http.FileServer(http.Dir("../frontend/mobile"))))
-	//Serve the js and css files to desktop
 	router.Handle("/static/desktop/", http.StripPrefix("/static/desktop/", http.FileServer(http.Dir("../frontend/desktop"))))
-
-	//Serve the js and css files to desktop
 	router.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("../frontend/static"))))
+
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasPrefix(r.URL.Path, "/components") {
+			components.Component(w, r)
+		} else {
+			routes.HomeRoute(w, r)
+		}
+	})
 
 	router.HandleFunc("/register", routes.RegisterRoute)
 	router.HandleFunc("/login", routes.LoginRoute)
 	router.HandleFunc("/logout", routes.LogOutRoute)
 
-	router.HandleFunc("/protected", routes.ProtectedTest)
-
 	router.HandleFunc("/learn", routes.LearnRoute)
-	router.HandleFunc("/", routes.HomeRoute)
-
-	//components Handle
-	router.HandleFunc("/components/case_card", components.Case_card)
-	router.HandleFunc("/components/filter_tags", components.Filter_tags)
-	router.HandleFunc("/components/post", components.Post)
-
-	router.HandleFunc("/components/hotbar/profile", components.HotBarProfile)
+	router.HandleFunc("/profile", routes.ProfileRoute)
+	router.HandleFunc("/home", routes.HomeRoute)
 
 	startServer(router)
 
 }
 
 func startServer(router *http.ServeMux) {
-	/*TEMPORARIO*/
 	certManager := &autocert.Manager{
-		Prompt:     autocert.AcceptTOS,                      // Automatically accept the Let's Encrypt Terms of Service
-		Cache:      autocert.DirCache("certs"),              // Directory to store the certificates
-		HostPolicy: autocert.HostWhitelist("cubonauta.com"), // Replace with your domain name
+		Prompt:     autocert.AcceptTOS,
+		Cache:      autocert.DirCache("certs"),
+		HostPolicy: autocert.HostWhitelist("cubonauta.com"),
 	}
 
 	go func() {
 		httpServer := &http.Server{
 			Addr:    ":80",
-			Handler: certManager.HTTPHandler(nil), // Use certManager to handle HTTP-01 challenges
+			Handler: certManager.HTTPHandler(nil),
 		}
 		fmt.Println("Starting HTTP server on port 80 for certificate challenges and redirection to HTTPS")
 		if err := httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
@@ -61,7 +57,6 @@ func startServer(router *http.ServeMux) {
 		}
 	}()
 
-	// Start the HTTPS server
 	httpsServer := &http.Server{
 		Addr:      ":443",
 		Handler:   router,

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="/static/mobile/src/scripts/main.js"></script>
+</head>
+<body>
+    <script>
+        function logout(){
+            fetch('https://cubonauta.com/logout', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-Token': getCookie('csrf_token'),  // Adding the CSRF token from the cookie
+                    'Content-Type': 'application/json'        // Optionally set the Content-Type if sending JSON data
+                },
+            })
+            .then(response => {
+                if(response.status === 200) {
+                    window.location.href = 'https://cubonauta.com'
+                } else {
+                    alert("Error ao deslogar")
+                }
+            })
+        }
+    </script>
+
+    <button onclick="logout()">LogOut</button>
+
+</body>
+</html>
